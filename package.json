@@ -7,7 +7,8 @@
     "lint": "eslint .",
     "start": "SINGLE_START=1 npm run dev",
     "dev": "npm test -- --auto-watch --no-single-run",
-    "test": "karma start"
+    "test": "karma start",
+    "build:runner": "esbuild runner/page-entry.js --bundle --outfile=runner/dist/bundle.js --format=iife --loader:.json=json --log-level=warning"
   },
   "repository": {
     "type": "git",
@@ -20,8 +21,11 @@
   "author": "Nico Rehwaldt<git_nikku@nixis.de>",
   "license": "MIT",
   "devDependencies": {
+    "@bpmn-io/properties-panel": "^3.57.1",
     "bpmn-js": "^18.0.0",
+    "bpmn-js-properties-panel": "^5.65.2",
     "chai": "^6.0.0",
+    "esbuild": "^0.28.2",
     "eslint": "^9.39.2",
     "eslint-plugin-bpmn-io": "^2.2.0",
     "karma": "^6.4.4",
@@ -34,17 +38,26 @@
     "mocha": "^12.0.0",
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^9.0.0",
+    "puppeteer-core": "^25.14.0",
     "semver": "^7.7.3",
     "webpack": "^5.104.1"
   },
   "dependencies": {
-    "min-dash": "^5.0.0"
+    "bpmn-js-element-templates": "^2.38.0",
+    "camunda-bpmn-js-behaviors": "^1.18.0",
+    "min-dash": "^5.0.0",
+    "zeebe-bpmn-moddle": "^2.0.0"
   },
   "peerDependencies": {
     "bpmn-js": "*"
   },
   "files": [
     "lib",
-    "index.js"
-  ]
+    "index.js",
+    "bin",
+    "runner"
+  ],
+  "bin": {
+    "bpmn-js-cli": "bin/bpmn-js-cli.mjs"
+  }
 }
