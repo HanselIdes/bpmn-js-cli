@@ -193,8 +193,32 @@ describe('camunda commands', function() {
       // then
       var element = cli.element(sub);
       expect(element.type).to.equal('bpmn:AdHocSubProcess');
+      expect(element.collapsed).to.be.false;
+      expect(element.di.isExpanded).to.be.true;
       expect(element.width).to.equal(311);
       expect(element.height).to.equal(300);
+    }));
+
+
+    it('should route a connection with explicit waypoints', inject(function(cli) {
+
+      // given
+      var task = cli.append('StartEvent_1', 'bpmn:Task');
+      var flow = cli.element(task).incoming[0].id;
+      var start = cli.element('StartEvent_1');
+      var target = cli.element(task);
+      var points = [
+        [ start.x + start.width, start.y + 18 ],
+        [ start.x + 60, start.y + 18 ],
+        [ start.x + 60, target.y + 40 ],
+        [ target.x, target.y + 40 ]
+      ];
+
+      // when
+      cli.waypoints(flow, points);
+
+      // then
+      expect(cli.element(flow).waypoints.map(function(p) { return [ p.x, p.y ]; })).to.eql(points);
     }));
 
 
@@ -227,6 +251,20 @@ describe('camunda commands', function() {
       expect(association.source.id).to.equal('Annotation_1');
       expect(association.target.id).to.equal('StartEvent_1');
       expect(cli.element('Annotation_1').businessObject.text).to.equal('Some words here');
+    }));
+
+
+    it('should keep the requested annotation size', inject(function(cli) {
+
+      // when
+      var annotation = cli.annotate('StartEvent_1', 'A long annotation text that would otherwise be re-fitted', {
+        width: 290,
+        height: 70
+      });
+
+      // then
+      expect(cli.element(annotation).width).to.equal(290);
+      expect(cli.element(annotation).height).to.equal(70);
     }));
 
   });

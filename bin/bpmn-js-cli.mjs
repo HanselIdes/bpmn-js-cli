@@ -116,7 +116,10 @@ const code_ = await withPage(async (page, errors) => {
   writeFileSync(out, xml);
 
   if (png) {
-    await page.evaluate(() => window.modeler.get('canvas').zoom('fit-viewport', 'auto'));
+    await page.evaluate(() => {
+      window.modeler.get('selection').select(null);
+      window.modeler.get('canvas').zoom('fit-viewport', 'auto');
+    });
     await page.screenshot({ path: png });
   }
 

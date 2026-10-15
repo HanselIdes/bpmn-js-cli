@@ -63,8 +63,9 @@ may contain spaces. Upstream commands keep splitting string arguments on whitesp
 | `condition(flowId, expression)`                 | Set a sequence flow condition, e.g. `'=amount > 1000'`                                         |
 | `defaultFlow(gatewayId, flowId)`                | Set a gateway's default flow                                                                   |
 | `doc(id, text)`                                 | Set the element documentation                                                                  |
-| `replace(id, type, options?)`                   | Replace an element, e.g. `replace(id, 'bpmn:AdHocSubProcess', { isExpanded: true })`; returns the new id |
+| `replace(id, type, options?)`                   | Replace an element, e.g. `replace(id, 'bpmn:AdHocSubProcess', { isExpanded: true })` expands it in place; returns the new id |
 | `resize(id, { width, height, x?, y? })`         | Resize a shape                                                                                 |
+| `waypoints(id, [[x, y], ...])`                  | Route a connection through explicit points (first and last on the source and target borders)  |
 | `annotate(id, text, options?)`                  | Add a text annotation with an association; options `id`, `associationId`, `dx`, `dy`, `width`, `height`, `parent`, `reverse` |
 | `template(id, templateId, values?, options?)`   | Apply an element template, then write `values` by template property id; returns the new id     |
 | `templateProps(templateId, options?)`           | List a template's settable properties: id, type, default, choices, condition                   |
