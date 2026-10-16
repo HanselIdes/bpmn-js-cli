@@ -135,7 +135,7 @@ td[title] { cursor: help; }
 
 <section>
   <h2>Takeaways</h2>
-  <p class="prose">The extended CLI, run with the runner's auto layout, measured against two baselines. <strong>/camunda-bpmn</strong> is the status quo: the agent writes the BPMN XML by hand with the skill, including every diagram coordinate, following its layout rules. <strong>A Python generator</strong> is in the comparison because it is what an agent tends to reach for by default when asked to produce a file from code.</p>
+  <p class="prose">The extended CLI, run with the runner's auto layout, measured against two baselines. <strong><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md#L44">/camunda-bpmn</a></strong> is the status quo: the agent writes the BPMN XML by hand with the skill, including every diagram coordinate, following its <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>. <strong>A Python generator</strong> is in the comparison because it is what an agent tends to reach for by default when asked to produce a file from code.</p>
   <h3>Extended CLI against /camunda-bpmn</h3>
   <div class="verdict">
     <div class="v"><span class="k">Time</span><span class="big">16% faster</span><p>138 s against 164 s, and 12% fewer tokens. Without cli12's one rework the time gain is 31%.</p></div>
