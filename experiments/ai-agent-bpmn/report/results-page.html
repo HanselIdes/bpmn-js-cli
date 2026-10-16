@@ -153,7 +153,7 @@ dl.gloss dd { margin: 0; color: var(--muted); }
   <p class="prose"><strong><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></strong> is the status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>, and uses c8ctl to apply connector templates. <strong>A Python generator</strong> is the common fallback when no dedicated tool exists. Both are compared with the extended CLI, run with auto layout.</p>
   <h3>Extended CLI against /camunda-bpmn</h3>
   <div class="verdict">
-    <div class="v"><span class="k">Time to first passing gate</span><span class="big">31% faster</span><p>113 s against 164 s. Both CLI runs finished before either /camunda-bpmn run. Tokens: 12% fewer, counted in full.</p></div>
+    <div class="v"><span class="k">Time to first passing gate</span><span class="big">31% faster</span><p>113 s against 164 s. Both CLI runs finished before either /camunda-bpmn run. Estimated cost: 22% lower, counted in full.</p></div>
     <div class="v"><span class="k">Lines in the output file</span><span class="big">78% fewer</span><p>63 lines of commands against 282 lines of XML, with no diagram coordinates to work out.</p></div>
     <div class="v"><span class="k">Closeness to blueprint</span><span class="big">Tied</span><p>89.6 against 89.0 of 100. The runs' ranges overlap, and the layout score is the same (9.5 of 15).</p></div>
   </div>
@@ -164,14 +164,14 @@ dl.gloss dd { margin: 0; color: var(--muted); }
         <tr><th class="num">difference</th><th class="num">difference</th></tr>
       </thead>
       <tbody><tr><td class="strong">Time to first passing gate</td><td class="num" title="skill1 159 s | skill2 168 s">164 s</td><td class="num" title="py1 155 s | py2 182 s">169 s</td><td class="num pct good" title="Extended CLI: cli11 101 s | cli12 125 s">31.0% less</td><td class="num pct good" title="Extended CLI: cli11 101 s | cli12 125 s">33.0% less</td></tr>
-<tr><td class="strong">Tokens</td><td class="num" title="skill1 130,086 | skill2 136,346">133,216</td><td class="num" title="py1 121,439 | py2 127,030">124,235</td><td class="num pct good" title="Extended CLI: cli11 114,632 | cli12 120,658">11.7% fewer</td><td class="num pct good" title="Extended CLI: cli11 114,632 | cli12 120,658">5.3% fewer</td></tr>
+<tr><td class="strong">Estimated cost</td><td class="num" title="skill1 $0.60 | skill2 $0.61">$0.61</td><td class="num" title="py1 $0.51 | py2 $0.60">$0.56</td><td class="num pct good" title="Extended CLI: cli11 $0.42 | cli12 $0.53">21.6% lower</td><td class="num pct good" title="Extended CLI: cli11 $0.42 | cli12 $0.53">14.6% lower</td></tr>
 <tr><td class="strong">Tool calls</td><td class="num" title="skill1 23 | skill2 21">22</td><td class="num" title="py1 16 | py2 24">20</td><td class="num pct good" title="Extended CLI: cli11 13 | cli12 25">13.6% fewer</td><td class="num pct good" title="Extended CLI: cli11 13 | cli12 25">5.0% fewer</td></tr>
 <tr><td class="strong">Lines in the agent's output file</td><td class="num" title="skill1 286 | skill2 278">282</td><td class="num" title="py1 151 | py2 165">158</td><td class="num pct good" title="Extended CLI: cli11 65 | cli12 61">77.7% fewer</td><td class="num pct good" title="Extended CLI: cli11 65 | cli12 61">60.1% fewer</td></tr>
 <tr><td class="strong">Closeness to blueprint (of 100)</td><td class="num" title="skill1 88.6 | skill2 89.4">89.0</td><td class="num" title="py1 87.5 | py2 86.6">87.1</td><td class="num pct good" title="Extended CLI: cli11 90.3 | cli12 88.8">+0.6%</td><td class="num pct good" title="Extended CLI: cli11 90.3 | cli12 88.8">+2.9%</td></tr>
 <tr><td class="strong">Layout score (of 15)</td><td class="num" title="skill1 8.6 | skill2 10.4">9.5</td><td class="num" title="py1 8.2 | py2 8.1">8.2</td><td class="num pct flat" title="Extended CLI: cli11 9.5 | cli12 9.5">+0.0%</td><td class="num pct good" title="Extended CLI: cli11 9.5 | cli12 9.5">+16.6%</td></tr></tbody>
     </table>
   </div>
-  <p class="note">Means of two runs per method, so treat the differences as indicative. Percentages use unrounded means. Hover a value for the per-run numbers. The clock stops at each run's first passing gate: the second CLI run (cli12) ran the gate again after a layout fix, about 50 seconds that are not counted. Token totals include that run. The CLI numbers carry a caveat: see footnote 1 and the appendix.<sup><a href="#fn1">1</a></sup></p>
+  <p class="note">Means of two runs per method, so treat the differences as indicative. Percentages use unrounded means. Hover a value for the per-run numbers. The clock stops at each run's first passing gate: the second CLI run (cli12) ran the gate again after a layout fix, about 50 seconds that are not counted. Costs include that run. The CLI numbers carry a caveat: see footnote 1 and the appendix.<sup><a href="#fn1">1</a></sup></p>
 </section>
 
 <section class="gallery">
@@ -227,33 +227,31 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <g class="dot" tabindex="0" data-tip="py2: 86.6"><circle cx="506.0" cy="92" r="14" class="hit"/><circle cx="506.0" cy="92" r="6" style="fill:var(--s1);stroke:var(--s1)" class="mark"/></g>
 <text x="533.0" y="81" class="val" text-anchor="middle">87.1</text>
 </svg></figure>
-<figure class="chart"><figcaption>Tokens per trial <span>fewer is cheaper</span></figcaption><svg viewBox="0 0 900 146" role="img" aria-labelledby="t-tokens" class="strip">
-<title id="t-tokens">Tokens per trial, by method</title>
-<line x1="230.0" x2="230.0" y1="8" y2="116" class="grid"/>
-<text x="230.0" y="134" class="tick" text-anchor="middle">110k</text>
-<line x1="380.0" x2="380.0" y1="8" y2="116" class="grid"/>
-<text x="380.0" y="134" class="tick" text-anchor="middle">120k</text>
-<line x1="530.0" x2="530.0" y1="8" y2="116" class="grid"/>
-<text x="530.0" y="134" class="tick" text-anchor="middle">130k</text>
-<line x1="680.0" x2="680.0" y1="8" y2="116" class="grid"/>
-<text x="680.0" y="134" class="tick" text-anchor="middle">140k</text>
-<line x1="830.0" x2="830.0" y1="8" y2="116" class="grid"/>
-<text x="830.0" y="134" class="tick" text-anchor="middle">150k</text>
+<figure class="chart"><figcaption>Estimated cost per run <span>USD at Sonnet 5.5 API rates, lower is cheaper</span></figcaption><svg viewBox="0 0 900 146" role="img" aria-labelledby="t-cost" class="strip">
+<title id="t-cost">Cost per trial, by method</title>
+<line x1="305.0" x2="305.0" y1="8" y2="116" class="grid"/>
+<text x="305.0" y="134" class="tick" text-anchor="middle">$0.40</text>
+<line x1="455.0" x2="455.0" y1="8" y2="116" class="grid"/>
+<text x="455.0" y="134" class="tick" text-anchor="middle">$0.50</text>
+<line x1="605.0" x2="605.0" y1="8" y2="116" class="grid"/>
+<text x="605.0" y="134" class="tick" text-anchor="middle">$0.60</text>
+<line x1="755.0" x2="755.0" y1="8" y2="116" class="grid"/>
+<text x="755.0" y="134" class="tick" text-anchor="middle">$0.70</text>
 <text x="216" y="28" class="rowlabel" text-anchor="end">Extended CLI</text>
-<line x1="299.5" x2="389.9" y1="24" y2="24" class="range" style="stroke:var(--s2)"/>
-<g class="dot" tabindex="0" data-tip="cli11: 115k"><circle cx="299.5" cy="24" r="14" class="hit"/><circle cx="299.5" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
-<g class="dot" tabindex="0" data-tip="cli12: 121k"><circle cx="389.9" cy="24" r="14" class="hit"/><circle cx="389.9" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
-<text x="344.7" y="13" class="val" text-anchor="middle">118k</text>
+<line x1="331.5" x2="502.7" y1="24" y2="24" class="range" style="stroke:var(--s2)"/>
+<g class="dot" tabindex="0" data-tip="cli11: $0.42"><circle cx="331.5" cy="24" r="14" class="hit"/><circle cx="331.5" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
+<g class="dot" tabindex="0" data-tip="cli12: $0.53"><circle cx="502.7" cy="24" r="14" class="hit"/><circle cx="502.7" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
+<text x="417.1" y="13" class="val" text-anchor="middle">$0.47</text>
 <text x="216" y="62" class="rowlabel" text-anchor="end">/camunda-bpmn</text>
-<line x1="531.3" x2="625.2" y1="58" y2="58" class="range" style="stroke:var(--s3)"/>
-<g class="dot" tabindex="0" data-tip="skill1: 130k"><circle cx="531.3" cy="58" r="14" class="hit"/><circle cx="531.3" cy="58" r="6" style="fill:var(--s3);stroke:var(--s3)" class="mark"/></g>
-<g class="dot" tabindex="0" data-tip="skill2: 136k"><circle cx="625.2" cy="58" r="14" class="hit"/><circle cx="625.2" cy="58" r="6" style="fill:var(--s3);stroke:var(--s3)" class="mark"/></g>
-<text x="578.2" y="47" class="val" text-anchor="middle">133k</text>
+<line x1="607.9" x2="618.4" y1="58" y2="58" class="range" style="stroke:var(--s3)"/>
+<g class="dot" tabindex="0" data-tip="skill1: $0.60"><circle cx="607.9" cy="58" r="14" class="hit"/><circle cx="607.9" cy="58" r="6" style="fill:var(--s3);stroke:var(--s3)" class="mark"/></g>
+<g class="dot" tabindex="0" data-tip="skill2: $0.61"><circle cx="618.4" cy="58" r="14" class="hit"/><circle cx="618.4" cy="58" r="6" style="fill:var(--s3);stroke:var(--s3)" class="mark"/></g>
+<text x="613.1" y="47" class="val" text-anchor="middle">$0.61</text>
 <text x="216" y="96" class="rowlabel" text-anchor="end">Python</text>
-<line x1="401.6" x2="485.5" y1="92" y2="92" class="range" style="stroke:var(--s1)"/>
-<g class="dot" tabindex="0" data-tip="py1: 121k"><circle cx="401.6" cy="92" r="14" class="hit"/><circle cx="401.6" cy="92" r="6" style="fill:var(--s1);stroke:var(--s1)" class="mark"/></g>
-<g class="dot" tabindex="0" data-tip="py2: 127k"><circle cx="485.5" cy="92" r="14" class="hit"/><circle cx="485.5" cy="92" r="6" style="fill:var(--s1);stroke:var(--s1)" class="mark"/></g>
-<text x="443.5" y="81" class="val" text-anchor="middle">124k</text>
+<line x1="470.6" x2="607.5" y1="92" y2="92" class="range" style="stroke:var(--s1)"/>
+<g class="dot" tabindex="0" data-tip="py1: $0.51"><circle cx="470.6" cy="92" r="14" class="hit"/><circle cx="470.6" cy="92" r="6" style="fill:var(--s1);stroke:var(--s1)" class="mark"/></g>
+<g class="dot" tabindex="0" data-tip="py2: $0.60"><circle cx="607.5" cy="92" r="14" class="hit"/><circle cx="607.5" cy="92" r="6" style="fill:var(--s1);stroke:var(--s1)" class="mark"/></g>
+<text x="539.1" y="81" class="val" text-anchor="middle">$0.56</text>
 </svg></figure>
 <figure class="chart"><figcaption>Time to first passing gate <span>seconds, queue time excluded</span></figcaption><svg viewBox="0 0 900 146" role="img" aria-labelledby="t-active_s" class="strip">
 <title id="t-active_s">Active time per trial, by method</title>
@@ -594,7 +592,7 @@ dl.gloss dd { margin: 0; color: var(--muted); }
     <li><strong>Where points were lost.</strong> All six runs share some differences from the blueprint: template defaults it lacks (<code>followRedirects</code>, <code>documentReturnFormat</code>, reasoning effort), <code>ignoreNullValues</code> on the GET tools, which template v18 does not offer, and FEEL written without parentheses. Other misses are method-specific: the four Python and /camunda-bpmn runs lack the <code>agentDefinition</code> element, which c8ctl v4.0.0 drops when it applies the AI Agent template (fixed in <a href="https://github.com/camunda/c8ctl/pull/574">camunda/c8ctl#574</a>), and the CLI runs have it. Shape positions differ from the blueprint by 89 to 178 px.</li>
     <li><strong>What the layout score shows.</strong> Both CLI runs score the same layout (9.5 of 15) because the auto layout is deterministic, so the score says little about the agent. It also measures how close shapes sit to the blueprint's positions, not overlaps or readability.</li>
     <li><strong>CLI gap the agents reported.</strong> With auto layout the tools are placed in creation order, so cli12 reordered its tool calls to get the left and right columns the spec asks for. Annotation 3 sits above the agent rather than below the user task.</li>
-    <li><strong>Method.</strong> Closeness is an F1 over facts from both files, weighted structure 25, configuration 50, annotations 10, layout 15. Tokens are the single total the harness reports per run. It is not split by type or priced, so it does not weigh input, output, cache-write and cache-read tokens differently. The transcripts suggest it covers cache-creation, input and output tokens and leaves out cache reads, which ran from 0.9 to 2.0 million per run: about 1.27 million on average for the CLI, 1.97 million for /camunda-bpmn and 1.66 million for Python. The ordering is the same as for the totals, but a price-weighted comparison has not been done.</li>
+    <li><strong>Method.</strong> Closeness is an F1 over facts from both files, weighted structure 25, configuration 50, annotations 10, layout 15. Cost is estimated at Claude Sonnet 5.5 API rates from the <a href="https://platform.claude.com/docs/en/about-claude/pricing">pricing page</a> on 16 October 2026: $2 per million input tokens, $2.50 per million 5-minute cache-write tokens, $0.10 per million cache-read tokens and $10 per million output tokens. Input, cache-write and cache-read counts come from the run transcripts. Those record placeholder output counts, so output tokens are estimated from each run's model time at the rate measured on file writes (about 65 tokens per second, including reasoning), and output is roughly 10 to 15% of each estimate. Cache writes are the largest part (about $0.29 to $0.35 per run), and about 80,000 tokens of them are the fixed agent start-up context that nearly every run pays. The estimate assumes 5-minute caching, which the transcripts show, and ignores any discounts.</li>
     <li><strong>The fork</strong> is branch <code>camunda-executable</code> of the private repo <a href="https://github.com/HanselIdes/bpmn-js-cli/tree/camunda-executable">HanselIdes/bpmn-js-cli</a>, so the link needs access to that repo. It adds Zeebe, template, annotation and layout commands, per-command help, a filterable template listing and the runner. The specs, runs and scorer are in <code>experiments/ai-agent-bpmn</code> in the same repo.</li>
   </ul>
 </section>
@@ -604,19 +602,19 @@ dl.gloss dd { margin: 0; color: var(--muted); }
   <p class="prose">Two runs per iteration. Iterations 1 to 4 used the CLI without auto layout, and each iteration changed the CLI, the brief, or both. The main page shows iteration 6 only. Times are to the first passing gate.</p>
   <div class="tablewrap">
     <table>
-      <thead><tr><th>Group</th><th>What changed</th><th class="num">Closeness</th><th class="num">Layout /15</th><th class="num">Tokens</th><th class="num">Time s</th></tr></thead>
-      <tbody><tr><td>CLI round 1</td><td class="wrap2">First fork: collapsed sub-processes, annotation size ignored, no way to route a flow</td><td class="num">85.3</td><td class="num">6.2</td><td class="num">142,678</td><td class="num">194</td></tr>
-<tr><td>CLI round 2</td><td class="wrap2">Those three layout defects fixed</td><td class="num">87.1</td><td class="num">7.7</td><td class="num">130,883</td><td class="num">192</td></tr>
-<tr><td>CLI round 3</td><td class="wrap2">help for each command, filterable template listing, documented options, named flow ids</td><td class="num">89.2</td><td class="num">9.4</td><td class="num">124,347</td><td class="num">173</td></tr>
-<tr><td>CLI round 4</td><td class="wrap2">Help text says omitted template properties keep their default</td><td class="num">85.7</td><td class="num">5.9</td><td class="num">120,878</td><td class="num">139</td></tr>
-<tr><td>CLI round 5</td><td class="wrap2">Auto layout of the library alone, new brief</td><td class="num">89.7</td><td class="num">9.9</td><td class="num">123,092</td><td class="num">150</td></tr>
-<tr><td>CLI round 6</td><td class="wrap2">Runner tidies the auto layout output, new brief (shown above)</td><td class="num">89.6</td><td class="num">9.5</td><td class="num">117,645</td><td class="num">113</td></tr>
-<tr><td><strong>All 12 CLI runs</strong></td><td class="wrap2">Mean of every CLI run</td><td class="num">87.8</td><td class="num">8.1</td><td class="num">126,587</td><td class="num">160</td></tr>
-<tr><td>/camunda-bpmn</td><td class="wrap2">2 runs, no tuning</td><td class="num">89.0</td><td class="num">9.5</td><td class="num">133,216</td><td class="num">164</td></tr>
-<tr><td>Python</td><td class="wrap2">2 runs, no tuning</td><td class="num">87.1</td><td class="num">8.2</td><td class="num">124,235</td><td class="num">169</td></tr></tbody>
+      <thead><tr><th>Group</th><th>What changed</th><th class="num">Closeness</th><th class="num">Layout /15</th><th class="num">Est. cost</th><th class="num">Time s</th></tr></thead>
+      <tbody><tr><td>CLI round 1</td><td class="wrap2">First fork: collapsed sub-processes, annotation size ignored, no way to route a flow</td><td class="num">85.3</td><td class="num">6.2</td><td class="num">$0.62</td><td class="num">194</td></tr>
+<tr><td>CLI round 2</td><td class="wrap2">Those three layout defects fixed</td><td class="num">87.1</td><td class="num">7.7</td><td class="num">$0.64</td><td class="num">192</td></tr>
+<tr><td>CLI round 3</td><td class="wrap2">help for each command, filterable template listing, documented options, named flow ids</td><td class="num">89.2</td><td class="num">9.4</td><td class="num">$0.61</td><td class="num">173</td></tr>
+<tr><td>CLI round 4</td><td class="wrap2">Help text says omitted template properties keep their default</td><td class="num">85.7</td><td class="num">5.9</td><td class="num">$0.52</td><td class="num">139</td></tr>
+<tr><td>CLI round 5</td><td class="wrap2">Auto layout of the library alone, new brief</td><td class="num">89.7</td><td class="num">9.9</td><td class="num">$0.54</td><td class="num">150</td></tr>
+<tr><td>CLI round 6</td><td class="wrap2">Runner tidies the auto layout output, new brief (shown above)</td><td class="num">89.6</td><td class="num">9.5</td><td class="num">$0.47</td><td class="num">113</td></tr>
+<tr><td><strong>All 12 CLI runs</strong></td><td class="wrap2">Mean of every CLI run</td><td class="num">87.8</td><td class="num">8.1</td><td class="num">$0.57</td><td class="num">160</td></tr>
+<tr><td>/camunda-bpmn</td><td class="wrap2">2 runs, no tuning</td><td class="num">89.0</td><td class="num">9.5</td><td class="num">$0.61</td><td class="num">164</td></tr>
+<tr><td>Python</td><td class="wrap2">2 runs, no tuning</td><td class="num">87.1</td><td class="num">8.2</td><td class="num">$0.56</td><td class="num">169</td></tr></tbody>
     </table>
   </div>
-  <p class="note">Across all 12 CLI runs the mean closeness is 87.8, the mean time 160 s and the mean tokens 126,587. Iteration 6 is the tuned result and the earlier iterations are what it was tuned from, so the all-run mean is the fairer picture of an untuned CLI.</p>
+  <p class="note">Across all 12 CLI runs the mean closeness is 87.8, the mean time 160 s and the mean estimated cost $0.57. Iteration 6 is the tuned result and the earlier iterations are what it was tuned from, so the all-run mean is the fairer picture of an untuned CLI.</p>
 </section>
 
 <p class="note" id="fn1"><sup>1</sup> The two CLI runs shown are the 11th and 12th of 12 CLI runs, folders <code>cli11</code> and <code>cli12</code> in the raw data. The CLI had 6 iterations of two runs, tuned between iterations using what earlier runs hit, and its brief was rewritten along the way. The earlier 10 runs are in the appendix. The CLI agents could also render a PNG of their diagram, which the other methods could not. Python and /camunda-bpmn each had 2 runs and no tuning, and they ran on 15 October in a round with queue waits of 14 to 104 s, while the shown CLI runs ran on 16 October with none. Building the CLI is not counted in its numbers.</p>
