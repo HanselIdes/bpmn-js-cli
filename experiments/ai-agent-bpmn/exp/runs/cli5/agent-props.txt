@@ -1,0 +1,157 @@
+provider.type | Dropdown | "anthropic" | 
+provider.anthropic.backend.type | Dropdown | "anthropic-api" | provider.type=anthropic
+provider.anthropic.backend.anthropic.apiKey | String |  | provider.anthropic.backend.type=anthropic-api & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.region | String |  | provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.endpoint | String |  | provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.authentication.type | Dropdown | "credentials" | provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.authentication.accessKey | String |  | provider.anthropic.backend.awsBedrockMantle.authentication.type=credentials & provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.authentication.secretKey | String |  | provider.anthropic.backend.awsBedrockMantle.authentication.type=credentials & provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.awsBedrockMantle.authentication.apiKey | String |  | provider.anthropic.backend.awsBedrockMantle.authentication.type=apiKey & provider.anthropic.backend.type=aws-bedrock-mantle & provider.type=anthropic
+provider.anthropic.backend.foundry.endpoint | String |  | provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.type | Dropdown | "apiKey" | provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.apiKey | String |  | provider.anthropic.backend.foundry.authentication.type=apiKey & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.clientId | String |  | provider.anthropic.backend.foundry.authentication.type=clientCredentials & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.clientSecret | String |  | provider.anthropic.backend.foundry.authentication.type=clientCredentials & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.tenantId | String |  | provider.anthropic.backend.foundry.authentication.type=clientCredentials & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.authorityHost | String |  | provider.anthropic.backend.foundry.authentication.type=clientCredentials & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.foundry.authentication.managedIdentity.clientId | String |  | provider.anthropic.backend.foundry.authentication.type=managedIdentity & provider.anthropic.backend.type=foundry & provider.type=anthropic
+provider.anthropic.backend.custom.endpoint | String |  | provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.type | Dropdown | "none" | provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.apiKey | String |  | provider.anthropic.backend.custom.authentication.type=apiKey & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.oauthTokenEndpoint | String |  | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.clientId | String |  | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.clientSecret | String |  | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.audience | String |  | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.clientAuthentication | Dropdown | "BASIC_AUTH_HEADER" | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.authentication.scopes | String |  | provider.anthropic.backend.custom.authentication.type=oauth-client-credentials-flow & provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.timeouts.timeout | String |  | provider.type=anthropic
+provider.bedrock.region | String |  | provider.type=bedrock
+provider.bedrock.endpoint | String |  | provider.type=bedrock
+provider.bedrock.authentication.type | Dropdown | "credentials" | provider.type=bedrock
+provider.bedrock.authentication.accessKey | String |  | provider.bedrock.authentication.type=credentials & provider.type=bedrock
+provider.bedrock.authentication.secretKey | String |  | provider.bedrock.authentication.type=credentials & provider.type=bedrock
+provider.bedrock.authentication.apiKey | String |  | provider.bedrock.authentication.type=apiKey & provider.type=bedrock
+provider.bedrock.timeouts.timeout | String |  | provider.type=bedrock
+provider.openai.api.type | Dropdown | "responses" | provider.type=openai
+provider.openai.backend.type | Dropdown | "openai-api" | provider.type=openai
+provider.openai.backend.openai.apiKey | String |  | provider.openai.backend.type=openai-api & provider.type=openai
+provider.openai.backend.openai.organizationId | String |  | provider.openai.backend.type=openai-api & provider.type=openai
+provider.openai.backend.openai.projectId | String |  | provider.openai.backend.type=openai-api & provider.type=openai
+provider.openai.backend.foundry.endpoint | String |  | provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.type | Dropdown | "apiKey" | provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.apiKey | String |  | provider.openai.backend.foundry.authentication.type=apiKey & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.clientId | String |  | provider.openai.backend.foundry.authentication.type=clientCredentials & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.clientSecret | String |  | provider.openai.backend.foundry.authentication.type=clientCredentials & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.tenantId | String |  | provider.openai.backend.foundry.authentication.type=clientCredentials & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.authorityHost | String |  | provider.openai.backend.foundry.authentication.type=clientCredentials & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.foundry.authentication.managedIdentity.clientId | String |  | provider.openai.backend.foundry.authentication.type=managedIdentity & provider.openai.backend.type=foundry & provider.type=openai
+provider.openai.backend.custom.endpoint | String |  | provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.type | Dropdown | "none" | provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.apiKey | String |  | provider.openai.backend.custom.authentication.type=apiKey & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.oauthTokenEndpoint | String |  | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.clientId | String |  | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.clientSecret | String |  | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.audience | String |  | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.clientAuthentication | Dropdown | "BASIC_AUTH_HEADER" | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.authentication.scopes | String |  | provider.openai.backend.custom.authentication.type=oauth-client-credentials-flow & provider.openai.backend.type=custom & provider.type=openai
+provider.openai.timeouts.timeout | String |  | provider.type=openai
+provider.googleGemini.backend.type | Dropdown | "google-gemini-api" | provider.type=google-gemini
+provider.googleGemini.backend.googleGeminiApi.apiKey | String |  | provider.googleGemini.backend.type=google-gemini-api & provider.type=google-gemini
+provider.googleGemini.backend.googleVertexAi.projectId | String |  | provider.googleGemini.backend.type=google-vertex-ai & provider.type=google-gemini
+provider.googleGemini.backend.googleVertexAi.region | String |  | provider.googleGemini.backend.type=google-vertex-ai & provider.type=google-gemini
+provider.googleGemini.backend.googleVertexAi.authentication.type | Dropdown | "serviceAccountCredentials" | provider.googleGemini.backend.type=google-vertex-ai & provider.type=google-gemini
+provider.googleGemini.backend.googleVertexAi.authentication.jsonKey | String |  | provider.googleGemini.backend.googleVertexAi.authentication.type=serviceAccountCredentials & provider.googleGemini.backend.type=google-vertex-ai & provider.type=google-gemini
+provider.googleGemini.timeouts.timeout | String |  | provider.type=google-gemini
+provider.mistral.backend.type | Dropdown | "mistral-api" | provider.type=mistral
+provider.mistral.backend.mistral.apiKey | String |  | provider.mistral.backend.type=mistral-api & provider.type=mistral
+provider.mistral.backend.custom.endpoint | String |  | provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.type | Dropdown | "none" | provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.apiKey | String |  | provider.mistral.backend.custom.authentication.type=apiKey & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.oauthTokenEndpoint | String |  | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.clientId | String |  | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.clientSecret | String |  | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.audience | String |  | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.clientAuthentication | Dropdown | "BASIC_AUTH_HEADER" | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.authentication.scopes | String |  | provider.mistral.backend.custom.authentication.type=oauth-client-credentials-flow & provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.timeouts.timeout | String |  | provider.type=mistral
+provider.providerType | String |  | provider.type=custom
+provider.parameters | String |  | provider.type=custom
+provider.anthropic.backend.custom.headers | String |  | provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.queryParameters | String |  | provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.anthropic.backend.custom.bodyProperties | String |  | provider.anthropic.backend.type=custom & provider.type=anthropic
+provider.bedrock.headers | String |  | provider.type=bedrock
+provider.bedrock.queryParameters | String |  | provider.type=bedrock
+provider.bedrock.bodyProperties | String |  | provider.type=bedrock
+provider.openai.backend.custom.headers | String |  | provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.queryParameters | String |  | provider.openai.backend.type=custom & provider.type=openai
+provider.openai.backend.custom.bodyProperties | String |  | provider.openai.backend.type=custom & provider.type=openai
+provider.mistral.backend.custom.headers | String |  | provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.queryParameters | String |  | provider.mistral.backend.type=custom & provider.type=mistral
+provider.mistral.backend.custom.bodyProperties | String |  | provider.mistral.backend.type=custom & provider.type=mistral
+provider.anthropic.model.model | String |  | provider.type=anthropic
+provider.anthropic.model.parameters.effort | Dropdown | "modelDefault" | provider.type=anthropic
+provider.anthropic.model.parameters.thinking.mode | Dropdown | "modelDefault" | provider.type=anthropic
+provider.anthropic.model.parameters.thinking.budgetTokens | Number |  | provider.anthropic.model.parameters.thinking.mode=enabled & provider.type=anthropic
+provider.anthropic.model.parameters.thinking.display | Dropdown | "summarized" | provider.anthropic.model.parameters.thinking.mode=adaptive & provider.type=anthropic
+provider.anthropic.model.parameters.promptCaching.enabled | Boolean | true | provider.type=anthropic
+provider.bedrock.model.model | String |  | provider.type=bedrock
+provider.bedrock.model.parameters.promptCaching.enabled | Boolean | true | provider.type=bedrock
+provider.openai.model.model | String |  | provider.type=openai
+provider.openai.api.responses.effort | Dropdown | "modelDefault" | provider.openai.api.type=responses & provider.type=openai
+provider.openai.api.completions.effort | Dropdown | "modelDefault" | provider.openai.api.type=completions & provider.type=openai
+provider.googleGemini.model.model | String |  | provider.type=google-gemini
+provider.googleGemini.model.parameters.thinking.thinkingBudget | Number |  | provider.googleGemini.model.parameters.thinking.thinkingLevel=modelDefault & provider.type=google-gemini
+provider.googleGemini.model.parameters.thinking.thinkingLevel | Dropdown | "modelDefault" | provider.type=google-gemini
+provider.mistral.model.model | String |  | provider.type=mistral
+provider.mistral.parameters.effort | Dropdown | "modelDefault" | provider.type=mistral
+provider.model | String |  | provider.type=custom
+provider.anthropic.model.parameters.maxTokens | Number |  | provider.type=anthropic
+provider.anthropic.model.parameters.temperature | Number |  | provider.type=anthropic
+provider.anthropic.model.parameters.topP | Number |  | provider.type=anthropic
+provider.anthropic.model.parameters.topK | Number |  | provider.type=anthropic
+provider.bedrock.model.parameters.maxTokens | Number |  | provider.type=bedrock
+provider.bedrock.model.parameters.temperature | Number |  | provider.type=bedrock
+provider.bedrock.model.parameters.topP | Number |  | provider.type=bedrock
+provider.openai.api.responses.maxOutputTokens | Number |  | provider.openai.api.type=responses & provider.type=openai
+provider.openai.api.responses.temperature | Number |  | provider.openai.api.type=responses & provider.type=openai
+provider.openai.api.responses.topP | Number |  | provider.openai.api.type=responses & provider.type=openai
+provider.openai.api.completions.maxCompletionTokens | Number |  | provider.openai.api.type=completions & provider.type=openai
+provider.openai.api.completions.temperature | Number |  | provider.openai.api.type=completions & provider.type=openai
+provider.openai.api.completions.topP | Number |  | provider.openai.api.type=completions & provider.type=openai
+provider.googleGemini.model.parameters.maxTokens | Number |  | provider.type=google-gemini
+provider.googleGemini.model.parameters.temperature | Number |  | provider.type=google-gemini
+provider.googleGemini.model.parameters.topP | Number |  | provider.type=google-gemini
+provider.googleGemini.model.parameters.topK | Number |  | provider.type=google-gemini
+provider.mistral.parameters.maxTokens | Number |  | provider.type=mistral
+provider.mistral.parameters.temperature | Number |  | provider.type=mistral
+provider.mistral.parameters.topP | Number |  | provider.type=mistral
+data.systemPrompt.prompt | Text | "=\"You are **TaskAgent**, a helpful, capable agent that can handle a wide variety of customer requests using your own knowledge **and** any tools explicitly provided to you at runtime. Prefer a provided tool over guessing whenever it would give a more accurate or reliable answer, and only use tools that were explicitly configured for you (never assume a tool exists). You can call the same tool multiple times with different inputs if that helps complete the request. If no tool fits the request, answer from your own knowledge; if you can't produce a reliable answer, say so plainly and explain why, rather than guessing.\"" | 
+data.userPrompt.prompt | Text |  | 
+data.userPrompt.documents | String |  | 
+agentContext | Text |  | 
+data.memory.storage.type | Dropdown | "in-process" | 
+data.memory.storage.timeToLive | String |  | data.memory.storage.type=camunda-document
+data.memory.storage.customProperties | String |  | data.memory.storage.type=camunda-document
+data.memory.storage.region | String |  | data.memory.storage.type=aws-agentcore
+data.memory.storage.endpoint | String |  | data.memory.storage.type=aws-agentcore
+data.memory.storage.authentication.type | Dropdown | "credentials" | data.memory.storage.type=aws-agentcore
+data.memory.storage.authentication.accessKey | String |  | data.memory.storage.authentication.type=credentials & data.memory.storage.type=aws-agentcore
+data.memory.storage.authentication.secretKey | String |  | data.memory.storage.authentication.type=credentials & data.memory.storage.type=aws-agentcore
+data.memory.storage.memoryId | String |  | data.memory.storage.type=aws-agentcore
+data.memory.storage.actorId | String |  | data.memory.storage.type=aws-agentcore
+data.memory.storage.storeType | String |  | data.memory.storage.type=custom
+data.memory.storage.parameters | String |  | data.memory.storage.type=custom
+data.memory.contextWindowSize | Number | 20 | 
+data.limits.maxModelCalls | Number | 10 | 
+data.events.behavior | Dropdown | "WAIT_FOR_TOOL_CALL_RESULTS" | 
+data.response.format.type | Dropdown | "text" | 
+data.response.format.parseJson | Boolean |  | data.response.format.type=text
+data.response.format.schema | String |  | data.response.format.type=json
+data.response.format.schemaName | String | "Response" | data.response.format.type=json
+data.response.includeAssistantMessage | Boolean |  | 
+data.response.includeAgentContext | Boolean |  | 
+resultVariable | String | "agent" | 
+errorExpression | Text |  | 
+retryCount | String | "3" | 
+retryBackoff | String | "PT30S" | 
+jobTimeout | String |  | 

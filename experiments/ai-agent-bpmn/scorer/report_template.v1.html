@@ -1,0 +1,236 @@
+<title>AI Agent BPMN Bake-off</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,500;6..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a lab report. Verdict first, then the evidence in the order a reviewer checks it: setup, numbers, where points went, renders, tooling findings, caveats. */
+:root {
+  --bg: #f5f6f8;
+  --surface: #ffffff;
+  --fg: #151922;
+  --muted: #5b6272;
+  --rule: #dce0e7;
+  --accent: #2c56c4;
+  --s1: #2a78d6;
+  --s2: #eb6834;
+  --s3: #1baf7a;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #11141a; --surface: #191d25; --fg: #e7eaf0; --muted: #9aa2b3; --rule: #2b313d; --accent: #8aa8ff;
+    --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #11141a; --surface: #191d25; --fg: #e7eaf0; --muted: #9aa2b3; --rule: #2b313d; --accent: #8aa8ff;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; margin: 0; padding-inline: 16px; padding-block: 0; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-block: 40px 72px; display: grid; gap: 44px; }
+.prose { max-width: 68ch; }
+h1, h2 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+h1 { font-size: clamp(2rem, 4.6vw, 3rem); line-height: 1.08; }
+h2 { font-size: 1.55rem; line-height: 1.2; }
+h3 { font-size: 1rem; margin: 0; font-weight: 600; }
+p { margin: 0; }
+section { display: grid; gap: 16px; }
+.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.lede { font-size: 1.12rem; color: var(--fg); max-width: 64ch; }
+a { color: var(--accent); }
+a:focus-visible, button:focus-visible, .dot:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.88em; }
+.status { display: inline-flex; gap: 8px; align-items: center; font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.pill { border: 1px solid var(--rule); border-radius: 999px; padding: 2px 10px; background: var(--surface); }
+header { display: grid; gap: 14px; }
+
+.verdict { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.v { background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 16px; display: grid; gap: 6px; align-content: start; min-width: 0; }
+.v .k { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+.v .big { font-family: var(--font-display); font-size: 1.6rem; line-height: 1.1; }
+.v p { color: var(--muted); font-size: 14px; }
+
+ol.points, ul.points { margin: 0; padding-left: 1.3em; display: grid; gap: 10px; max-width: 72ch; }
+ol.points li::marker, ul.points li::marker { color: var(--muted); }
+
+.tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th { font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: 0.02em; }
+tbody tr:last-child td { border-bottom: 0; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 13px; }
+td.strong { font-weight: 500; color: var(--fg); }
+td.wrap { white-space: normal; min-width: 240px; vertical-align: top; }
+.points-table td:first-child { width: 42%; }
+.points-table td { vertical-align: top; }
+.muted-row td { color: var(--muted); }
+.sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; vertical-align: -1px; }
+
+.charts { display: grid; grid-template-columns: 1fr; gap: 14px; }
+.chart { margin: 0; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; padding: 14px 12px 6px; min-width: 0; position: relative; }
+.chart figcaption { font-weight: 600; font-size: 14px; padding-left: 4px; }
+.chart figcaption span { font-weight: 400; color: var(--muted); font-size: 13px; margin-left: 8px; }
+.strip { width: 100%; height: auto; display: block; overflow: visible; }
+.strip .grid { stroke: var(--rule); stroke-width: 1; }
+.strip .tick, .strip .axisnote { fill: var(--muted); font: 11px var(--font-mono); }
+.strip .rowlabel { fill: var(--fg); font: 12px var(--font-body); }
+.strip .val { fill: var(--fg); font: 12px var(--font-mono); }
+.strip .range { stroke-width: 2; opacity: 0.45; }
+.strip .mark { stroke-width: 2; }
+.strip .hit { fill: transparent; }
+.strip .dot { cursor: default; }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font: 12px var(--font-mono); padding: 4px 8px; border-radius: 4px; white-space: nowrap; }
+
+.gallery { display: grid; gap: 12px; }
+.gbtns { display: flex; flex-wrap: wrap; gap: 6px; }
+.gbtn { font: 13px var(--font-mono); border: 1px solid var(--rule); background: var(--surface); color: var(--fg); padding: 5px 11px; border-radius: 999px; cursor: pointer; }
+.gbtn.on { border-color: var(--accent); color: var(--accent); }
+.gframe { background: #ffffff; border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+.gframe img { display: block; width: 100%; height: auto; }
+.note { font-size: 13.5px; color: var(--muted); max-width: 72ch; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+.two > * { min-width: 0; }
+footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule); padding-top: 16px; }
+@media (prefers-reduced-motion: no-preference) { .gbtn { transition: border-color 120ms; } }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Experiment &middot; 15 October 2026 &middot; Sonnet 5.5 trials</span>
+  <h1>AI Agent BPMN Bake-off</h1>
+  <p class="lede">Three ways to build the Camunda "AI Agent Chat With Tools" tutorial process from a plain-language spec: a Python generator, a bpmn-js-cli fork extended for Camunda 8, and hand-written XML with the camunda-bpmn skill. Each method ran twice in isolation, and each run was scored on cost, closeness to the canonical file, and time until lint and the tutorial's own test suite passed.</p>
+  <div class="status"><span class="pill">8 trials, all passed the hard gate</span><span class="pill">Fork: private repo</span><span class="pill">Nothing merged into camunda/skills</span></div>
+</header>
+
+<section>
+  <h2>Result</h2>
+  <div class="verdict">
+    <div class="v"><span class="k">Hard gate</span><span class="big">8 of 8 pass</span><p>Every trial ended with 0 lint errors and 6 of 6 CPT scenarios green. Seven passed on their first gate attempt.</p></div>
+    <div class="v"><span class="k">Closeness</span><span class="big">87 to 89 / 100</span><p>Hand-written XML scored highest (mean 89.0). Python and the extended CLI tied at about 87, a gap of 2 points.</p></div>
+    <div class="v"><span class="k">Cost</span><span class="big">124k to 133k tokens</span><p>Python was cheapest on average. The gap between the cheapest and dearest method is about 7%.</p></div>
+    <div class="v"><span class="k">Time</span><span class="big">2.7 to 3.2 min</span><p>Hand-written and Python averaged under 3 minutes of active time. The extended CLI averaged 3.2 minutes.</p></div>
+  </div>
+  <div class="prose" style="display:grid;gap:12px">
+    <p><strong>On this task no method is clearly better.</strong> With two trials each, the differences sit inside run-to-run noise. Choose on other grounds: what the method gets right by construction, and what it leaves to the author.</p>
+    <p>Two of those grounds showed up clearly. The extended CLI is the only method that kept <code>zeebe:agentDefinition</code>, because <code>c8ctl element-template apply</code> silently drops it and every other trial used c8ctl for templates. The CLI's weak spot is layout, which scored lowest of the three methods.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Numbers</h2>
+  <div class="charts">{{CHARTS}}</div>
+  <p class="note">Each dot is one trial; the label is the method mean. Hollow grey dots are the first CLI round, which ran on a fork with three layout defects. Those were fixed and the CLI was re-run (v2). Hover or focus a dot for its value.</p>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Method</th><th class="num">Closeness</th><th class="num">Tokens</th><th class="num">Active s</th><th class="num">Config /50</th><th class="num">Layout /15</th></tr></thead>
+      <tbody>{{SUMMARY_ROWS}}</tbody>
+    </table>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Run</th><th>Method</th><th class="num">Lint errors</th><th class="num">CPT</th><th class="num">Gate tries</th><th class="num">Closeness</th><th class="num">Structure /25</th><th class="num">Config /50</th><th class="num">Annot. /10</th><th class="num">Layout /15</th><th class="num">Tokens</th><th class="num">Active s</th><th class="num">Queue s</th><th class="num">Tool uses</th></tr></thead>
+      <tbody>{{TRIAL_ROWS}}</tbody>
+    </table>
+  </div>
+  <p class="note">Lint and CPT were re-run independently on every final file, not taken from the agents' reports. Each run also had 3 lint warnings for the deprecated secret format, which the canonical file has too. Active time is the agent's wall-clock duration minus time spent queued behind other trials' CPT runs.</p>
+</section>
+
+<section>
+  <h2>Where the points went</h2>
+  <p class="prose">Most lost points were shared by every method, because every method applied the same element templates. The table lists each miss by how many of the 8 runs had it.</p>
+  <div class="tablewrap">
+    <table class="points-table">
+      <thead><tr><th>Difference from canonical</th><th class="num">Runs</th><th>Cause</th></tr></thead>
+      <tbody>
+        <tr><td class="wrap">Template defaults the canonical lacks: <code>followRedirects</code>, <code>documentReturnFormat</code>, reasoning effort, an empty <code>agent</code> input</td><td class="num">8</td><td class="wrap">The canonical was saved from Camunda Modeler without these. Current templates write them, so any template-faithful output differs.</td></tr>
+        <tr><td class="wrap"><code>ignoreNullValues = false</code> on the four GET tools</td><td class="num">8</td><td class="wrap">REST template v18 only activates it for POST, PUT and PATCH. The canonical carries it anyway. Agents correctly reported it as not settable.</td></tr>
+        <tr><td class="wrap">Recipe result expression written <code>if count(...) &gt; 0</code> instead of <code>if (count(...) &gt; 0)</code></td><td class="num">8</td><td class="wrap">Same FEEL meaning. The spec described the logic in prose, and the scorer compares tokens strictly.</td></tr>
+        <tr><td class="wrap">User prompt written <code>if is defined(x)</code> instead of <code>if (is defined(x))</code></td><td class="num">6</td><td class="wrap">Same cause as above.</td></tr>
+        <tr><td class="wrap">System prompt blank line encoded as a FEEL <code>\n\n</code> escape instead of real newlines</td><td class="num">5</td><td class="wrap">Same string at runtime. The spec cannot distinguish the two encodings.</td></tr>
+        <tr><td class="wrap"><code>zeebe:agentDefinition agentType="aiAgentSubProcess"</code> missing</td><td class="num">4</td><td class="wrap">All 4 Python and hand-written runs. <code>c8ctl element-template apply</code> drops it, as does <code>c8ctl bpmn format</code>. The CLI uses Modeler's template engine and kept it in all 4 of its runs.</td></tr>
+        <tr><td class="wrap">Shape positions far from canonical</td><td class="num">8</td><td class="wrap">Mean offset 89 to 385 px. Nothing in the spec pins coordinates, so layout is the noisiest score.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="gallery">
+  <h2>Renders</h2>
+  <p class="note">Every file rendered with the same headless bpmn-js runner. cli1 and cli2 show the v1 fork defect: the AI Agent sub-process came out collapsed, with its tools on a separate drill-down plane. cli4 never set the "AI Agent" label.</p>
+  <div class="gbtns" role="group" aria-label="Choose a render">{{GALLERY_BUTTONS}}</div>
+  <div class="gframe">{{GALLERY_IMGS}}</div>
+</section>
+
+<section>
+  <h2>Tooling findings</h2>
+  <p class="prose">These came up during the experiment and matter beyond it. Each is labelled with how it was established.</p>
+  <ol class="points">
+    <li><strong>c8ctl drops <code>zeebe:agentDefinition</code></strong> on <code>element-template apply</code> and on <code>bpmn format</code>. Verified: a format round-trip of the canonical file loses it, and all 4 apply-based trials lack it. CPT still passes because it mocks the agent job, so the runtime effect is unverified.</li>
+    <li><strong>Lint passes an attribute that Zeebe rejects at deploy.</strong> An unprefixed <code>executionPlatformVersion</code> on <code>bpmn:definitions</code> lints clean, and every CPT scenario then fails on an XSD error. Verified during fork acceptance. The CPT gate caught it, not lint.</li>
+    <li><strong>The AI Agent template's result variable is not settable by name.</strong> All 4 Python and hand trials tried <code>resultVariable</code> with c8ctl and were rejected, because the binding is keyed by its source <code>=agent</code>. In the CLI, setting it wrote a stray empty input. One agent also reported that c8ctl's <code>--set name=value</code> cannot express a key that starts with <code>=</code>; that part is the agent's report and has not been verified separately.</li>
+    <li><strong>c8ctl lints 8.10 files with the 8.9 ruleset</strong>, printing a fallback warning on every run.</li>
+    <li><strong>The fork's first version had three layout defects</strong>, found by the CLI trials: <code>replace</code> left sub-processes collapsed, <code>annotate</code> ignored width and height, and there was no way to route a connection. All three are fixed and tested in v2. The v1 trials averaged 85.3 closeness against 87.1 for v2.</li>
+    <li><strong>Sandbox friction was equal across methods.</strong> Every trial reported the worktree sandbox refusing compound shell commands and heredocs, and worked around it with absolute paths and the Write tool.</li>
+  </ol>
+</section>
+
+<section class="two">
+  <div style="display:grid;gap:12px">
+    <h2>Setup</h2>
+    <ol class="points">
+      <li><strong>Baseline.</strong> A plain-language spec derived from the tutorial's <a href="https://github.com/camunda/camunda-8-tutorials/blob/main/solutions/ai-agent-chat-with-tools/ai-agent-chat-with-tools.bpmn">canonical BPMN</a>. It states behaviour in prose but quotes literal values: prompts, URLs, FEEL conditions, element IDs the tests select, and documentation text.</li>
+      <li><strong>Methods.</strong> Python: a generator script; the XML may not be hand-edited. Extended CLI: a command script run by the fork's headless runner; no XML edits or post-processing. Hand: Write and Edit only, following the camunda-bpmn skill. All methods could use <code>c8ctl element-template apply</code>, and all Python and hand trials did.</li>
+      <li><strong>Done gate.</strong> 0 lint errors from <code>c8ctl bpmn lint</code>, and the tutorial's CPT suite (6 scenarios, agent and tools mocked) green via Maven. Warnings allowed.</li>
+      <li><strong>Isolation.</strong> Each trial had its own worktree and run directory. The canonical file, the tutorial sources and the scorer were moved out of the shared area, CPT run copies were deleted after each run, and briefs forbade fetching the tutorial. This was enforced by instruction, not by permissions.</li>
+    </ol>
+  </div>
+  <div style="display:grid;gap:12px">
+    <h2>Metrics and caveats</h2>
+    <ol class="points">
+      <li><strong>Closeness (0 to 100).</strong> F1 over facts extracted from both files, so missing and invented facts both cost points. Weights: structure 25, configuration 50, annotations 10, layout 15. Validated: the canonical scores 100 against itself, whitespace-only edits score 100, and single mutations lose points. FEEL literals such as <code>=20</code> and <code>20</code> count as equal, because the canonical mixes both.</li>
+      <li><strong>Cost.</strong> Subagent tokens reported by the harness for the whole trial.</li>
+      <li><strong>Time.</strong> Agent wall-clock minus queue time. CPT runs were serialized to protect another stack running on this machine.</li>
+      <li><strong>Sample.</strong> Two trials per method, one task, one model, so there is no variance estimate. As a judgement call rather than a measurement, read differences under about 3 closeness points or 10% tokens as noise.</li>
+      <li><strong>Not counted.</strong> Building the fork was a one-time cost on the main thread and is not in the CLI numbers. It amounts to about 770 lines of command code plus a runner, 17 new tests, and two rounds of fixes.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>The fork</h2>
+  <p class="prose">The extension lives on branch <code>camunda-executable</code> of the private repo <a href="https://github.com/HanselIdes/bpmn-js-cli/tree/camunda-executable">HanselIdes/bpmn-js-cli</a>, a copy of bpmn-io/bpmn-js-cli 2.4.0. GitHub does not allow private forks of public repositories, so it is a private repo with upstream history rather than a fork. It adds 17 commands for Zeebe extensions, conditions, documentation, annotations, sizing, waypoints and element templates, plus a headless runner. Upstream command behaviour is unchanged, and all 33 tests and eslint pass.</p>
+</section>
+
+<footer>Generated from verified results on 15 October 2026. Raw files, scripts and logs are in the session scratchpad.</footer>
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll('.chart').forEach(function (fig) {
+    var tip = document.createElement('div');
+    tip.className = 'tip'; tip.hidden = true; fig.appendChild(tip);
+    function show(e) {
+      var g = e.currentTarget, r = fig.getBoundingClientRect(), c = g.querySelector('.mark').getBoundingClientRect();
+      tip.textContent = g.getAttribute('data-tip'); tip.hidden = false;
+      tip.style.left = Math.max(4, Math.min(r.width - tip.offsetWidth - 4, c.left - r.left + c.width / 2 - tip.offsetWidth / 2)) + 'px';
+      tip.style.top = (c.top - r.top - 30) + 'px';
+    }
+    function hide() { tip.hidden = true; }
+    fig.querySelectorAll('.dot').forEach(function (g) {
+      g.addEventListener('mouseenter', show); g.addEventListener('focus', show);
+      g.addEventListener('mouseleave', hide); g.addEventListener('blur', hide);
+    });
+  });
+  var btns = document.querySelectorAll('.gbtn');
+  btns.forEach(function (b) {
+    b.addEventListener('click', function () {
+      btns.forEach(function (x) { x.classList.remove('on'); x.setAttribute('aria-pressed', 'false'); document.getElementById(x.dataset.img).hidden = true; });
+      b.classList.add('on'); b.setAttribute('aria-pressed', 'true'); document.getElementById(b.dataset.img).hidden = false;
+    });
+  });
+})();
+</script>

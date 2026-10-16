@@ -1,0 +1,42 @@
+# a property you do not set keeps its default; set only values that differ
+authenticationConfiguration | Configuration |  | 
+authentication.type | Dropdown | "noAuth" | {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.apiKeyLocation | Dropdown | "headers" | authentication.type=apiKey & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.name | String |  | authentication.type=apiKey & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.value | String |  | authentication.type=apiKey & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.username | String |  | authentication.type=basic & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.password | String |  | authentication.type=basic & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.token | String |  | authentication.type=bearer & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthTokenEndpoint | String |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.clientId | String |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.clientSecret | String |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.audience | String |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.clientAuthentication | Dropdown |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.scopes | String |  | authentication.type=oauth-client-credentials-flow & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthRefreshToken.oauthTokenEndpoint | String |  | authentication.type=oauth-refresh-token & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthRefreshToken.clientId | String |  | authentication.type=oauth-refresh-token & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthRefreshToken.clientSecret | String |  | authentication.type=oauth-refresh-token & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthRefreshToken.refreshToken | String |  | authentication.type=oauth-refresh-token & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+authentication.oauthRefreshToken.scopes | String |  | authentication.type=oauth-refresh-token & {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+clientTls.clientCertificate | Text |  | 
+clientTls.clientPrivateKey | Text |  | 
+clientTls.privateKeyPassword | String |  | 
+clientTls.trustedCertificate | Text |  | 
+method | Dropdown | "GET" | 
+url | String |  | {"property":"authenticationConfiguration","isEmpty":true,"type":"simple"}
+urlOverride | String |  | {"property":"authenticationConfiguration","isEmpty":false,"type":"simple"}
+headers | String |  | 
+queryParameters | String |  | 
+followRedirects | Boolean | false | 
+documentReturnFormat | Dropdown | "JSON" | 
+documentReturnFormatEncoding | String | "UTF-8" | documentReturnFormat=TEXT
+connectionTimeoutInSeconds | Number | 20 | 
+readTimeoutInSeconds | Number | 20 | 
+body | Text |  | method in [POST, PUT, PATCH]
+ignoreNullValues | Boolean | false | method in [POST, PUT, PATCH]
+resultVariable | String |  | 
+resultExpression | Text | "{\n  myResponseBody: response.body\n  // Use FEEL to ext... | 
+errorExpression | Text |  | 
+retryCount | String | "3" | 
+retryBackoff | String | "PT30S" | 
+jobTimeout | String |  | 

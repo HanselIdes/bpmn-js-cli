@@ -1,0 +1,100 @@
+[
+  {
+    "run": "cli3",
+    "method": "cli",
+    "tokens": 123844,
+    "tool_uses": 22,
+    "duration_ms": 146198,
+    "lint_errors": 0,
+    "lint_warnings": 3,
+    "cpt": "6/6",
+    "cpt_pass": true,
+    "closeness": 87.3,
+    "parts": {
+      "structure": 25.0,
+      "configuration": 45.3,
+      "annotations": 10.0,
+      "layout": 7.0
+    },
+    "config_missing": 6,
+    "config_extra": 12,
+    "missing_config": [
+      "('header', 'SearchRecipes', 'resultExpression', '={toolCallResult:if(count(response.body.recipes)>0)thenresponse.body.recipeselse\"Noresultfound.\"}')",
+      "('input', 'AI_Agent', 'data.systemPrompt.prompt', '=\"Youare**TaskAgent**,ahelpful,genericchatagentthatcanhandleawidevarietyofcustomerrequestsusingyourowndomainknowledge**and**anytoolsexplicitlyprovidedtoyouatruntime.Iftoolsareprovided,youshouldprefertheminsteadofguessingananswer.Youcancallthesametoolmultipletimesbyprovidingdifferentinputvalues.Don\\'tguessanytoolswhichwerenotexplicitlyconfigured.Ifnotoolmatchestherequest,trytogenerateananswer.Ifyou\\'renotabletofindagoodanswer,returnwithamessagestatingwhyyou\\'renotableto.\"')",
+      "('input', 'FetchSafeJoke', 'ignoreNullValues', 'false')",
+      "('input', 'ListSampleTechnologyProducts', 'ignoreNullValues', 'false')",
+      "('input', 'LookupSampleUsers', 'ignoreNullValues', 'false')",
+      "('input', 'SearchRecipes', 'ignoreNullValues', 'false')"
+    ],
+    "extra_config": [
+      "('header', 'SearchRecipes', 'resultExpression', '={toolCallResult:ifcount(response.body.recipes)>0thenresponse.body.recipeselse\"Noresultfound.\"}')",
+      "('input', 'AI_Agent', 'agent', '')",
+      "('input', 'AI_Agent', 'data.systemPrompt.prompt', '=\"Youare**TaskAgent**,ahelpful,genericchatagentthatcanhandleawidevarietyofcustomerrequestsusingyourowndomainknowledge**and**anytoolsexplicitlyprovidedtoyouatruntime.\\\\n\\\\nIftoolsareprovided,youshouldprefertheminsteadofguessingananswer.Youcancallthesametoolmultipletimesbyprovidingdifferentinputvalues.Don\\'tguessanytoolswhichwerenotexplicitlyconfigured.Ifnotoolmatchestherequest,trytogenerateananswer.Ifyou\\'renotabletofindagoodanswer,returnwithamessagestatingwhyyou\\'renotableto.\"')",
+      "('input', 'AI_Agent', 'provider.openai.api.responses.effort', 'modelDefault')",
+      "('input', 'FetchSafeJoke', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'FetchSafeJoke', 'followRedirects', 'false')",
+      "('input', 'ListSampleTechnologyProducts', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'ListSampleTechnologyProducts', 'followRedirects', 'false')",
+      "('input', 'LookupSampleUsers', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'LookupSampleUsers', 'followRedirects', 'false')",
+      "('input', 'SearchRecipes', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'SearchRecipes', 'followRedirects', 'false')"
+    ],
+    "missing_structure": [],
+    "mean_shape_offset_px": 222.9,
+    "lock_wait_s": 0,
+    "active_s": 146,
+    "exists": true
+  },
+  {
+    "run": "cli4",
+    "method": "cli",
+    "tokens": 137921,
+    "tool_uses": 36,
+    "duration_ms": 237588,
+    "lint_errors": 0,
+    "lint_warnings": 3,
+    "cpt": "6/6",
+    "cpt_pass": true,
+    "closeness": 86.9,
+    "parts": {
+      "structure": 23.7,
+      "configuration": 44.8,
+      "annotations": 10.0,
+      "layout": 8.4
+    },
+    "config_missing": 7,
+    "config_extra": 13,
+    "missing_config": [
+      "('header', 'SearchRecipes', 'resultExpression', '={toolCallResult:if(count(response.body.recipes)>0)thenresponse.body.recipeselse\"Noresultfound.\"}')",
+      "('input', 'AI_Agent', 'data.userPrompt.documents', '=if(isdefined(followUpInput)orisdefined(followUpDocuments))thenfollowUpDocumentselseinputDocuments')",
+      "('input', 'AI_Agent', 'data.userPrompt.prompt', '=if(isdefined(followUpInput))thenfollowUpInputelseinputText')",
+      "('input', 'FetchSafeJoke', 'ignoreNullValues', 'false')",
+      "('input', 'ListSampleTechnologyProducts', 'ignoreNullValues', 'false')",
+      "('input', 'LookupSampleUsers', 'ignoreNullValues', 'false')",
+      "('input', 'SearchRecipes', 'ignoreNullValues', 'false')"
+    ],
+    "extra_config": [
+      "('header', 'SearchRecipes', 'resultExpression', '={toolCallResult:ifcount(response.body.recipes)>0thenresponse.body.recipeselse\"Noresultfound.\"}')",
+      "('input', 'AI_Agent', 'agent', '')",
+      "('input', 'AI_Agent', 'data.userPrompt.documents', '=ifisdefined(followUpInput)orisdefined(followUpDocuments)thenfollowUpDocumentselseinputDocuments')",
+      "('input', 'AI_Agent', 'data.userPrompt.prompt', '=ifisdefined(followUpInput)thenfollowUpInputelseinputText')",
+      "('input', 'AI_Agent', 'provider.openai.api.responses.effort', 'modelDefault')",
+      "('input', 'FetchSafeJoke', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'FetchSafeJoke', 'followRedirects', 'false')",
+      "('input', 'ListSampleTechnologyProducts', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'ListSampleTechnologyProducts', 'followRedirects', 'false')",
+      "('input', 'LookupSampleUsers', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'LookupSampleUsers', 'followRedirects', 'false')",
+      "('input', 'SearchRecipes', 'documentReturnFormat.choice', 'JSON')",
+      "('input', 'SearchRecipes', 'followRedirects', 'false')"
+    ],
+    "missing_structure": [
+      "('node', 'AI_Agent', 'adHocSubProcess', 'AI Agent', 'ai-agent-chat-with-tools')"
+    ],
+    "mean_shape_offset_px": 168.6,
+    "lock_wait_s": 0,
+    "active_s": 238,
+    "exists": true
+  }
+]

@@ -1,0 +1,1 @@
+1 lint_errors=0 lint_warnings=3 cpt=pass skeleton hand-written, templates applied via c8ctl; warnings = deprecated secret format (spec-mandated)

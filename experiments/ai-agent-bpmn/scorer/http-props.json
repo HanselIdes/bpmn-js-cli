@@ -1,0 +1,621 @@
+{
+  "id": "io.camunda.connectors.HttpJson.v2",
+  "version": 18,
+  "appliesTo": [
+    "bpmn:Task"
+  ],
+  "elementType": "bpmn:ServiceTask",
+  "properties": [
+    {
+      "id": "authenticationConfiguration",
+      "label": "Authentication credential",
+      "type": "Configuration",
+      "binding": "authenticationConfiguration"
+    },
+    {
+      "id": "authentication.type",
+      "label": "Type",
+      "type": "Dropdown",
+      "binding": "authentication.type",
+      "default": "noAuth",
+      "choices": [
+        "apiKey",
+        "basic",
+        "bearer",
+        "noAuth",
+        "oauth-client-credentials-flow",
+        "oauth-refresh-token"
+      ],
+      "condition": {
+        "property": "authenticationConfiguration",
+        "isEmpty": true,
+        "type": "simple"
+      }
+    },
+    {
+      "id": "authentication.apiKeyLocation",
+      "label": "Api key location",
+      "type": "Dropdown",
+      "binding": "authentication.apiKeyLocation",
+      "default": "headers",
+      "choices": [
+        "headers",
+        "query"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "authentication.name",
+      "label": "API key name",
+      "type": "String",
+      "binding": "authentication.name",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.value",
+      "label": "API key value",
+      "type": "String",
+      "binding": "authentication.value",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.username",
+      "label": "Username",
+      "type": "String",
+      "binding": "authentication.username",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "basic",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.password",
+      "label": "Password",
+      "type": "String",
+      "binding": "authentication.password",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "basic",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.token",
+      "label": "Bearer token",
+      "type": "String",
+      "binding": "authentication.token",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "bearer",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.oauthTokenEndpoint",
+      "label": "OAuth 2.0 token endpoint",
+      "type": "String",
+      "binding": "authentication.oauthTokenEndpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.audience",
+      "label": "Audience",
+      "type": "String",
+      "binding": "authentication.audience",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "authentication.clientAuthentication",
+      "label": "Client authentication",
+      "type": "Dropdown",
+      "binding": "authentication.clientAuthentication",
+      "choices": [
+        "credentialsBody",
+        "basicAuthHeader"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "authentication.scopes",
+      "label": "Scopes",
+      "type": "String",
+      "binding": "authentication.scopes",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "authentication.oauthRefreshToken.oauthTokenEndpoint",
+      "label": "OAuth 2.0 token endpoint",
+      "type": "String",
+      "binding": "authentication.oauthTokenEndpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-refresh-token",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.oauthRefreshToken.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-refresh-token",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.oauthRefreshToken.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-refresh-token",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "authentication.oauthRefreshToken.refreshToken",
+      "label": "Refresh token",
+      "type": "String",
+      "binding": "authentication.refreshToken",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-refresh-token",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "authentication.oauthRefreshToken.scopes",
+      "label": "Scopes",
+      "type": "String",
+      "binding": "authentication.scopes",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "authentication.type",
+            "equals": "oauth-refresh-token",
+            "type": "simple"
+          },
+          {
+            "property": "authenticationConfiguration",
+            "isEmpty": true,
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "clientTls.clientCertificate",
+      "label": "Client certificate (PEM)",
+      "type": "Text",
+      "binding": "clientTls.clientCertificate",
+      "feel": "optional"
+    },
+    {
+      "id": "clientTls.clientPrivateKey",
+      "label": "Client private key (PEM)",
+      "type": "Text",
+      "binding": "clientTls.clientPrivateKey",
+      "feel": "optional"
+    },
+    {
+      "id": "clientTls.privateKeyPassword",
+      "label": "Private key password",
+      "type": "String",
+      "binding": "clientTls.privateKeyPassword",
+      "feel": "optional"
+    },
+    {
+      "id": "clientTls.trustedCertificate",
+      "label": "Trusted CA certificate (PEM)",
+      "type": "Text",
+      "binding": "clientTls.trustedCertificate",
+      "feel": "optional"
+    },
+    {
+      "id": "method",
+      "label": "Method",
+      "type": "Dropdown",
+      "binding": "method",
+      "default": "GET",
+      "choices": [
+        "POST",
+        "GET",
+        "DELETE",
+        "PATCH",
+        "PUT"
+      ],
+      "required": true
+    },
+    {
+      "id": "url",
+      "label": "URL",
+      "type": "String",
+      "binding": "url",
+      "condition": {
+        "property": "authenticationConfiguration",
+        "isEmpty": true,
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "urlOverride",
+      "label": "URL",
+      "type": "String",
+      "binding": "url",
+      "condition": {
+        "property": "authenticationConfiguration",
+        "isEmpty": false,
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "headers",
+      "label": "Headers",
+      "type": "String",
+      "binding": "headers",
+      "feel": "required"
+    },
+    {
+      "id": "queryParameters",
+      "label": "Query parameters",
+      "type": "String",
+      "binding": "queryParameters",
+      "feel": "required"
+    },
+    {
+      "id": "followRedirects",
+      "label": "Follow redirects",
+      "type": "Boolean",
+      "binding": "followRedirects",
+      "default": false,
+      "feel": "static"
+    },
+    {
+      "id": "documentReturnFormat",
+      "label": "Response format",
+      "type": "Dropdown",
+      "binding": "documentReturnFormat.choice",
+      "default": "JSON",
+      "choices": [
+        "DOCUMENT",
+        "TEXT",
+        "JSON"
+      ]
+    },
+    {
+      "id": "documentReturnFormatEncoding",
+      "label": "Encoding",
+      "type": "String",
+      "binding": "documentReturnFormat.encoding",
+      "default": "UTF-8",
+      "condition": {
+        "property": "documentReturnFormat",
+        "equals": "TEXT",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "connectionTimeoutInSeconds",
+      "label": "Connection timeout in seconds",
+      "type": "Number",
+      "binding": "connectionTimeoutInSeconds",
+      "default": 20,
+      "feel": "static",
+      "required": true
+    },
+    {
+      "id": "readTimeoutInSeconds",
+      "label": "Read timeout in seconds",
+      "type": "Number",
+      "binding": "readTimeoutInSeconds",
+      "default": 20,
+      "feel": "static",
+      "required": true
+    },
+    {
+      "id": "body",
+      "label": "Request body",
+      "type": "Text",
+      "binding": "body",
+      "condition": {
+        "property": "method",
+        "oneOf": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "ignoreNullValues",
+      "label": "Ignore null values",
+      "type": "Boolean",
+      "binding": "ignoreNullValues",
+      "default": false,
+      "condition": {
+        "property": "method",
+        "oneOf": [
+          "POST",
+          "PUT",
+          "PATCH"
+        ],
+        "type": "simple"
+      },
+      "feel": "static"
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "type": "String",
+      "binding": "resultVariable"
+    },
+    {
+      "id": "resultExpression",
+      "label": "Result expression",
+      "type": "Text",
+      "binding": "resultExpression",
+      "default": "{\n  myResponseBody: response.body\n  // Use FEEL to extract values, e.g.,:\n  // myUserId: response.body.post.userId\n}",
+      "feel": "required"
+    },
+    {
+      "id": "errorExpression",
+      "label": "Error expression",
+      "type": "Text",
+      "binding": "errorExpression",
+      "feel": "required"
+    },
+    {
+      "id": "retryCount",
+      "label": "Retries",
+      "type": "String",
+      "binding": "retries",
+      "default": "3",
+      "feel": "optional"
+    },
+    {
+      "id": "retryBackoff",
+      "label": "Retry backoff",
+      "type": "String",
+      "binding": "retryBackoff",
+      "default": "PT30S"
+    },
+    {
+      "id": "jobTimeout",
+      "label": "Job timeout",
+      "type": "String",
+      "binding": "jobTimeout"
+    }
+  ]
+}
