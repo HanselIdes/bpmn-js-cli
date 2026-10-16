@@ -306,6 +306,68 @@ describe('camunda commands', function() {
     }));
 
 
+    it('should filter template properties by substring', inject(function(cli) {
+
+      // when
+      var props = cli.templateProps('test.connector', { filter: 'OUT' });
+
+      // then
+      expect(props.properties.map(function(p) { return p.id; })).to.eql([ 'timeout' ]);
+    }));
+
+
+    it('should filter template properties by glob', inject(function(cli) {
+
+      // when
+      var props = cli.templateProps('test.connector', { filter: '*Only' });
+
+      // then
+      expect(props.properties.map(function(p) { return p.id; })).to.eql([ 'bOnly' ]);
+    }));
+
+
+    it('should print condensed template properties', inject(function(cli) {
+
+      // when
+      var text = cli.templateProps('test.connector', { condensed: true });
+
+      // then
+      expect(text.split('\n')).to.eql([
+        'mode | Dropdown | "a" | ',
+        'bOnly | String |  | mode=b',
+        'timeout | Number | 20 | ',
+        'resultExpression | Text |  | '
+      ]);
+    }));
+
+
+    it('should cut long defaults in condensed output', inject(function(cli, elementTemplates) {
+
+      // given
+      var long = JSON.parse(JSON.stringify(testTemplate));
+      long.id = 'test.long';
+      long.properties[1].value = new Array(100).join('x');
+      elementTemplates.set([ long ]);
+
+      // when
+      var text = cli.templateProps('test.long', { condensed: true, filter: 'mode' });
+
+      // then
+      expect(text.split(' | ')[2]).to.have.length(60);
+      expect(text).to.contain('...');
+    }));
+
+
+    it('should print condensed filtered properties', inject(function(cli) {
+
+      // when
+      var text = cli.templateProps('test.connector', { condensed: true, filter: 'bOnly' });
+
+      // then
+      expect(text).to.equal('bOnly | String |  | mode=b');
+    }));
+
+
     it('should apply a template and write values exactly as given', inject(function(cli) {
 
       // given

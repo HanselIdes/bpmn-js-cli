@@ -3,8 +3,12 @@
  * Headless bpmn-js-cli runner with Camunda 8 commands.
  *
  *   bpmn-js-cli run <script.js> --out <file.bpmn> [--in <base.bpmn>] [--png <file.png>]
- *   bpmn-js-cli template-props <templateId> [--version <n>]
- *   bpmn-js-cli help
+ *   bpmn-js-cli template-props <templateId> [--version <n>] [--filter <text|glob>] [--condensed]
+ *   bpmn-js-cli help [<command>]
+ *
+ * template-props --filter keeps properties whose id contains the text or matches a glob
+ * (e.g. 'authentication.*'); --condensed prints one line per property: id | type | default | condition.
+ * help lists the model.js commands; help <command> prints that command's arguments and options.
  *
  * Options:
  *   --engine <x.y.z>        Camunda engine version for templates and executionPlatformVersion (default 8.10.0)
@@ -39,8 +43,10 @@ const templatesFile = opt('templates', [
 ].find(p => p && existsSync(p)));
 const chrome = opt('chrome', process.env.CHROME_BIN || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');
 
-if (!cmd || cmd === 'help' || cmd === '--help') {
-  console.log(readFileSync(fileURLToPath(import.meta.url), 'utf8').split('*/')[0].replace(/^#!.*\n\/\*\*\n/, '').replace(/^ \* ?/gm, ''));
+const usage = readFileSync(fileURLToPath(import.meta.url), 'utf8').split('*/')[0].replace(/^#!.*\n\/\*\*\n/, '').replace(/^ \* ?/gm, '');
+
+if (!cmd || cmd === '--help') {
+  console.log(usage);
   process.exit(0);
 }
 
@@ -65,13 +71,27 @@ async function withPage(fn) {
   }
 }
 
-if (cmd === 'template-props') {
-  const id = argv.shift();
-  const version = opt('version');
+if (cmd === 'help') {
+  const name = argv.shift();
   await withPage(async page => {
     await page.evaluate(o => window.bootCli(o), { engine, templates });
-    const props = await page.evaluate((id, version) => window.cli.templateProps(id, version ? { version } : undefined), id, version);
-    console.log(JSON.stringify(props, null, 2));
+    const text = await page.evaluate(name => window.cli.help(name), name);
+    console.log((name ? '' : usage + '\n') + text);
+  }).catch(e => { console.error('ERROR ' + e.message.split('\n')[0]); process.exit(1); });
+  process.exit(0);
+}
+
+if (cmd === 'template-props') {
+  const condensed = argv.includes('--condensed');
+  if (condensed) argv.splice(argv.indexOf('--condensed'), 1);
+  const version = opt('version');
+  const filter = opt('filter');
+  const id = argv.shift();
+  await withPage(async page => {
+    await page.evaluate(o => window.bootCli(o), { engine, templates });
+    const options = Object.assign({}, version ? { version } : {}, filter ? { filter } : {}, condensed ? { condensed } : {});
+    const props = await page.evaluate((id, options) => window.cli.templateProps(id, options), id, options);
+    console.log(condensed ? props : JSON.stringify(props, null, 2));
   }).catch(e => { console.error('ERROR ' + e.message.split('\n')[0]); process.exit(1); });
   process.exit(0);
 }

@@ -254,6 +254,52 @@ describe('cli', function() {
   });
 
 
+  describe('flow ids', function() {
+
+    beforeEach(bootstrapModeler(startDiagramXML, {
+      modules: testModules
+    }));
+
+
+    it('should name the flow created by append', inject(function(cli) {
+
+      // when
+      var task = cli.append('StartEvent_1', 'bpmn:Task', '200,0', 'Flow_Named');
+
+      // then
+      var flow = cli.element('Flow_Named');
+      expect(flow.source.id).to.equal('StartEvent_1');
+      expect(flow.target.id).to.equal(task);
+    }));
+
+
+    it('should keep generated flow id without a name', inject(function(cli) {
+
+      // when
+      var task = cli.append('StartEvent_1', 'bpmn:Task');
+
+      // then
+      expect(cli.element(task).incoming[0].id).to.match(/^Flow_/);
+    }));
+
+
+    it('should name the flow created by connect', inject(function(cli) {
+
+      // given
+      var task = cli.append('StartEvent_1', 'bpmn:Task');
+      var end = cli.append(task, 'bpmn:EndEvent');
+
+      // when
+      var id = cli.connect('StartEvent_1', end, 'bpmn:SequenceFlow', '-', 'Flow_Skip');
+
+      // then
+      expect(id).to.equal('Flow_Skip');
+      expect(cli.element('Flow_Skip').target.id).to.equal(end);
+    }));
+
+  });
+
+
   describe('help', function() {
 
     // given that
@@ -273,6 +319,37 @@ describe('cli', function() {
       expect(helpText).to.contain('undo');
       expect(helpText).to.contain('removeShape');
       expect(helpText).to.contain('append');
+    }));
+
+
+    it('should show arguments of a command', inject(function(cli) {
+
+      // when
+      var helpText = cli.help('append');
+
+      // then
+      expect(helpText).to.match(/^append <source> <type> \[delta\] \[flowId\]/);
+      expect(helpText).to.contain('flowId:');
+    }));
+
+
+    it('should show options of a command', inject(function(cli) {
+
+      // when
+      var helpText = cli.help('connect');
+
+      // then
+      expect(helpText).to.match(/^connect <source> <target> <type> \[parent\] \[flowId\]/);
+      expect(helpText).to.contain('options:');
+    }));
+
+
+    it('should reject an unknown command', inject(function(cli) {
+
+      // then
+      expect(function() {
+        cli.help('nope');
+      }).to.throw(/no command <nope>/);
     }));
 
   });
