@@ -35,7 +35,7 @@ the fork's build cost is not in its numbers.
 - `harness/`: the headless render script used for the gallery.
 
 Scripts hold absolute paths into the session scratchpad where they were run. Agent transcripts are not
-included. The canonical BPMN and CPT suite come from camunda/camunda-8-tutorials: keep this repo private.
+included. The canonical BPMN and CPT suite come from camunda/camunda-8-tutorials and keep their own terms, see `NOTICE.md` in the repo root.
 
 ## Fork changes made for the experiment
 
