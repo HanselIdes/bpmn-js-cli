@@ -158,8 +158,8 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 
 <section>
   <h2>Takeaways</h2>
-  <p class="prose"><strong><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></strong> is the status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>, and uses c8ctl to apply connector templates. <strong>A Python generator</strong> is the common fallback when no dedicated tool exists. Both are compared with the extended CLI, run with auto layout.</p>
-  <h3>Extended CLI against /camunda-bpmn</h3>
+  <p class="prose"><strong><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></strong> is the status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>, and uses c8ctl to apply connector templates. <strong>A Python generator</strong> is the common fallback when no dedicated tool exists. Both are compared with the CLI, an extended bpmn-js-cli run with auto layout.</p>
+  <h3>CLI against /camunda-bpmn</h3>
   <div class="verdict">
     <div class="v"><span class="k">Time to first passing gate</span><span class="big">31% faster</span><p>113 s against 164 s. Both CLI runs finished before either /camunda-bpmn run. Cost is in the third card.</p></div>
     <div class="v"><span class="k">Lines in the output file</span><span class="big">78% fewer</span><p>63 lines of commands against 282 lines of XML, with no diagram coordinates to work out.</p></div>
@@ -170,12 +170,12 @@ dl.gloss dd { margin: 0; color: var(--muted); }
       <thead>
         <tr><th>Metric</th><th class="num">/camunda-bpmn</th><th class="num">Python</th><th class="num">CLI vs /camunda-bpmn</th><th class="num">CLI vs Python</th></tr>
       </thead>
-      <tbody><tr><td class="strong">Time to first passing gate</td><td class="num" title="skill1 159 s | skill2 168 s">164 s</td><td class="num" title="py1 155 s | py2 182 s">169 s</td><td class="num pct good" title="Extended CLI: cli11 101 s | cli12 125 s">31.0% less</td><td class="num pct good" title="Extended CLI: cli11 101 s | cli12 125 s">33.0% less</td></tr>
-<tr><td class="strong">Estimated cost</td><td class="num" title="skill1 $0.60 | skill2 $0.61">$0.61</td><td class="num" title="py1 $0.51 | py2 $0.60">$0.56</td><td class="num pct good" title="Extended CLI: cli11 $0.42 | cli12 $0.53">21.6% lower</td><td class="num pct good" title="Extended CLI: cli11 $0.42 | cli12 $0.53">14.6% lower</td></tr>
-<tr><td class="strong">Tool calls</td><td class="num" title="skill1 23 | skill2 21">22</td><td class="num" title="py1 16 | py2 24">20</td><td class="num pct good" title="Extended CLI: cli11 13 | cli12 25">13.6% fewer</td><td class="num pct good" title="Extended CLI: cli11 13 | cli12 25">5.0% fewer</td></tr>
-<tr><td class="strong">Lines in the agent's output file</td><td class="num" title="skill1 286 | skill2 278">282</td><td class="num" title="py1 151 | py2 165">158</td><td class="num pct good" title="Extended CLI: cli11 65 | cli12 61">77.7% fewer</td><td class="num pct good" title="Extended CLI: cli11 65 | cli12 61">60.1% fewer</td></tr>
-<tr><td class="strong">Closeness to blueprint (of 100)</td><td class="num" title="skill1 88.6 | skill2 89.4">89.0</td><td class="num" title="py1 87.5 | py2 86.6">87.1</td><td class="num pct good" title="Extended CLI: cli11 90.3 | cli12 88.8">+0.6%</td><td class="num pct good" title="Extended CLI: cli11 90.3 | cli12 88.8">+2.9%</td></tr>
-<tr><td class="strong">Layout score (of 15)</td><td class="num" title="skill1 8.6 | skill2 10.4">9.5</td><td class="num" title="py1 8.2 | py2 8.1">8.2</td><td class="num pct flat" title="Extended CLI: cli11 9.5 | cli12 9.5">+0.0%</td><td class="num pct good" title="Extended CLI: cli11 9.5 | cli12 9.5">+16.6%</td></tr></tbody>
+      <tbody><tr><td class="strong">Time to first passing gate</td><td class="num" title="skill1 159 s | skill2 168 s">164 s</td><td class="num" title="py1 155 s | py2 182 s">169 s</td><td class="num pct good" title="CLI: cli11 101 s | cli12 125 s">31.0% less</td><td class="num pct good" title="CLI: cli11 101 s | cli12 125 s">33.0% less</td></tr>
+<tr><td class="strong">Estimated cost</td><td class="num" title="skill1 $0.60 | skill2 $0.61">$0.61</td><td class="num" title="py1 $0.51 | py2 $0.60">$0.56</td><td class="num pct good" title="CLI: cli11 $0.42 | cli12 $0.53">21.6% lower</td><td class="num pct good" title="CLI: cli11 $0.42 | cli12 $0.53">14.6% lower</td></tr>
+<tr><td class="strong">Tool calls</td><td class="num" title="skill1 23 | skill2 21">22</td><td class="num" title="py1 16 | py2 24">20</td><td class="num pct good" title="CLI: cli11 13 | cli12 25">13.6% fewer</td><td class="num pct good" title="CLI: cli11 13 | cli12 25">5.0% fewer</td></tr>
+<tr><td class="strong">Lines in the agent's output file</td><td class="num" title="skill1 286 | skill2 278">282</td><td class="num" title="py1 151 | py2 165">158</td><td class="num pct good" title="CLI: cli11 65 | cli12 61">77.7% fewer</td><td class="num pct good" title="CLI: cli11 65 | cli12 61">60.1% fewer</td></tr>
+<tr><td class="strong">Closeness to blueprint (of 100)</td><td class="num" title="skill1 88.6 | skill2 89.4">89.0</td><td class="num" title="py1 87.5 | py2 86.6">87.1</td><td class="num pct good" title="CLI: cli11 90.3 | cli12 88.8">+0.6%</td><td class="num pct good" title="CLI: cli11 90.3 | cli12 88.8">+2.9%</td></tr>
+<tr><td class="strong">Layout score (of 15)</td><td class="num" title="skill1 8.6 | skill2 10.4">9.5</td><td class="num" title="py1 8.2 | py2 8.1">8.2</td><td class="num pct flat" title="CLI: cli11 9.5 | cli12 9.5">+0.0%</td><td class="num pct good" title="CLI: cli11 9.5 | cli12 9.5">+16.6%</td></tr></tbody>
     </table>
   </div>
   <p class="note">Means of two runs per method, so treat the differences as indicative. Percentages use unrounded means. Hover a value for the per-run numbers. The clock stops at each run's first passing gate: the second CLI run (cli12) ran the gate again after a layout fix, about 50 seconds that are not counted. Costs include that run. The CLI numbers carry a caveat: see footnote 1 and the appendix.<sup><a href="#fn1">1</a></sup></p>
@@ -184,9 +184,9 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <section class="gallery">
   <h2>Renders</h2>
   <p class="note">Every file rendered with the same headless bpmn-js runner. The blueprint is on the left; pick a run for the right.</p>
-  <ul class="legend" aria-label="Method colours"><li><span class="sw" style="background:var(--s2)"></span>Extended CLI</li><li><span class="sw" style="background:var(--s3)"></span>/camunda-bpmn</li><li><span class="sw" style="background:var(--s1)"></span>Python</li></ul>
-  <div class="gbtns" role="group" aria-label="Choose a render"><button type="button" class="gbtn on" style="--c:var(--s2)" title="Extended CLI" data-img="g-cli11" aria-pressed="true">cli11</button>
-<button type="button" class="gbtn" style="--c:var(--s2)" title="Extended CLI" data-img="g-cli12" aria-pressed="false">cli12</button>
+  <ul class="legend" aria-label="Method colours"><li><span class="sw" style="background:var(--s2)"></span>CLI</li><li><span class="sw" style="background:var(--s3)"></span>/camunda-bpmn</li><li><span class="sw" style="background:var(--s1)"></span>Python</li></ul>
+  <div class="gbtns" role="group" aria-label="Choose a render"><button type="button" class="gbtn on" style="--c:var(--s2)" title="CLI" data-img="g-cli11" aria-pressed="true">cli11</button>
+<button type="button" class="gbtn" style="--c:var(--s2)" title="CLI" data-img="g-cli12" aria-pressed="false">cli12</button>
 <button type="button" class="gbtn" style="--c:var(--s3)" title="/camunda-bpmn" data-img="g-skill1" aria-pressed="false">skill1</button>
 <button type="button" class="gbtn" style="--c:var(--s3)" title="/camunda-bpmn" data-img="g-skill2" aria-pressed="false">skill2</button>
 <button type="button" class="gbtn" style="--c:var(--s1)" title="Python" data-img="g-py1" aria-pressed="false">py1</button>
@@ -205,7 +205,7 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <section>
   <h2>The code the agents wrote</h2>
   <p class="note">The second run of each method: the CLI script, the BPMN XML the /camunda-bpmn agent wrote, and the Python generator. Scroll inside the window.</p>
-  <div class="cbtns" role="group" aria-label="Choose a file"><button type="button" class="cbtn on" style="--c:var(--s2)" data-pane="c-cli" aria-pressed="true">Extended CLI</button>
+  <div class="cbtns" role="group" aria-label="Choose a file"><button type="button" class="cbtn on" style="--c:var(--s2)" data-pane="c-cli" aria-pressed="true">CLI</button>
 <button type="button" class="cbtn" style="--c:var(--s3)" data-pane="c-hand" aria-pressed="false">/camunda-bpmn</button>
 <button type="button" class="cbtn" style="--c:var(--s1)" data-pane="c-py" aria-pressed="false">Python</button></div>
   <div class="cpane" id="c-cli"><div class="chead">cli12 / model.js &middot; 61 lines</div><pre tabindex="0"><code>cli.set(&#x27;Process_1&#x27;, { id: &#x27;ai-agent-chat-with-tools&#x27;, name: &#x27;AI Agent Chat With Tools&#x27;, isExecutable: true });
@@ -762,7 +762,7 @@ print(&quot;wrote&quot;, OUT)
 <text x="710.0" y="134" class="tick" text-anchor="middle">90.0</text>
 <line x1="830.0" x2="830.0" y1="8" y2="116" class="grid"/>
 <text x="830.0" y="134" class="tick" text-anchor="middle">92.0</text>
-<text x="216" y="28" class="rowlabel" text-anchor="end">Extended CLI</text>
+<text x="216" y="28" class="rowlabel" text-anchor="end">CLI</text>
 <line x1="638.0" x2="728.0" y1="24" y2="24" class="range" style="stroke:var(--s2)"/>
 <g class="dot" tabindex="0" data-tip="cli11: 90.3"><circle cx="728.0" cy="24" r="14" class="hit"/><circle cx="728.0" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
 <g class="dot" tabindex="0" data-tip="cli12: 88.8"><circle cx="638.0" cy="24" r="14" class="hit"/><circle cx="638.0" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
@@ -788,7 +788,7 @@ print(&quot;wrote&quot;, OUT)
 <text x="605.0" y="134" class="tick" text-anchor="middle">$0.60</text>
 <line x1="755.0" x2="755.0" y1="8" y2="116" class="grid"/>
 <text x="755.0" y="134" class="tick" text-anchor="middle">$0.70</text>
-<text x="216" y="28" class="rowlabel" text-anchor="end">Extended CLI</text>
+<text x="216" y="28" class="rowlabel" text-anchor="end">CLI</text>
 <line x1="331.5" x2="502.7" y1="24" y2="24" class="range" style="stroke:var(--s2)"/>
 <g class="dot" tabindex="0" data-tip="cli11: $0.42"><circle cx="331.5" cy="24" r="14" class="hit"/><circle cx="331.5" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
 <g class="dot" tabindex="0" data-tip="cli12: $0.53"><circle cx="502.7" cy="24" r="14" class="hit"/><circle cx="502.7" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
@@ -822,7 +822,7 @@ print(&quot;wrote&quot;, OUT)
 <text x="744.3" y="134" class="tick" text-anchor="middle">270</text>
 <line x1="830.0" x2="830.0" y1="8" y2="116" class="grid"/>
 <text x="830.0" y="134" class="tick" text-anchor="middle">300</text>
-<text x="216" y="28" class="rowlabel" text-anchor="end">Extended CLI</text>
+<text x="216" y="28" class="rowlabel" text-anchor="end">CLI</text>
 <line x1="261.4" x2="329.1" y1="24" y2="24" class="range" style="stroke:var(--s2)"/>
 <g class="dot" tabindex="0" data-tip="cli11: 101 s"><circle cx="261.4" cy="24" r="14" class="hit"/><circle cx="261.4" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
 <g class="dot" tabindex="0" data-tip="cli12: 125 s"><circle cx="329.1" cy="24" r="14" class="hit"/><circle cx="329.1" cy="24" r="6" style="fill:var(--s2);stroke:var(--s2)" class="mark"/></g>
@@ -851,7 +851,7 @@ print(&quot;wrote&quot;, OUT)
 <line x1="507.3" x2="507.3" y1="8" y2="132" class="grid"/><text x="507.3" y="150" class="tick" text-anchor="middle">100 s</text>
 <line x1="645.9" x2="645.9" y1="8" y2="132" class="grid"/><text x="645.9" y="150" class="tick" text-anchor="middle">150 s</text>
 <line x1="784.5" x2="784.5" y1="8" y2="132" class="grid"/><text x="784.5" y="150" class="tick" text-anchor="middle">200 s</text>
-<text x="216" y="32" class="rowlabel" text-anchor="end">Extended CLI</text>
+<text x="216" y="32" class="rowlabel" text-anchor="end">CLI</text>
 <g class="seg" tabindex="0" data-tip="Thinking 51 s"><rect x="230.0" y="16" width="139.9" height="26" style="fill:var(--ph-think)" class="segr"/></g>
 <text x="300.0" y="33" class="seglabel inkthink" text-anchor="middle">51</text>
 <g class="seg" tabindex="0" data-tip="Looking up 12 s"><rect x="371.4" y="16" width="32.7" height="26" style="fill:var(--p1)" class="segr"/></g>
@@ -894,7 +894,7 @@ print(&quot;wrote&quot;, OUT)
 <line x1="500.0" x2="500.0" y1="6" y2="184" class="grid"/><text x="500.0" y="202" class="tick" text-anchor="middle">100 s</text>
 <line x1="665.0" x2="665.0" y1="6" y2="184" class="grid"/><text x="665.0" y="202" class="tick" text-anchor="middle">150 s</text>
 <line x1="830.0" x2="830.0" y1="6" y2="184" class="grid"/><text x="830.0" y="202" class="tick" text-anchor="middle">200 s</text>
-<text x="160" y="22" class="rowlabel" text-anchor="end">cli11 <tspan class="dim">Extended CLI</tspan></text>
+<text x="160" y="22" class="rowlabel" text-anchor="end">cli11 <tspan class="dim">CLI</tspan></text>
 <g class="seg" tabindex="0" data-tip="cli11: Thinking 3 s"><rect x="170.0" y="9" width="9.0" height="18" style="fill:var(--ph-think)" class="segr"/></g>
 <g class="seg" tabindex="0" data-tip="cli11: Looking up 0 s"><rect x="180.0" y="9" width="0.8" height="18" style="fill:var(--p1)" class="segr"/></g>
 <g class="seg" tabindex="0" data-tip="cli11: Thinking 2 s"><rect x="181.3" y="9" width="5.1" height="18" style="fill:var(--ph-think)" class="segr"/></g>
@@ -917,7 +917,7 @@ print(&quot;wrote&quot;, OUT)
 <g class="seg" tabindex="0" data-tip="cli11: Thinking 7 s"><rect x="476.5" y="9" width="23.1" height="18" style="fill:var(--ph-think)" class="segr"/></g>
 <g class="seg" tabindex="0" data-tip="cli11: Looking up 1 s"><rect x="500.5" y="9" width="0.8" height="18" style="fill:var(--p1)" class="segr"/></g>
 <text x="510.2" y="22" class="val">101 s</text>
-<text x="160" y="46" class="rowlabel" text-anchor="end">cli12 <tspan class="dim">Extended CLI</tspan></text>
+<text x="160" y="46" class="rowlabel" text-anchor="end">cli12 <tspan class="dim">CLI</tspan></text>
 <g class="seg" tabindex="0" data-tip="cli12: Thinking 3 s"><rect x="170.0" y="33" width="10.2" height="18" style="fill:var(--ph-think)" class="segr"/></g>
 <g class="seg" tabindex="0" data-tip="cli12: Looking up 0 s"><rect x="181.2" y="33" width="0.8" height="18" style="fill:var(--p1)" class="segr"/></g>
 <g class="seg" tabindex="0" data-tip="cli12: Thinking 2 s"><rect x="182.3" y="33" width="4.7" height="18" style="fill:var(--ph-think)" class="segr"/></g>
@@ -1114,8 +1114,8 @@ print(&quot;wrote&quot;, OUT)
   <details class="tv"><summary>Table view: seconds per phase per run</summary>
     <div class="tablewrap"><table>
       <thead><tr><th>Run</th><th>Method</th><th class="num">Thinking</th><th class="num">Looking up</th><th class="num">Creating</th><th class="num">Fixing</th><th class="num">Executing</th><th class="num">Linting</th><th class="num">Test suite</th><th class="num">Time to first passing gate</th></tr></thead>
-      <tbody><tr><td>cli11</td><td>Extended CLI</td><td class="num">53</td><td class="num">6</td><td class="num">14</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="num">25</td><td class="num">101</td></tr>
-<tr><td>cli12</td><td>Extended CLI</td><td class="num">49</td><td class="num">19</td><td class="num">29</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num">21</td><td class="num">125</td></tr>
+      <tbody><tr><td>cli11</td><td>CLI</td><td class="num">53</td><td class="num">6</td><td class="num">14</td><td class="num">0</td><td class="num">3</td><td class="num">1</td><td class="num">25</td><td class="num">101</td></tr>
+<tr><td>cli12</td><td>CLI</td><td class="num">49</td><td class="num">19</td><td class="num">29</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num">21</td><td class="num">125</td></tr>
 <tr><td>skill1</td><td>/camunda-bpmn</td><td class="num">91</td><td class="num">6</td><td class="num">26</td><td class="num">0</td><td class="num">8</td><td class="num">1</td><td class="num">26</td><td class="num">159</td></tr>
 <tr><td>skill2</td><td>/camunda-bpmn</td><td class="num">71</td><td class="num">8</td><td class="num">55</td><td class="num">0</td><td class="num">4</td><td class="num">3</td><td class="num">27</td><td class="num">168</td></tr>
 <tr><td>py1</td><td>Python</td><td class="num">51</td><td class="num">6</td><td class="num">60</td><td class="num">2</td><td class="num">2</td><td class="num">5</td><td class="num">29</td><td class="num">155</td></tr>
@@ -1174,7 +1174,7 @@ print(&quot;wrote&quot;, OUT)
   <div class="tablewrap">
     <table>
       <thead><tr><th>Run</th><th>Method</th><th class="num">Input</th><th class="num">Cache write</th><th class="num">Cache read</th><th class="num">Output (est.)</th><th class="num">Harness total</th><th class="num">Est. cost</th></tr></thead>
-      <tbody><tr><td><strong>Mean</strong></td><td>Extended CLI (cli11, cli12)</td><td class="num">27</td><td class="num">116,831</td><td class="num">1,267,536</td><td class="num">5,584</td><td class="num">117,645</td><td class="num">$0.475</td></tr>
+      <tbody><tr><td><strong>Mean</strong></td><td>CLI (cli11, cli12)</td><td class="num">27</td><td class="num">116,831</td><td class="num">1,267,536</td><td class="num">5,584</td><td class="num">117,645</td><td class="num">$0.475</td></tr>
 <tr><td><strong>Mean</strong></td><td>/camunda-bpmn (skill1, skill2)</td><td class="num">37</td><td class="num">132,218</td><td class="num">1,965,094</td><td class="num">7,831</td><td class="num">133,216</td><td class="num">$0.605</td></tr>
 <tr><td><strong>Mean</strong></td><td>Python (py1, py2)</td><td class="num">33</td><td class="num">123,198</td><td class="num">1,662,222</td><td class="num">8,176</td><td class="num">124,235</td><td class="num">$0.556</td></tr>
 <tr><td><strong>Mean</strong></td><td>All 12 CLI runs</td><td class="num">37</td><td class="num">122,302</td><td class="num">1,862,428</td><td class="num">7,439</td><td class="num">126,587</td><td class="num">$0.566</td></tr>
