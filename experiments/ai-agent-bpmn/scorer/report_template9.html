@@ -138,7 +138,7 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
   <div class="verdict">
     <div class="v"><span class="k">Time against hand-written XML</span><span class="big">{{A_TIME_H}}% faster</span><p>{{A_TOK_H}}% fewer tokens, and closeness {{A_CLO_H}}%. Without cli12's one rework the time gain is {{ADJ_H}}%.</p></div>
     <div class="v"><span class="k">Time against Python</span><span class="big">{{A_TIME_P}}% faster</span><p>{{A_TOK_P}}% fewer tokens, closeness {{A_CLO_P}}%, and layout {{A_LAY_P}}%. Without the rework the time gain is {{ADJ_P}}%.</p></div>
-    <div class="v"><span class="k">Layout placed by hand</span><span class="big">&minus;{{C_LAY_H}}% against hand-written</span><p>Hand-placed CLI layout scored {{C_LAY_H}}% below hand-written XML and {{C_LAY_P}}% below Python. Auto layout closes the gap to 0% against hand-written XML.</p></div>
+    <div class="v"><span class="k">Auto layout</span><span class="big">{{AUTO_LAYOUT}} of 15</span><p>Layout score equal to hand-written XML and {{A_LAY_P_EXACT}}% above Python, with no layout code in the script. The runner tidies bpmn-auto-layout's output.</p></div>
   </div>
   <div class="tablewrap">
     <table>

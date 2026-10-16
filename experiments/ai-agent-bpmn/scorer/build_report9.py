@@ -296,7 +296,7 @@ adj_p = 100 * (gm('py', 'active_s') - adj) / gm('py', 'active_s')
 lines_gain = lambda base, g: 100 * (LINES[base] - LINES[g]) / LINES[base]
 vs_rows.append(f'<tr><td class="strong">Lines the agent writes</td><td class="num">{LINES["hand"]:.0f} (XML)</td><td class="num">{LINES["py"]:.0f} (Python)</td>'
                + ''.join(cell(lines_gain(b, g)) for b in ('hand', 'py') for g in ('cli', 'auto')) + '</tr>')
-repl = {'{{VS_ROWS}}': '\n'.join(vs_rows),
+repl = {'{{AUTO_LAYOUT}}': f'{gm("auto", "layout", True):.1f}', '{{A_LAY_P_EXACT}}': f'{A["lay"]["py"]:.0f}', '{{VS_ROWS}}': '\n'.join(vs_rows),
         '{{A_TIME_H}}': f'{A["time"]["hand"]:.0f}', '{{A_TIME_P}}': f'{A["time"]["py"]:.0f}',
         '{{A_TOK_H}}': f'{A["tok"]["hand"]:.0f}', '{{A_TOK_P}}': f'{A["tok"]["py"]:.0f}',
         '{{A_CLO_H}}': f'{A["clo"]["hand"]:+.1f}', '{{A_CLO_P}}': f'{A["clo"]["py"]:+.1f}',
