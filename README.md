@@ -74,6 +74,15 @@ may contain spaces. Upstream commands keep splitting string arguments on whitesp
 | `templateProps(templateId, options?)`           | List a template's settable properties: id, type, default, choices, condition. Options below   |
 | `describe(id)`                                  | Return a JSON summary of an element: type, name, flows, condition, extensions                  |
 
+### Auto layout
+
+`run ... --autolayout` lays out the flow nodes with [bpmn-auto-layout](https://github.com/bpmn-io/bpmn-auto-layout)
+after the script ran, so the script needs no coordinates for the main flow. The layout drops text
+annotations and cannot arrange free tasks inside a sub-process (they stack in one column). Create
+annotations, and any grid or loop fix-ups, in `cli.afterLayout(function() { ... })`: the callbacks run
+after the layout with every element placed, so they can read `cli.element(id)` positions instead of
+hard-coding them. Without `--autolayout` the runner behaves as before.
+
 ### Options
 
 Commands that take an options or bounds object accept these keys. Anything else is ignored,

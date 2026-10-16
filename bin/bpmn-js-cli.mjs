@@ -2,13 +2,17 @@
 /**
  * Headless bpmn-js-cli runner with Camunda 8 commands.
  *
- *   bpmn-js-cli run <script.js> --out <file.bpmn> [--in <base.bpmn>] [--png <file.png>]
+ *   bpmn-js-cli run <script.js> --out <file.bpmn> [--in <base.bpmn>] [--png <file.png>] [--autolayout]
  *   bpmn-js-cli template-props <templateId> [--version <n>] [--filter <text|glob>] [--condensed]
  *   bpmn-js-cli help [<command>]
  *
  * template-props --filter keeps properties whose id contains the text or matches a glob
  * (e.g. 'authentication.*'); --condensed prints one line per property: id | type | default | condition.
  * help lists the model.js commands; help <command> prints that command's arguments and options.
+ *
+ * --autolayout lays out the flow nodes with bpmn-auto-layout after the script ran, so a script needs no
+ * coordinates. The layout drops text annotations, so create them inside cli.afterLayout(function() { ... }):
+ * callbacks run after the layout, with every element placed.
  *
  * Options:
  *   --engine <x.y.z>        Camunda engine version for templates and executionPlatformVersion (default 8.10.0)
@@ -20,6 +24,7 @@
  * unless --in is given. Errors stop the run and print the failing command.
  */
 import puppeteer from 'puppeteer-core';
+import { layoutProcess } from 'bpmn-auto-layout';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { homedir } from 'node:os';
@@ -105,6 +110,8 @@ const script = argv.shift();
 const out = opt('out');
 const input = opt('in');
 const png = opt('png');
+const autolayout = argv.includes('--autolayout');
+if (autolayout) argv.splice(argv.indexOf('--autolayout'), 1);
 
 if (!script || !out) {
   console.error('usage: bpmn-js-cli run <script.js> --out <file.bpmn> [--in <base.bpmn>] [--png <file.png>]');
@@ -120,6 +127,8 @@ const code_ = await withPage(async (page, errors) => {
 
   const result = await page.evaluate(src => {
     try {
+      window.__afterLayout = [];
+      window.cli.afterLayout = fn => window.__afterLayout.push(fn);
       (new Function('cli', src))(window.cli);
       return { ok: true };
     } catch (e) {
@@ -130,6 +139,25 @@ const code_ = await withPage(async (page, errors) => {
   if (!result.ok) {
     console.error('COMMAND ERROR ' + result.message);
     return 1;
+  }
+
+  if (autolayout) {
+    const { xml: unplaced } = await page.evaluate(() => window.modeler.saveXML({ format: true }));
+    const laidOut = await layoutProcess(unplaced);
+    const after = await page.evaluate(async laidOut => {
+      try {
+        await window.modeler.importXML(laidOut);
+        window.__afterLayout.forEach(fn => fn());
+        return { ok: true };
+      } catch (e) {
+        return { ok: false, message: String(e && e.message || e).split('\n').slice(0, 2).join(' ') };
+      }
+    }, laidOut);
+
+    if (!after.ok) {
+      console.error('COMMAND ERROR (afterLayout) ' + after.message);
+      return 1;
+    }
   }
 
   const { xml } = await page.evaluate(() => window.modeler.saveXML({ format: true }));
