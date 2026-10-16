@@ -306,6 +306,20 @@ describe('camunda commands', function() {
     }));
 
 
+    it('should keep template defaults for properties left out', inject(function(cli) {
+
+      // given
+      var task = cli.append('StartEvent_1', 'bpmn:Task');
+
+      // when
+      task = cli.template(task, 'test.connector', { mode: 'a' });
+
+      // then
+      expect(inputs(cli.element(task))).to.include({ timeout: '=20' });
+      expect(cli.help('template')).to.contain('omit keep the template default');
+    }));
+
+
     it('should filter template properties by substring', inject(function(cli) {
 
       // when
@@ -333,6 +347,7 @@ describe('camunda commands', function() {
 
       // then
       expect(text.split('\n')).to.eql([
+        '# a property you do not set keeps its default; set only values that differ',
         'mode | Dropdown | "a" | ',
         'bOnly | String |  | mode=b',
         'timeout | Number | 20 | ',
@@ -353,7 +368,7 @@ describe('camunda commands', function() {
       var text = cli.templateProps('test.long', { condensed: true, filter: 'mode' });
 
       // then
-      expect(text.split(' | ')[2]).to.have.length(60);
+      expect(text.split('\n')[1].split(' | ')[2]).to.have.length(60);
       expect(text).to.contain('...');
     }));
 
@@ -364,7 +379,7 @@ describe('camunda commands', function() {
       var text = cli.templateProps('test.connector', { condensed: true, filter: 'bOnly' });
 
       // then
-      expect(text).to.equal('bOnly | String |  | mode=b');
+      expect(text.split('\n')[1]).to.equal('bOnly | String |  | mode=b');
     }));
 
 

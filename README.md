@@ -118,8 +118,12 @@ template. Narrow and shorten the list:
 bin/bpmn-js-cli.mjs template-props io.camunda.connectors.agenticai.ai-agent-subprocess.v2 --filter 'data.*' --condensed
 ```
 
-`--filter` takes a substring or glob on the property id and `--condensed` prints one line per
+`--filter` takes a substring or glob on the property id and `--condensed` prints a note that unset properties keep their default, then one line per
 property: `id | type | default | condition`. Both are also options of `cli.templateProps(id, { filter, condensed })`.
+
+Applying a template already fills every property with its default, so set only the values that
+differ from the default column of `templateProps`. Leaving out a default such as a 20 s timeout
+or 3 retries gives the same process as writing it.
 
 `template` writes each value through its binding exactly as given, so `'20'` stays `20`
 and `'=20'` stays `=20`. It writes in passes, so a value that activates conditional
