@@ -1,0 +1,2962 @@
+{
+  "id": "io.camunda.connectors.agenticai.ai-agent-subprocess.v2",
+  "version": 1,
+  "appliesTo": [
+    "bpmn:SubProcess"
+  ],
+  "elementType": "bpmn:AdHocSubProcess",
+  "properties": [
+    {
+      "id": "provider.type",
+      "label": "Provider",
+      "type": "Dropdown",
+      "binding": "provider.type",
+      "default": "anthropic",
+      "choices": [
+        "anthropic",
+        "bedrock",
+        "openai",
+        "google-gemini",
+        "mistral",
+        "custom"
+      ]
+    },
+    {
+      "id": "provider.anthropic.backend.type",
+      "label": "Backend",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.backend.type",
+      "default": "anthropic-api",
+      "choices": [
+        "anthropic-api",
+        "aws-bedrock-mantle",
+        "foundry",
+        "custom"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.anthropic.backend.anthropic.apiKey",
+      "label": "Anthropic API key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.anthropic.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "anthropic-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.region",
+      "label": "AWS region",
+      "type": "String",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.region",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.endpoint",
+      "label": "Custom endpoint",
+      "type": "String",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.authentication.type",
+      "default": "credentials",
+      "choices": [
+        "credentials",
+        "apiKey",
+        "defaultCredentialsChain"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.authentication.accessKey",
+      "label": "Access key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.authentication.accessKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.awsBedrockMantle.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.authentication.secretKey",
+      "label": "Secret key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.authentication.secretKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.awsBedrockMantle.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.awsBedrockMantle.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.awsBedrockMantle.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.awsBedrockMantle.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "aws-bedrock-mantle",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.endpoint",
+      "label": "API endpoint",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.backend.foundry.authentication.type",
+      "default": "apiKey",
+      "choices": [
+        "apiKey",
+        "clientCredentials",
+        "managedIdentity"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.tenantId",
+      "label": "Tenant ID",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.tenantId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.authorityHost",
+      "label": "Authority host",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.authorityHost",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.anthropic.backend.foundry.authentication.managedIdentity.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.anthropic.backend.foundry.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.foundry.authentication.type",
+            "equals": "managedIdentity",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.anthropic.backend.custom.endpoint",
+      "label": "API endpoint",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.backend.custom.authentication.type",
+      "default": "none",
+      "choices": [
+        "none",
+        "apiKey",
+        "oauth-client-credentials-flow"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.oauthTokenEndpoint",
+      "label": "OAuth 2.0 token endpoint",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.oauthTokenEndpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.audience",
+      "label": "Audience",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.audience",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.clientAuthentication",
+      "label": "Client authentication",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.backend.custom.authentication.clientAuthentication",
+      "default": "BASIC_AUTH_HEADER",
+      "choices": [
+        "BASIC_AUTH_HEADER",
+        "CREDENTIALS_BODY"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.backend.custom.authentication.scopes",
+      "label": "Scopes",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.authentication.scopes",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.anthropic.timeouts.timeout",
+      "label": "Timeout",
+      "type": "String",
+      "binding": "provider.anthropic.timeouts.timeout",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.bedrock.region",
+      "label": "AWS region",
+      "type": "String",
+      "binding": "provider.bedrock.region",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.bedrock.endpoint",
+      "label": "Custom endpoint",
+      "type": "String",
+      "binding": "provider.bedrock.endpoint",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.bedrock.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.bedrock.authentication.type",
+      "default": "credentials",
+      "choices": [
+        "credentials",
+        "apiKey",
+        "defaultCredentialsChain"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.bedrock.authentication.accessKey",
+      "label": "Access key",
+      "type": "String",
+      "binding": "provider.bedrock.authentication.accessKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.bedrock.authentication.secretKey",
+      "label": "Secret key",
+      "type": "String",
+      "binding": "provider.bedrock.authentication.secretKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.bedrock.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.bedrock.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.bedrock.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "bedrock",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.bedrock.timeouts.timeout",
+      "label": "Timeout",
+      "type": "String",
+      "binding": "provider.bedrock.timeouts.timeout",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.api.type",
+      "label": "API",
+      "type": "Dropdown",
+      "binding": "provider.openai.api.type",
+      "default": "responses",
+      "choices": [
+        "responses",
+        "completions"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.openai.backend.type",
+      "label": "Backend",
+      "type": "Dropdown",
+      "binding": "provider.openai.backend.type",
+      "default": "openai-api",
+      "choices": [
+        "openai-api",
+        "foundry",
+        "custom"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.openai.backend.openai.apiKey",
+      "label": "OpenAI API key",
+      "type": "String",
+      "binding": "provider.openai.backend.openai.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "openai-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.openai.organizationId",
+      "label": "Organization ID",
+      "type": "String",
+      "binding": "provider.openai.backend.openai.organizationId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "openai-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.backend.openai.projectId",
+      "label": "Project ID",
+      "type": "String",
+      "binding": "provider.openai.backend.openai.projectId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "openai-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.backend.foundry.endpoint",
+      "label": "API endpoint",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.openai.backend.foundry.authentication.type",
+      "default": "apiKey",
+      "choices": [
+        "apiKey",
+        "clientCredentials",
+        "managedIdentity"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.tenantId",
+      "label": "Tenant ID",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.tenantId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.authorityHost",
+      "label": "Authority host",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.authorityHost",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "clientCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.backend.foundry.authentication.managedIdentity.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.openai.backend.foundry.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.foundry.authentication.type",
+            "equals": "managedIdentity",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "foundry",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.backend.custom.endpoint",
+      "label": "API endpoint",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.openai.backend.custom.authentication.type",
+      "default": "none",
+      "choices": [
+        "none",
+        "apiKey",
+        "oauth-client-credentials-flow"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.oauthTokenEndpoint",
+      "label": "OAuth 2.0 token endpoint",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.oauthTokenEndpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.audience",
+      "label": "Audience",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.audience",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.clientAuthentication",
+      "label": "Client authentication",
+      "type": "Dropdown",
+      "binding": "provider.openai.backend.custom.authentication.clientAuthentication",
+      "default": "BASIC_AUTH_HEADER",
+      "choices": [
+        "BASIC_AUTH_HEADER",
+        "CREDENTIALS_BODY"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "provider.openai.backend.custom.authentication.scopes",
+      "label": "Scopes",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.authentication.scopes",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.openai.timeouts.timeout",
+      "label": "Timeout",
+      "type": "String",
+      "binding": "provider.openai.timeouts.timeout",
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.googleGemini.backend.type",
+      "label": "Backend",
+      "type": "Dropdown",
+      "binding": "provider.googleGemini.backend.type",
+      "default": "google-gemini-api",
+      "choices": [
+        "google-gemini-api",
+        "google-vertex-ai"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.googleGemini.backend.googleGeminiApi.apiKey",
+      "label": "Gemini API key",
+      "type": "String",
+      "binding": "provider.googleGemini.backend.googleGeminiApi.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.backend.type",
+            "equals": "google-gemini-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.googleGemini.backend.googleVertexAi.projectId",
+      "label": "Project ID",
+      "type": "String",
+      "binding": "provider.googleGemini.backend.googleVertexAi.projectId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.backend.type",
+            "equals": "google-vertex-ai",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.googleGemini.backend.googleVertexAi.region",
+      "label": "Region",
+      "type": "String",
+      "binding": "provider.googleGemini.backend.googleVertexAi.region",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.backend.type",
+            "equals": "google-vertex-ai",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.googleGemini.backend.googleVertexAi.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.googleGemini.backend.googleVertexAi.authentication.type",
+      "default": "serviceAccountCredentials",
+      "choices": [
+        "serviceAccountCredentials",
+        "applicationDefaultCredentials"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.backend.type",
+            "equals": "google-vertex-ai",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.googleGemini.backend.googleVertexAi.authentication.jsonKey",
+      "label": "JSON key of the service account",
+      "type": "String",
+      "binding": "provider.googleGemini.backend.googleVertexAi.authentication.jsonKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.backend.googleVertexAi.authentication.type",
+            "equals": "serviceAccountCredentials",
+            "type": "simple"
+          },
+          {
+            "property": "provider.googleGemini.backend.type",
+            "equals": "google-vertex-ai",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.googleGemini.timeouts.timeout",
+      "label": "Timeout",
+      "type": "String",
+      "binding": "provider.googleGemini.timeouts.timeout",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.mistral.backend.type",
+      "label": "Connection",
+      "type": "Dropdown",
+      "binding": "provider.mistral.backend.type",
+      "default": "mistral-api",
+      "choices": [
+        "mistral-api",
+        "custom"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.mistral.backend.mistral.apiKey",
+      "label": "Mistral API key",
+      "type": "String",
+      "binding": "provider.mistral.backend.mistral.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "mistral-api",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.endpoint",
+      "label": "API endpoint",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.endpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "provider.mistral.backend.custom.authentication.type",
+      "default": "none",
+      "choices": [
+        "none",
+        "apiKey",
+        "oauth-client-credentials-flow"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.apiKey",
+      "label": "API key",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.apiKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "apiKey",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.oauthTokenEndpoint",
+      "label": "OAuth 2.0 token endpoint",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.oauthTokenEndpoint",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.clientId",
+      "label": "Client ID",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.clientId",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.clientSecret",
+      "label": "Client secret",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.clientSecret",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.audience",
+      "label": "Audience",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.audience",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.clientAuthentication",
+      "label": "Client authentication",
+      "type": "Dropdown",
+      "binding": "provider.mistral.backend.custom.authentication.clientAuthentication",
+      "default": "BASIC_AUTH_HEADER",
+      "choices": [
+        "BASIC_AUTH_HEADER",
+        "CREDENTIALS_BODY"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "required": true
+    },
+    {
+      "id": "provider.mistral.backend.custom.authentication.scopes",
+      "label": "Scopes",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.authentication.scopes",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.custom.authentication.type",
+            "equals": "oauth-client-credentials-flow",
+            "type": "simple"
+          },
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.mistral.timeouts.timeout",
+      "label": "Timeout",
+      "type": "String",
+      "binding": "provider.mistral.timeouts.timeout",
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "provider.providerType",
+      "label": "Provider type",
+      "type": "String",
+      "binding": "provider.providerType",
+      "condition": {
+        "property": "provider.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.parameters",
+      "label": "Provider parameters",
+      "type": "String",
+      "binding": "provider.parameters",
+      "condition": {
+        "property": "provider.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.backend.custom.headers",
+      "label": "HTTP headers",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.headers",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.backend.custom.queryParameters",
+      "label": "Query parameters",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.queryParameters",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.backend.custom.bodyProperties",
+      "label": "Body properties",
+      "type": "String",
+      "binding": "provider.anthropic.backend.custom.bodyProperties",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.headers",
+      "label": "HTTP headers",
+      "type": "String",
+      "binding": "provider.bedrock.headers",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.queryParameters",
+      "label": "Query parameters",
+      "type": "String",
+      "binding": "provider.bedrock.queryParameters",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.bodyProperties",
+      "label": "Body properties",
+      "type": "String",
+      "binding": "provider.bedrock.bodyProperties",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.backend.custom.headers",
+      "label": "Headers",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.headers",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.backend.custom.queryParameters",
+      "label": "Query parameters",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.queryParameters",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.backend.custom.bodyProperties",
+      "label": "Body properties",
+      "type": "String",
+      "binding": "provider.openai.backend.custom.bodyProperties",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.backend.custom.headers",
+      "label": "Headers",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.headers",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.backend.custom.queryParameters",
+      "label": "Query parameters",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.queryParameters",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.backend.custom.bodyProperties",
+      "label": "Body properties",
+      "type": "String",
+      "binding": "provider.mistral.backend.custom.bodyProperties",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.mistral.backend.type",
+            "equals": "custom",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "mistral",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.model.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.anthropic.model.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.model.parameters.effort",
+      "label": "Effort",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.model.parameters.effort",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.anthropic.model.parameters.thinking.mode",
+      "label": "Thinking mode",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.model.parameters.thinking.mode",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "enabled",
+        "adaptive",
+        "disabled"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.anthropic.model.parameters.thinking.budgetTokens",
+      "label": "Thinking budget tokens",
+      "type": "Number",
+      "binding": "provider.anthropic.model.parameters.thinking.budgetTokens",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.model.parameters.thinking.mode",
+            "equals": "enabled",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.thinking.display",
+      "label": "Thinking display",
+      "type": "Dropdown",
+      "binding": "provider.anthropic.model.parameters.thinking.display",
+      "default": "summarized",
+      "choices": [
+        "summarized",
+        "omitted"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.anthropic.model.parameters.thinking.mode",
+            "equals": "adaptive",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "anthropic",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.anthropic.model.parameters.promptCaching.enabled",
+      "label": "Enable prompt caching",
+      "type": "Boolean",
+      "binding": "provider.anthropic.model.parameters.promptCaching.enabled",
+      "default": true,
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "static"
+    },
+    {
+      "id": "provider.bedrock.model.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.bedrock.model.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.bedrock.model.parameters.promptCaching.enabled",
+      "label": "Enable prompt caching",
+      "type": "Boolean",
+      "binding": "provider.bedrock.model.parameters.promptCaching.enabled",
+      "default": true,
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "static"
+    },
+    {
+      "id": "provider.openai.model.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.openai.model.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "openai",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.openai.api.responses.effort",
+      "label": "Effort",
+      "type": "Dropdown",
+      "binding": "provider.openai.api.responses.effort",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "responses",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.openai.api.completions.effort",
+      "label": "Effort",
+      "type": "Dropdown",
+      "binding": "provider.openai.api.completions.effort",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "minimal",
+        "low",
+        "medium",
+        "high",
+        "xhigh",
+        "max"
+      ],
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "completions",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      }
+    },
+    {
+      "id": "provider.googleGemini.model.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.googleGemini.model.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.thinking.thinkingBudget",
+      "label": "Thinking budget (tokens)",
+      "type": "Number",
+      "binding": "provider.googleGemini.model.parameters.thinking.thinkingBudget",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.googleGemini.model.parameters.thinking.thinkingLevel",
+            "equals": "modelDefault",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "google-gemini",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.thinking.thinkingLevel",
+      "label": "Thinking level",
+      "type": "Dropdown",
+      "binding": "provider.googleGemini.model.parameters.thinking.thinkingLevel",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "minimal",
+        "low",
+        "medium",
+        "high"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.mistral.model.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.mistral.model.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.mistral.parameters.effort",
+      "label": "Effort",
+      "type": "Dropdown",
+      "binding": "provider.mistral.parameters.effort",
+      "default": "modelDefault",
+      "choices": [
+        "modelDefault",
+        "none",
+        "high"
+      ],
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "provider.model",
+      "label": "Model",
+      "type": "String",
+      "binding": "provider.model",
+      "condition": {
+        "property": "provider.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "provider.anthropic.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "type": "Number",
+      "binding": "provider.anthropic.model.parameters.maxTokens",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.anthropic.model.parameters.temperature",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.anthropic.model.parameters.topP",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.anthropic.model.parameters.topK",
+      "label": "top K",
+      "type": "Number",
+      "binding": "provider.anthropic.model.parameters.topK",
+      "condition": {
+        "property": "provider.type",
+        "equals": "anthropic",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "type": "Number",
+      "binding": "provider.bedrock.model.parameters.maxTokens",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.bedrock.model.parameters.temperature",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.bedrock.model.parameters.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.bedrock.model.parameters.topP",
+      "condition": {
+        "property": "provider.type",
+        "equals": "bedrock",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.responses.maxOutputTokens",
+      "label": "Max output tokens",
+      "type": "Number",
+      "binding": "provider.openai.api.responses.maxOutputTokens",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "responses",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.responses.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.openai.api.responses.temperature",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "responses",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.responses.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.openai.api.responses.topP",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "responses",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.completions.maxCompletionTokens",
+      "label": "Max completion tokens",
+      "type": "Number",
+      "binding": "provider.openai.api.completions.maxCompletionTokens",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "completions",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.completions.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.openai.api.completions.temperature",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "completions",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.openai.api.completions.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.openai.api.completions.topP",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "provider.openai.api.type",
+            "equals": "completions",
+            "type": "simple"
+          },
+          {
+            "property": "provider.type",
+            "equals": "openai",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.maxTokens",
+      "label": "Maximum tokens",
+      "type": "Number",
+      "binding": "provider.googleGemini.model.parameters.maxTokens",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.googleGemini.model.parameters.temperature",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.googleGemini.model.parameters.topP",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.googleGemini.model.parameters.topK",
+      "label": "top K",
+      "type": "Number",
+      "binding": "provider.googleGemini.model.parameters.topK",
+      "condition": {
+        "property": "provider.type",
+        "equals": "google-gemini",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.parameters.maxTokens",
+      "label": "Max tokens",
+      "type": "Number",
+      "binding": "provider.mistral.parameters.maxTokens",
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.parameters.temperature",
+      "label": "Temperature",
+      "type": "Number",
+      "binding": "provider.mistral.parameters.temperature",
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "provider.mistral.parameters.topP",
+      "label": "top P",
+      "type": "Number",
+      "binding": "provider.mistral.parameters.topP",
+      "condition": {
+        "property": "provider.type",
+        "equals": "mistral",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "data.systemPrompt.prompt",
+      "label": "System prompt",
+      "type": "Text",
+      "binding": "data.systemPrompt.prompt",
+      "default": "=\"You are **TaskAgent**, a helpful, capable agent that can handle a wide variety of customer requests using your own knowledge **and** any tools explicitly provided to you at runtime. Prefer a provided tool over guessing whenever it would give a more accurate or reliable answer, and only use tools that were explicitly configured for you (never assume a tool exists). You can call the same tool multiple times with different inputs if that helps complete the request. If no tool fits the request, answer from your own knowledge; if you can't produce a reliable answer, say so plainly and explain why, rather than guessing.\"",
+      "feel": "required",
+      "required": true
+    },
+    {
+      "id": "data.userPrompt.prompt",
+      "label": "User prompt",
+      "type": "Text",
+      "binding": "data.userPrompt.prompt",
+      "feel": "required",
+      "required": true
+    },
+    {
+      "id": "data.userPrompt.documents",
+      "label": "Documents",
+      "type": "String",
+      "binding": "data.userPrompt.documents",
+      "feel": "required"
+    },
+    {
+      "id": "agentContext",
+      "label": "Agent context",
+      "type": "Text",
+      "binding": "agentContext",
+      "feel": "required"
+    },
+    {
+      "id": "data.memory.storage.type",
+      "label": "Memory storage type",
+      "type": "Dropdown",
+      "binding": "data.memory.storage.type",
+      "default": "in-process",
+      "choices": [
+        "in-process",
+        "camunda-document",
+        "aws-agentcore",
+        "custom"
+      ]
+    },
+    {
+      "id": "data.memory.storage.timeToLive",
+      "label": "Document TTL",
+      "type": "String",
+      "binding": "data.memory.storage.timeToLive",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "camunda-document",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "data.memory.storage.customProperties",
+      "label": "Custom document properties",
+      "type": "String",
+      "binding": "data.memory.storage.customProperties",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "camunda-document",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "data.memory.storage.region",
+      "label": "Region",
+      "type": "String",
+      "binding": "data.memory.storage.region",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "aws-agentcore",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.endpoint",
+      "label": "Endpoint",
+      "type": "String",
+      "binding": "data.memory.storage.endpoint",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "aws-agentcore",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "data.memory.storage.authentication.type",
+      "label": "Authentication",
+      "type": "Dropdown",
+      "binding": "data.memory.storage.authentication.type",
+      "default": "credentials",
+      "choices": [
+        "credentials",
+        "defaultCredentialsChain"
+      ],
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "aws-agentcore",
+        "type": "simple"
+      }
+    },
+    {
+      "id": "data.memory.storage.authentication.accessKey",
+      "label": "Access key",
+      "type": "String",
+      "binding": "data.memory.storage.authentication.accessKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "data.memory.storage.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "data.memory.storage.type",
+            "equals": "aws-agentcore",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.authentication.secretKey",
+      "label": "Secret key",
+      "type": "String",
+      "binding": "data.memory.storage.authentication.secretKey",
+      "condition": {
+        "allMatch": [
+          {
+            "property": "data.memory.storage.authentication.type",
+            "equals": "credentials",
+            "type": "simple"
+          },
+          {
+            "property": "data.memory.storage.type",
+            "equals": "aws-agentcore",
+            "type": "simple"
+          }
+        ]
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.memoryId",
+      "label": "Memory ID",
+      "type": "String",
+      "binding": "data.memory.storage.memoryId",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "aws-agentcore",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.actorId",
+      "label": "Actor ID",
+      "type": "String",
+      "binding": "data.memory.storage.actorId",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "aws-agentcore",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.storeType",
+      "label": "Implementation type",
+      "type": "String",
+      "binding": "data.memory.storage.storeType",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "feel": "optional",
+      "required": true
+    },
+    {
+      "id": "data.memory.storage.parameters",
+      "label": "Parameters",
+      "type": "String",
+      "binding": "data.memory.storage.parameters",
+      "condition": {
+        "property": "data.memory.storage.type",
+        "equals": "custom",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "data.memory.contextWindowSize",
+      "label": "Context window size",
+      "type": "Number",
+      "binding": "data.memory.contextWindowSize",
+      "default": 20,
+      "feel": "static"
+    },
+    {
+      "id": "data.limits.maxModelCalls",
+      "label": "Maximum model calls",
+      "type": "Number",
+      "binding": "data.limits.maxModelCalls",
+      "default": 10,
+      "feel": "static"
+    },
+    {
+      "id": "data.events.behavior",
+      "label": "Event handling behavior",
+      "type": "Dropdown",
+      "binding": "data.events.behavior",
+      "default": "WAIT_FOR_TOOL_CALL_RESULTS",
+      "choices": [
+        "WAIT_FOR_TOOL_CALL_RESULTS",
+        "INTERRUPT_TOOL_CALLS"
+      ],
+      "required": true
+    },
+    {
+      "id": "data.response.format.type",
+      "label": "Response format",
+      "type": "Dropdown",
+      "binding": "data.response.format.type",
+      "default": "text",
+      "choices": [
+        "text",
+        "json"
+      ]
+    },
+    {
+      "id": "data.response.format.parseJson",
+      "label": "Parse text as JSON",
+      "type": "Boolean",
+      "binding": "data.response.format.parseJson",
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "text",
+        "type": "simple"
+      },
+      "feel": "static"
+    },
+    {
+      "id": "data.response.format.schema",
+      "label": "Response JSON schema",
+      "type": "String",
+      "binding": "data.response.format.schema",
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "json",
+        "type": "simple"
+      },
+      "feel": "required"
+    },
+    {
+      "id": "data.response.format.schemaName",
+      "label": "Response JSON schema name",
+      "type": "String",
+      "binding": "data.response.format.schemaName",
+      "default": "Response",
+      "condition": {
+        "property": "data.response.format.type",
+        "equals": "json",
+        "type": "simple"
+      },
+      "feel": "optional"
+    },
+    {
+      "id": "data.response.includeAssistantMessage",
+      "label": "Include assistant message",
+      "type": "Boolean",
+      "binding": "data.response.includeAssistantMessage",
+      "feel": "static"
+    },
+    {
+      "id": "data.response.includeAgentContext",
+      "label": "Include agent context",
+      "type": "Boolean",
+      "binding": "data.response.includeAgentContext",
+      "feel": "static"
+    },
+    {
+      "id": "resultVariable",
+      "label": "Result variable",
+      "type": "String",
+      "default": "agent"
+    },
+    {
+      "id": "errorExpression",
+      "label": "Error expression",
+      "type": "Text",
+      "binding": "errorExpression",
+      "feel": "required"
+    },
+    {
+      "id": "retryCount",
+      "label": "Retries",
+      "type": "String",
+      "binding": "retries",
+      "default": "3",
+      "feel": "optional"
+    },
+    {
+      "id": "retryBackoff",
+      "label": "Retry backoff",
+      "type": "String",
+      "binding": "retryBackoff",
+      "default": "PT30S"
+    },
+    {
+      "id": "jobTimeout",
+      "label": "Job timeout",
+      "type": "String",
+      "binding": "jobTimeout"
+    }
+  ]
+}

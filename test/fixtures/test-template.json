@@ -1,0 +1,21 @@
+{
+  "$schema": "https://unpkg.com/@camunda/zeebe-element-templates-json-schema/resources/schema.json",
+  "name": "Test connector",
+  "id": "test.connector",
+  "version": 1,
+  "appliesTo": [ "bpmn:Task" ],
+  "elementType": { "value": "bpmn:ServiceTask" },
+  "properties": [
+    { "type": "Hidden", "value": "test:job", "binding": { "type": "zeebe:taskDefinition", "property": "type" } },
+    { "id": "mode", "label": "Mode", "type": "Dropdown", "value": "a",
+      "choices": [ { "name": "A", "value": "a" }, { "name": "B", "value": "b" } ],
+      "binding": { "type": "zeebe:input", "name": "mode" } },
+    { "id": "bOnly", "label": "B only", "type": "String",
+      "binding": { "type": "zeebe:input", "name": "bOnly" },
+      "condition": { "property": "mode", "equals": "b" } },
+    { "id": "timeout", "label": "Timeout", "type": "Number", "value": 20, "feel": "static",
+      "binding": { "type": "zeebe:input", "name": "timeout" } },
+    { "id": "resultExpression", "label": "Result expression", "type": "Text", "feel": "required",
+      "binding": { "type": "zeebe:taskHeader", "key": "resultExpression" } }
+  ]
+}
