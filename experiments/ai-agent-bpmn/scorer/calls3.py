@@ -1,7 +1,7 @@
 import json,re,sys,statistics as st
 from datetime import datetime
 T='/private/tmp/claude-501/-Users-eric-lundberg-GitHub-skills--claude-worktrees-camunda-strategy-review-459c75/33f575b0-23c2-4d29-955b-27c99c333923/scratchpad/exp2-private/tasks3'
-A={'py1':'a95af065c2ff89f13','py2':'a0f42894aee69b47b','cli3':'a342ab756a3b3fd30','cli4':'a30aa0d3dbfe5aaaf','hand1':'a87c4f7102f9bebf0','hand2':'a5fe82d1312b5c4d7','cli5':'a1bde4e4c2355197f','cli6':'aaf3fc8539fcc6cc3','cli1':'ab47217565c7bfdfa','cli2':'a1099250c44e7c9b3','cli7':'a6c5dcf94461c627a','cli8':'a4ff69b979c22f725','cli9':'aaaba317bf0ef4b3a','cli10':'a29b905e030e30335'}
+A={'py1':'a95af065c2ff89f13','py2':'a0f42894aee69b47b','cli3':'a342ab756a3b3fd30','cli4':'a30aa0d3dbfe5aaaf','hand1':'a87c4f7102f9bebf0','hand2':'a5fe82d1312b5c4d7','cli5':'a1bde4e4c2355197f','cli6':'aaf3fc8539fcc6cc3','cli1':'ab47217565c7bfdfa','cli2':'a1099250c44e7c9b3','cli7':'a6c5dcf94461c627a','cli8':'a4ff69b979c22f725','cli9':'aaaba317bf0ef4b3a','cli10':'a29b905e030e30335','cli11':'a49d6218e1ae26144','cli12':'a1ee97aed91c11c00'}
 ts=lambda s: datetime.fromisoformat(s.replace('Z','+00:00')).timestamp()
 def calls(run):
     rows=[json.loads(l) for l in open(f'{T}/{A[run]}.output') if l.strip()]
