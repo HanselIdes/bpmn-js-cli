@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>AI Agent BPMN Bake-off</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -183,6 +184,107 @@ details.sec .secbody { display: grid; gap: 16px; margin-top: 16px; }
       <dt>Gate</dt><dd>Lint with 0 errors plus the tutorial's 6 tests. Time is measured to the first pass, without time queued behind other runs' tests.</dd>
     </dl>
   </details>
+</section>
+
+<section>
+  <h2>The plain-language spec</h2>
+  <p class="note">Every method received this spec word for word, with the same done gate (lint with 0 errors plus the tutorial's 6 tests) and a short brief for its own method. It describes behaviour in prose and quotes the literal values the tests and scoring depend on.</p>
+  <div class="cpane">
+    <div class="chead">spec.md, 6.6 KB. Scroll to read.</div>
+    <pre tabindex="0" aria-label="The plain-language spec given to every method" style="white-space:pre-wrap;overflow-wrap:anywhere"># Spec: AI Agent Chat With Tools (Camunda 8.10)
+
+Build one executable BPMN file named `ai-agent-chat-with-tools.bpmn` for Camunda 8.10.
+
+## What the process does
+
+A user submits a task in a start form. An AI agent works on the task and may call four
+HTTP tools. The user reads the agent&#x27;s answer in a feedback form. If the user is not
+satisfied, the agent runs again with the user&#x27;s follow-up. If the user is satisfied, the
+process ends.
+
+## Process
+
+- Process ID `ai-agent-chat-with-tools`, name &quot;AI Agent Chat With Tools&quot;, executable.
+- Target platform: Camunda Cloud 8.10.0.
+
+## Main flow, left to right
+
+1. **Start event** `StartEvent_TaskReceived`, named &quot;Task to perform received&quot;. It uses the
+   form with form ID `ai-agent-chat-initial-request`.
+2. **Exclusive gateway** `Gateway_RunAgent`, with no name. It merges the start path and the
+   retry path, then leads to the agent.
+3. **AI agent** `AI_Agent`, named &quot;AI Agent&quot;. It is an ad-hoc sub-process configured with the
+   Camunda **AI Agent Sub-process** connector template
+   (`io.camunda.connectors.agenticai.ai-agent-subprocess.v2`, template version 1). Settings:
+   - Model provider: OpenAI, using the Responses API, with a custom backend.
+     - Endpoint: secret `CAMUNDA_PROVIDED_LLM_API_ENDPOINT`.
+     - Authentication: API key, from secret `CAMUNDA_PROVIDED_LLM_API_KEY`.
+     - Model: secret `CAMUNDA_PROVIDED_LLM_DEFAULT_MODEL`.
+     - Reference each secret as a FEEL expression, for example `=camunda.secrets.CAMUNDA_PROVIDED_LLM_API_KEY`.
+   - System prompt, as a FEEL string with this exact text (two paragraphs separated by one blank line):
+     &gt; You are **TaskAgent**, a helpful, generic chat agent that can handle a wide variety of customer requests using your own domain knowledge **and** any tools explicitly provided to you at runtime.
+     &gt;
+     &gt; If tools are provided, you should prefer them instead of guessing an answer. You can call the same tool multiple times by providing different input values. Don&#x27;t guess any tools which were not explicitly configured. If no tool matches the request, try to generate an answer. If you&#x27;re not able to find a good answer, return with a message stating why you&#x27;re not able to.
+   - User prompt: use `followUpInput` when it is defined, otherwise `inputText`.
+   - User prompt documents: if `followUpInput` or `followUpDocuments` is defined, use
+     `followUpDocuments`, otherwise use `inputDocuments`.
+   - Agent context: `=agent.context`.
+   - Memory: in-process storage, context window of 20 messages.
+   - Limits: at most 10 model calls.
+   - Event handling: wait for tool call results.
+   - Response: text format, do not parse JSON, do not include the assistant message,
+     do include the agent context.
+   - Result variable: `agent`.
+   - Retries 3, retry backoff `PT0S`.
+4. **User task** `UserTask_ReviewAgentResponse`, named &quot;User Feedback&quot;. It is a Camunda user
+   task with form ID `ai-agent-chat-user-feedback`. It maps the input `responseText` from
+   `=agent.responseText`.
+5. **Exclusive gateway** `Gateway_UserSatisfied`, named &quot;User satisfied?&quot;. It has two outgoing flows:
+   - &quot;Yes&quot;, to the end event, when `=userSatisfied`.
+   - &quot;No&quot;, back to `Gateway_RunAgent`, when `=userSatisfied = null or userSatisfied = false`.
+6. **End event** `EndEvent_UserSatisfied`, named &quot;User satisfied&quot;.
+
+## Tools inside the AI agent
+
+There are four service tasks inside `AI_Agent`, with no flows between them. Each one uses
+the Camunda **REST Outbound** connector template (`io.camunda.connectors.HttpJson.v2`,
+template version 18). Each has no authentication, method GET, connection timeout 20 s,
+read timeout 20 s, &quot;ignore null values&quot; false, retries 3 and retry backoff `PT0S`. Each
+tool&#x27;s documentation text tells the agent what the tool is for.
+
+1. `LookupSampleUsers`, &quot;Find sample users&quot;.
+   - URL: `https://jsonplaceholder.typicode.com/users`
+   - Result expression: build `toolCallResult` as a list. Each user in `response.body`
+     becomes an object with that user&#x27;s `id`, `name` and `username`.
+   - Documentation: &quot;Lists available users. Use this tool to look up names, usernames, or IDs. Do not use it for details not returned by the service. Input: none. Returns: an array of user objects containing id, name, and username.&quot;
+2. `SearchRecipes`, &quot;Search recipes&quot;.
+   - URL: `https://dummyjson.com/recipes/search`
+   - Query parameters: `q` comes from the AI as `toolCall.searchQuery`, described as &quot;The query describing which recipe to search (e.g. a specific dish or the cuisine).&quot;
+   - Result expression: `toolCallResult` is `response.body.recipes` when it holds more than
+     0 recipes, otherwise the text &quot;No result found.&quot;
+   - Documentation: &quot;Searches the recipe catalog. Use this tool when a request asks for a recipe, dish, cuisine, or cooking instructions. Do not use it for unrelated food facts or guaranteed dietary safety. Input: searchQuery describing the desired dish or cuisine. Returns: matching recipe objects, or &quot;No result found.&quot;&quot;
+3. `FetchSafeJoke`, &quot;Get a safe joke&quot;.
+   - URL: `https://v2.jokeapi.dev/joke/Any?format=txt&amp;safe-mode`
+   - Result expression: `toolCallResult` is `response.body`.
+   - Documentation: &quot;Fetches one random safe-mode joke. Use this tool when the user asks for a joke or humorous response. Do not use it when the request requires a specific factual answer or a particular joke topic. Input: none. Returns: the joke as plain text.&quot;
+4. `ListSampleTechnologyProducts`, &quot;List sample technology products&quot;.
+   - URL: `https://api.restful-api.dev/objects`
+   - Result expression: `toolCallResult` is `response.body`.
+   - Documentation: &quot;Lists technology products. Use this tool when a request asks which devices or technology products are available or needs their attributes. Do not use it for live inventory, pricing, or purchasing. Input: none. Returns: an array of product objects with identifiers, names, and available attribute data.&quot;
+
+Lay the four tools out in a 2 x 2 grid inside the sub-process: users and recipes in the
+left column, joke and products in the right column.
+
+## Annotations
+
+1. Above the start event, attached to it: &quot;Triggered when a user submits a task for the AI agent to perform. The agent uses available tools to complete the task, and the process ends once the user confirms they are satisfied.&quot;
+2. To the left of the AI agent, attached to it: &quot;This is your agent running certain tasks to reach the goal it was given&quot;
+3. To the right of the AI agent, below the user task, attached to &quot;Get a safe joke&quot;: &quot;Each task you add represents a capability your agent will have. You can add new tasks and the agent will know what it&#x27;s good for based on its documentation.&quot;
+
+## Out of scope
+
+The two form files and the test suite already exist. Do not author them.</pre>
+  </div>
 </section>
 
 <section class="gallery">
@@ -1130,7 +1232,7 @@ print(&quot;wrote&quot;, OUT)
 
 <section>
   <h2>What changed in the CLI and auto layout</h2>
-  <p class="prose">The CLI started as bpmn-io/bpmn-js-cli 2.4.0 plus 17 commands for Zeebe extensions, element templates, annotations and waypoints, and a headless runner. Each change targeted something the previous runs showed, grouped here by what it was meant to improve. Iteration numbers point to the appendix.</p>
+  <p class="prose">The CLI started as bpmn-io/bpmn-js-cli 2.4.0 plus 16 commands for Zeebe extensions, element templates and annotations, and a headless runner. It has 17 now, after <code>waypoints</code> was added. Each change targeted something the previous runs showed, grouped here by what it was meant to improve. Iteration numbers point to the appendix.</p>
   <ul class="points">
     <li><strong>Less looking up.</strong> <code>help &lt;command&gt;</code> prints arguments and options, <code>template-props</code> takes <code>--filter</code> and <code>--condensed</code> to shrink the AI Agent template's 150 properties, the README documents every option, and <code>append</code> and <code>connect</code> take an optional flow id so agents need not look up generated ids (iteration 3). A note that omitted template properties keep their default cut the default-valued properties scripts set from 12 or 13 to 2 or 3 (iteration 4).</li>
     <li><strong>Layout without hand-placed coordinates.</strong> First the commands needed to place things at all: <code>replace</code> expands a sub-process in place, <code>annotate</code> keeps the size it is given, <code>waypoints</code> routes a flow (iteration 2). Then <code>--autolayout</code>, which lays the diagram out with bpmn-auto-layout 1.3.0, unmodified, plus <code>cli.afterLayout</code> callbacks (iteration 5). Then a tidying step, because the library alone drops text annotations, stacks the unconnected children of a sub-process in one column and routes a loop-back through the diagram. The runner now grids those children and fits the sub-process around them, shifts later nodes right, centers the sub-process on the main row, routes loop-backs below the diagram and puts annotations back in free space, with general rules and no coordinates from the blueprint (iteration 6).</li>
@@ -1238,3 +1340,5 @@ print(&quot;wrote&quot;, OUT)
   });
 })();
 </script>
+
+</body></html>
