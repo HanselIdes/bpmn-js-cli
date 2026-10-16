@@ -20,8 +20,8 @@ P = os.path.dirname(os.path.abspath(__file__))
 TASKS = os.path.join(os.path.dirname(P), '..', 'tasks')
 TASKS = os.path.join(P,'tasks3')
 AGENTS = {'py1': 'a95af065c2ff89f13', 'py2': 'a0f42894aee69b47b', 'cli1': 'ab47217565c7bfdfa', 'cli2': 'a1099250c44e7c9b3',
-          'cli3': 'a342ab756a3b3fd30', 'cli4': 'a30aa0d3dbfe5aaaf', 'hand1': 'a87c4f7102f9bebf0', 'hand2': 'a5fe82d1312b5c4d7', 'cli5': 'a1bde4e4c2355197f', 'cli6': 'aaf3fc8539fcc6cc3', 'cli7': 'a6c5dcf94461c627a', 'cli8': 'a4ff69b979c22f725'}
-res = {r['run']: r for r in json.load(open(os.path.join(P, 'results.v1.json'))) + json.load(open(os.path.join(P, 'results.v2.json')))+json.load(open(os.path.join(P, 'results.v3.json')))+json.load(open(os.path.join(P, 'results.v4.json')))}
+          'cli3': 'a342ab756a3b3fd30', 'cli4': 'a30aa0d3dbfe5aaaf', 'hand1': 'a87c4f7102f9bebf0', 'hand2': 'a5fe82d1312b5c4d7', 'cli5': 'a1bde4e4c2355197f', 'cli6': 'aaf3fc8539fcc6cc3', 'cli7': 'a6c5dcf94461c627a', 'cli8': 'a4ff69b979c22f725', 'cli9': 'aaaba317bf0ef4b3a', 'cli10': 'a29b905e030e30335'}
+res = {r['run']: r for r in json.load(open(os.path.join(P, 'results.v1.json'))) + json.load(open(os.path.join(P, 'results.v2.json')))+json.load(open(os.path.join(P, 'results.v3.json')))+json.load(open(os.path.join(P, 'results.v4.json')))+json.load(open(os.path.join(P, 'results.v5.json')))}
 
 from datetime import datetime
 
@@ -115,9 +115,9 @@ def analyse(run):
 
 
 out = {run: analyse(run) for run in AGENTS}
-json.dump(out, open(os.path.join(P, 'phases.v4.json'), 'w'), indent=1)
+json.dump(out, open(os.path.join(P, 'phases.v5.json'), 'w'), indent=1)
 cats = ['thinking', 'looking up', 'creating', 'fixing', 'executing', 'linting', 'test suite', 'queued', 'other']
 print('run   span ' + ' '.join(f'{c[:7]:>7}' for c in cats) + '   agent_duration')
-for run in ['py1','py2','cli7','cli8','hand1','hand2']:
+for run in ['py1','py2','cli7','cli8','cli9','cli10','hand1','hand2']:
     o = out[run]
     print(f'{run:5} {o["span_s"]:5.0f} ' + ' '.join(f'{o["totals"].get(c, 0):7.1f}' for c in cats) + f'   {res[run]["duration_ms"] / 1000:.0f}')

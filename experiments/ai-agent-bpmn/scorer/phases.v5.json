@@ -1,0 +1,2732 @@
+{
+ "py1": {
+  "segments": [
+   [
+    "thinking",
+    3.96
+   ],
+   [
+    "looking up",
+    0.93
+   ],
+   [
+    "thinking",
+    2.28
+   ],
+   [
+    "looking up",
+    1.73
+   ],
+   [
+    "thinking",
+    3.31
+   ],
+   [
+    "looking up",
+    1.66
+   ],
+   [
+    "thinking",
+    3.02
+   ],
+   [
+    "looking up",
+    0.91
+   ],
+   [
+    "thinking",
+    9.09
+   ],
+   [
+    "executing",
+    1.27
+   ],
+   [
+    "thinking",
+    6.25
+   ],
+   [
+    "creating",
+    32.22
+   ],
+   [
+    "thinking",
+    1.54
+   ],
+   [
+    "creating",
+    28.04
+   ],
+   [
+    "thinking",
+    2.42
+   ],
+   [
+    "other",
+    0.54
+   ],
+   [
+    "thinking",
+    1.99
+   ],
+   [
+    "executing",
+    1.03
+   ],
+   [
+    "thinking",
+    2.89
+   ],
+   [
+    "linting",
+    0.46
+   ],
+   [
+    "thinking",
+    1.02
+   ],
+   [
+    "fixing",
+    1.52
+   ],
+   [
+    "thinking",
+    2.91
+   ],
+   [
+    "linting",
+    4.26
+   ],
+   [
+    "thinking",
+    3.14
+   ],
+   [
+    "test suite",
+    28.61
+   ],
+   [
+    "thinking",
+    7.52
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "other",
+    0.03
+   ]
+  ],
+  "totals": {
+   "thinking": 51.3,
+   "looking up": 5.6,
+   "executing": 2.3,
+   "creating": 60.3,
+   "other": 0.6,
+   "linting": 4.7,
+   "fixing": 1.5,
+   "test suite": 28.6
+  },
+  "span_s": 155.0
+ },
+ "py2": {
+  "segments": [
+   [
+    "thinking",
+    3.88
+   ],
+   [
+    "looking up",
+    1.06
+   ],
+   [
+    "thinking",
+    2.31
+   ],
+   [
+    "looking up",
+    0.39
+   ],
+   [
+    "thinking",
+    2.98
+   ],
+   [
+    "looking up",
+    2.84
+   ],
+   [
+    "thinking",
+    1.38
+   ],
+   [
+    "looking up",
+    0.91
+   ],
+   [
+    "thinking",
+    2.83
+   ],
+   [
+    "looking up",
+    1.43
+   ],
+   [
+    "thinking",
+    5.72
+   ],
+   [
+    "executing",
+    1.73
+   ],
+   [
+    "thinking",
+    17.29
+   ],
+   [
+    "creating",
+    31.68
+   ],
+   [
+    "thinking",
+    3.48
+   ],
+   [
+    "other",
+    0.46
+   ],
+   [
+    "thinking",
+    1.65
+   ],
+   [
+    "creating",
+    28.37
+   ],
+   [
+    "thinking",
+    2.17
+   ],
+   [
+    "executing",
+    1.04
+   ],
+   [
+    "linting",
+    0.44
+   ],
+   [
+    "thinking",
+    1.09
+   ],
+   [
+    "fixing",
+    1.76
+   ],
+   [
+    "thinking",
+    0.22
+   ],
+   [
+    "executing",
+    1.04
+   ],
+   [
+    "thinking",
+    2.82
+   ],
+   [
+    "fixing",
+    2.06
+   ],
+   [
+    "thinking",
+    1.53
+   ],
+   [
+    "fixing",
+    1.32
+   ],
+   [
+    "thinking",
+    0.48
+   ],
+   [
+    "executing",
+    1.07
+   ],
+   [
+    "thinking",
+    4.33
+   ],
+   [
+    "executing",
+    2.21
+   ],
+   [
+    "thinking",
+    1.04
+   ],
+   [
+    "fixing",
+    5.13
+   ],
+   [
+    "thinking",
+    2.32
+   ],
+   [
+    "linting",
+    0.88
+   ],
+   [
+    "thinking",
+    2.89
+   ],
+   [
+    "queued",
+    104
+   ],
+   [
+    "test suite",
+    25.12
+   ],
+   [
+    "fixing",
+    2.03
+   ],
+   [
+    "thinking",
+    7.71
+   ],
+   [
+    "other",
+    0.68
+   ]
+  ],
+  "totals": {
+   "thinking": 68.1,
+   "looking up": 6.6,
+   "executing": 7.1,
+   "creating": 60.1,
+   "other": 1.1,
+   "linting": 1.3,
+   "fixing": 12.3,
+   "queued": 104,
+   "test suite": 25.1
+  },
+  "span_s": 285.8
+ },
+ "cli1": {
+  "segments": [
+   [
+    "thinking",
+    3.86
+   ],
+   [
+    "looking up",
+    0.86
+   ],
+   [
+    "thinking",
+    2.31
+   ],
+   [
+    "looking up",
+    0.54
+   ],
+   [
+    "thinking",
+    1.83
+   ],
+   [
+    "looking up",
+    0.45
+   ],
+   [
+    "thinking",
+    2.78
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    3.65
+   ],
+   [
+    "looking up",
+    0.52
+   ],
+   [
+    "thinking",
+    2.88
+   ],
+   [
+    "looking up",
+    6.69
+   ],
+   [
+    "thinking",
+    5.66
+   ],
+   [
+    "looking up",
+    6.08
+   ],
+   [
+    "thinking",
+    4.46
+   ],
+   [
+    "looking up",
+    0.5
+   ],
+   [
+    "thinking",
+    2.46
+   ],
+   [
+    "looking up",
+    0.53
+   ],
+   [
+    "thinking",
+    2.16
+   ],
+   [
+    "looking up",
+    0.44
+   ],
+   [
+    "thinking",
+    17.64
+   ],
+   [
+    "creating",
+    13.23
+   ],
+   [
+    "thinking",
+    1.44
+   ],
+   [
+    "creating",
+    16.52
+   ],
+   [
+    "thinking",
+    2.96
+   ],
+   [
+    "executing",
+    3.87
+   ],
+   [
+    "thinking",
+    2.11
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.07
+   ],
+   [
+    "linting",
+    0.74
+   ],
+   [
+    "thinking",
+    10.09
+   ],
+   [
+    "looking up",
+    0.54
+   ],
+   [
+    "thinking",
+    6.63
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    17.92
+   ],
+   [
+    "executing",
+    3.97
+   ],
+   [
+    "thinking",
+    2.04
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.51
+   ],
+   [
+    "linting",
+    0.9
+   ],
+   [
+    "thinking",
+    4.99
+   ],
+   [
+    "fixing",
+    9.92
+   ],
+   [
+    "thinking",
+    2.18
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.66
+   ],
+   [
+    "queued",
+    52
+   ],
+   [
+    "test suite",
+    27.29
+   ],
+   [
+    "thinking",
+    9.47
+   ],
+   [
+    "looking up",
+    0.45
+   ],
+   [
+    "other",
+    0.01
+   ]
+  ],
+  "totals": {
+   "thinking": 113.8,
+   "looking up": 18.5,
+   "creating": 29.7,
+   "executing": 7.8,
+   "linting": 1.6,
+   "fixing": 9.9,
+   "queued": 52,
+   "test suite": 27.3,
+   "other": 0.0
+  },
+  "span_s": 260.7
+ },
+ "cli2": {
+  "segments": [
+   [
+    "thinking",
+    2.54
+   ],
+   [
+    "looking up",
+    0.61
+   ],
+   [
+    "thinking",
+    2.45
+   ],
+   [
+    "looking up",
+    0.68
+   ],
+   [
+    "thinking",
+    2.1
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    3.39
+   ],
+   [
+    "looking up",
+    0.49
+   ],
+   [
+    "thinking",
+    2.97
+   ],
+   [
+    "looking up",
+    6.01
+   ],
+   [
+    "thinking",
+    5.06
+   ],
+   [
+    "looking up",
+    3.31
+   ],
+   [
+    "thinking",
+    2.98
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    2.53
+   ],
+   [
+    "looking up",
+    0.47
+   ],
+   [
+    "thinking",
+    2.95
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    1.67
+   ],
+   [
+    "looking up",
+    0.43
+   ],
+   [
+    "thinking",
+    1.73
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    5.15
+   ],
+   [
+    "looking up",
+    0.52
+   ],
+   [
+    "thinking",
+    15.55
+   ],
+   [
+    "creating",
+    8.73
+   ],
+   [
+    "thinking",
+    1.47
+   ],
+   [
+    "creating",
+    6.67
+   ],
+   [
+    "thinking",
+    2.3
+   ],
+   [
+    "executing",
+    3.94
+   ],
+   [
+    "thinking",
+    1.8
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    20.33
+   ],
+   [
+    "executing",
+    0.35
+   ],
+   [
+    "thinking",
+    3.17
+   ],
+   [
+    "creating",
+    15.69
+   ],
+   [
+    "thinking",
+    2.64
+   ],
+   [
+    "executing",
+    4.61
+   ],
+   [
+    "thinking",
+    3.6
+   ],
+   [
+    "linting",
+    0.45
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    4.52
+   ],
+   [
+    "queued",
+    46
+   ],
+   [
+    "test suite",
+    25.23
+   ],
+   [
+    "thinking",
+    8.27
+   ],
+   [
+    "looking up",
+    0.56
+   ],
+   [
+    "other",
+    0.01
+   ]
+  ],
+  "totals": {
+   "thinking": 99.2,
+   "looking up": 14.0,
+   "creating": 31.1,
+   "executing": 8.9,
+   "linting": 0.4,
+   "queued": 46,
+   "test suite": 25.2,
+   "other": 0.0
+  },
+  "span_s": 224.8
+ },
+ "cli3": {
+  "segments": [
+   [
+    "thinking",
+    2.39
+   ],
+   [
+    "looking up",
+    0.59
+   ],
+   [
+    "thinking",
+    1.92
+   ],
+   [
+    "looking up",
+    0.55
+   ],
+   [
+    "thinking",
+    2.83
+   ],
+   [
+    "looking up",
+    0.48
+   ],
+   [
+    "thinking",
+    3.08
+   ],
+   [
+    "looking up",
+    0.64
+   ],
+   [
+    "thinking",
+    2.75
+   ],
+   [
+    "looking up",
+    5.89
+   ],
+   [
+    "thinking",
+    3.05
+   ],
+   [
+    "other",
+    0.5
+   ],
+   [
+    "thinking",
+    2.6
+   ],
+   [
+    "other",
+    0.51
+   ],
+   [
+    "thinking",
+    5.55
+   ],
+   [
+    "looking up",
+    3.34
+   ],
+   [
+    "thinking",
+    2.64
+   ],
+   [
+    "looking up",
+    0.46
+   ],
+   [
+    "thinking",
+    2.8
+   ],
+   [
+    "looking up",
+    1.68
+   ],
+   [
+    "thinking",
+    2.15
+   ],
+   [
+    "looking up",
+    0.43
+   ],
+   [
+    "thinking",
+    2.29
+   ],
+   [
+    "looking up",
+    0.48
+   ],
+   [
+    "thinking",
+    9.53
+   ],
+   [
+    "creating",
+    18.06
+   ],
+   [
+    "thinking",
+    1.76
+   ],
+   [
+    "creating",
+    15.37
+   ],
+   [
+    "thinking",
+    3.0
+   ],
+   [
+    "executing",
+    4.05
+   ],
+   [
+    "thinking",
+    3.17
+   ],
+   [
+    "linting",
+    0.56
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    3.27
+   ],
+   [
+    "test suite",
+    26.64
+   ],
+   [
+    "thinking",
+    2.88
+   ],
+   [
+    "looking up",
+    0.47
+   ],
+   [
+    "thinking",
+    7.42
+   ],
+   [
+    "other",
+    0.38
+   ]
+  ],
+  "totals": {
+   "thinking": 65.1,
+   "looking up": 15.0,
+   "other": 1.4,
+   "creating": 33.4,
+   "executing": 4.1,
+   "linting": 0.6,
+   "test suite": 26.6
+  },
+  "span_s": 146.2
+ },
+ "cli4": {
+  "segments": [
+   [
+    "thinking",
+    2.54
+   ],
+   [
+    "other",
+    0.54
+   ],
+   [
+    "thinking",
+    2.35
+   ],
+   [
+    "other",
+    0.72
+   ],
+   [
+    "thinking",
+    3.26
+   ],
+   [
+    "looking up",
+    3.8
+   ],
+   [
+    "thinking",
+    3.9
+   ],
+   [
+    "looking up",
+    0.53
+   ],
+   [
+    "thinking",
+    4.47
+   ],
+   [
+    "other",
+    0.5
+   ],
+   [
+    "thinking",
+    1.54
+   ],
+   [
+    "creating",
+    1.66
+   ],
+   [
+    "thinking",
+    4.3
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    5.29
+   ],
+   [
+    "looking up",
+    3.1
+   ],
+   [
+    "thinking",
+    4.51
+   ],
+   [
+    "looking up",
+    3.7
+   ],
+   [
+    "executing",
+    0.18
+   ],
+   [
+    "thinking",
+    4.74
+   ],
+   [
+    "executing",
+    0.59
+   ],
+   [
+    "thinking",
+    3.05
+   ],
+   [
+    "looking up",
+    0.55
+   ],
+   [
+    "thinking",
+    2.96
+   ],
+   [
+    "other",
+    0.57
+   ],
+   [
+    "thinking",
+    1.96
+   ],
+   [
+    "looking up",
+    0.61
+   ],
+   [
+    "thinking",
+    13.13
+   ],
+   [
+    "creating",
+    4.69
+   ],
+   [
+    "thinking",
+    1.55
+   ],
+   [
+    "executing",
+    3.85
+   ],
+   [
+    "thinking",
+    2.93
+   ],
+   [
+    "looking up",
+    0.47
+   ],
+   [
+    "thinking",
+    5.91
+   ],
+   [
+    "creating",
+    9.33
+   ],
+   [
+    "thinking",
+    2.44
+   ],
+   [
+    "creating",
+    9.39
+   ],
+   [
+    "thinking",
+    1.55
+   ],
+   [
+    "executing",
+    4.31
+   ],
+   [
+    "thinking",
+    25.62
+   ],
+   [
+    "other",
+    0.47
+   ],
+   [
+    "thinking",
+    2.03
+   ],
+   [
+    "creating",
+    9.57
+   ],
+   [
+    "thinking",
+    1.69
+   ],
+   [
+    "executing",
+    4.2
+   ],
+   [
+    "thinking",
+    2.33
+   ],
+   [
+    "creating",
+    1.52
+   ],
+   [
+    "thinking",
+    1.78
+   ],
+   [
+    "executing",
+    4.05
+   ],
+   [
+    "thinking",
+    2.12
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    1.15
+   ],
+   [
+    "linting",
+    0.96
+   ],
+   [
+    "thinking",
+    5.96
+   ],
+   [
+    "looking up",
+    0.85
+   ],
+   [
+    "thinking",
+    1.51
+   ],
+   [
+    "fixing",
+    1.54
+   ],
+   [
+    "thinking",
+    4.11
+   ],
+   [
+    "executing",
+    4.26
+   ],
+   [
+    "test suite",
+    24.84
+   ],
+   [
+    "thinking",
+    2.9
+   ],
+   [
+    "linting",
+    0.55
+   ],
+   [
+    "thinking",
+    2.31
+   ],
+   [
+    "fixing",
+    1.34
+   ],
+   [
+    "linting",
+    0.82
+   ],
+   [
+    "fixing",
+    0.06
+   ],
+   [
+    "thinking",
+    6.56
+   ],
+   [
+    "other",
+    0.55
+   ]
+  ],
+  "totals": {
+   "thinking": 132.4,
+   "other": 3.4,
+   "looking up": 14.1,
+   "creating": 36.2,
+   "executing": 21.4,
+   "linting": 2.3,
+   "fixing": 2.9,
+   "test suite": 24.8
+  },
+  "span_s": 237.6
+ },
+ "hand1": {
+  "segments": [
+   [
+    "thinking",
+    3.74
+   ],
+   [
+    "looking up",
+    0.95
+   ],
+   [
+    "thinking",
+    2.25
+   ],
+   [
+    "looking up",
+    0.55
+   ],
+   [
+    "thinking",
+    1.67
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    0.98
+   ],
+   [
+    "looking up",
+    0.53
+   ],
+   [
+    "thinking",
+    2.33
+   ],
+   [
+    "looking up",
+    1.06
+   ],
+   [
+    "thinking",
+    1.75
+   ],
+   [
+    "looking up",
+    1.53
+   ],
+   [
+    "thinking",
+    14.86
+   ],
+   [
+    "creating",
+    26.43
+   ],
+   [
+    "thinking",
+    0.15
+   ],
+   [
+    "executing",
+    0.86
+   ],
+   [
+    "thinking",
+    6.63
+   ],
+   [
+    "executing",
+    0.91
+   ],
+   [
+    "thinking",
+    8.68
+   ],
+   [
+    "executing",
+    0.41
+   ],
+   [
+    "looking up",
+    0.17
+   ],
+   [
+    "thinking",
+    7.19
+   ],
+   [
+    "executing",
+    1.5
+   ],
+   [
+    "thinking",
+    5.5
+   ],
+   [
+    "linting",
+    0.4
+   ],
+   [
+    "thinking",
+    3.11
+   ],
+   [
+    "executing",
+    0.35
+   ],
+   [
+    "thinking",
+    3.74
+   ],
+   [
+    "executing",
+    0.94
+   ],
+   [
+    "thinking",
+    3.11
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    4.28
+   ],
+   [
+    "executing",
+    0.94
+   ],
+   [
+    "thinking",
+    5.34
+   ],
+   [
+    "executing",
+    1.67
+   ],
+   [
+    "thinking",
+    2.83
+   ],
+   [
+    "linting",
+    0.96
+   ],
+   [
+    "thinking",
+    2.48
+   ],
+   [
+    "queued",
+    52
+   ],
+   [
+    "test suite",
+    26.29
+   ],
+   [
+    "thinking",
+    2.57
+   ],
+   [
+    "looking up",
+    0.42
+   ],
+   [
+    "thinking",
+    7.45
+   ],
+   [
+    "other",
+    0.71
+   ]
+  ],
+  "totals": {
+   "thinking": 90.6,
+   "looking up": 5.7,
+   "creating": 26.4,
+   "executing": 7.6,
+   "linting": 1.4,
+   "queued": 52,
+   "test suite": 26.3,
+   "other": 0.7
+  },
+  "span_s": 210.7
+ },
+ "hand2": {
+  "segments": [
+   [
+    "thinking",
+    4.23
+   ],
+   [
+    "looking up",
+    0.6
+   ],
+   [
+    "thinking",
+    2.39
+   ],
+   [
+    "other",
+    0.48
+   ],
+   [
+    "thinking",
+    3.37
+   ],
+   [
+    "looking up",
+    0.47
+   ],
+   [
+    "thinking",
+    2.61
+   ],
+   [
+    "looking up",
+    2.32
+   ],
+   [
+    "thinking",
+    1.75
+   ],
+   [
+    "looking up",
+    0.33
+   ],
+   [
+    "thinking",
+    3.29
+   ],
+   [
+    "looking up",
+    0.62
+   ],
+   [
+    "thinking",
+    2.55
+   ],
+   [
+    "executing",
+    1.29
+   ],
+   [
+    "thinking",
+    1.96
+   ],
+   [
+    "looking up",
+    0.89
+   ],
+   [
+    "thinking",
+    1.71
+   ],
+   [
+    "looking up",
+    0.83
+   ],
+   [
+    "thinking",
+    9.65
+   ],
+   [
+    "creating",
+    28.26
+   ],
+   [
+    "thinking",
+    2.49
+   ],
+   [
+    "looking up",
+    0.56
+   ],
+   [
+    "creating",
+    26.45
+   ],
+   [
+    "thinking",
+    7.95
+   ],
+   [
+    "executing",
+    2.68
+   ],
+   [
+    "thinking",
+    6.5
+   ],
+   [
+    "linting",
+    1.42
+   ],
+   [
+    "thinking",
+    7.19
+   ],
+   [
+    "linting",
+    1.93
+   ],
+   [
+    "thinking",
+    3.38
+   ],
+   [
+    "looking up",
+    0.56
+   ],
+   [
+    "thinking",
+    2.59
+   ],
+   [
+    "queued",
+    14
+   ],
+   [
+    "test suite",
+    26.5
+   ],
+   [
+    "thinking",
+    7.58
+   ],
+   [
+    "looking up",
+    0.46
+   ],
+   [
+    "other",
+    0.01
+   ]
+  ],
+  "totals": {
+   "thinking": 71.2,
+   "looking up": 7.6,
+   "other": 0.5,
+   "executing": 4.0,
+   "creating": 54.7,
+   "linting": 3.4,
+   "queued": 14,
+   "test suite": 26.5
+  },
+  "span_s": 181.9
+ },
+ "cli5": {
+  "segments": [
+   [
+    "thinking",
+    2.42
+   ],
+   [
+    "looking up",
+    0.68
+   ],
+   [
+    "thinking",
+    3.24
+   ],
+   [
+    "looking up",
+    0.51
+   ],
+   [
+    "thinking",
+    2.17
+   ],
+   [
+    "looking up",
+    0.29
+   ],
+   [
+    "thinking",
+    2.67
+   ],
+   [
+    "looking up",
+    0.4
+   ],
+   [
+    "thinking",
+    4.82
+   ],
+   [
+    "other",
+    0.38
+   ],
+   [
+    "looking up",
+    0.07
+   ],
+   [
+    "thinking",
+    2.23
+   ],
+   [
+    "looking up",
+    4.94
+   ],
+   [
+    "thinking",
+    1.33
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    0.27
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    6.77
+   ],
+   [
+    "other",
+    6.64
+   ],
+   [
+    "thinking",
+    9.7
+   ],
+   [
+    "creating",
+    16.82
+   ],
+   [
+    "thinking",
+    0.94
+   ],
+   [
+    "creating",
+    14.97
+   ],
+   [
+    "thinking",
+    0.71
+   ],
+   [
+    "creating",
+    0.36
+   ],
+   [
+    "executing",
+    3.35
+   ],
+   [
+    "thinking",
+    1.65
+   ],
+   [
+    "linting",
+    0.34
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    3.27
+   ],
+   [
+    "other",
+    4.3
+   ],
+   [
+    "thinking",
+    1.93
+   ],
+   [
+    "fixing",
+    1.43
+   ],
+   [
+    "thinking",
+    2.18
+   ],
+   [
+    "fixing",
+    4.21
+   ],
+   [
+    "thinking",
+    1.93
+   ],
+   [
+    "looking up",
+    0.38
+   ],
+   [
+    "thinking",
+    11.91
+   ],
+   [
+    "executing",
+    3.13
+   ],
+   [
+    "thinking",
+    1.52
+   ],
+   [
+    "looking up",
+    0.35
+   ],
+   [
+    "thinking",
+    1.36
+   ],
+   [
+    "looking up",
+    0.39
+   ],
+   [
+    "thinking",
+    1.11
+   ],
+   [
+    "looking up",
+    0.29
+   ],
+   [
+    "thinking",
+    2.45
+   ],
+   [
+    "executing",
+    3.33
+   ],
+   [
+    "thinking",
+    1.86
+   ],
+   [
+    "test suite",
+    26.7
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    7.78
+   ],
+   [
+    "looking up",
+    0.32
+   ],
+   [
+    "other",
+    0.02
+   ]
+  ],
+  "totals": {
+   "thinking": 76.2,
+   "looking up": 8.7,
+   "other": 11.3,
+   "creating": 32.2,
+   "executing": 9.8,
+   "linting": 0.3,
+   "fixing": 5.6,
+   "test suite": 26.7
+  },
+  "span_s": 170.9
+ },
+ "cli6": {
+  "segments": [
+   [
+    "thinking",
+    2.43
+   ],
+   [
+    "looking up",
+    0.66
+   ],
+   [
+    "thinking",
+    1.97
+   ],
+   [
+    "looking up",
+    0.32
+   ],
+   [
+    "thinking",
+    1.55
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    0.91
+   ],
+   [
+    "looking up",
+    3.63
+   ],
+   [
+    "thinking",
+    2.72
+   ],
+   [
+    "looking up",
+    0.33
+   ],
+   [
+    "thinking",
+    3.21
+   ],
+   [
+    "looking up",
+    5.23
+   ],
+   [
+    "thinking",
+    2.73
+   ],
+   [
+    "looking up",
+    0.37
+   ],
+   [
+    "thinking",
+    7.2
+   ],
+   [
+    "creating",
+    2.32
+   ],
+   [
+    "thinking",
+    1.55
+   ],
+   [
+    "creating",
+    2.0
+   ],
+   [
+    "thinking",
+    3.75
+   ],
+   [
+    "executing",
+    2.72
+   ],
+   [
+    "thinking",
+    16.79
+   ],
+   [
+    "creating",
+    3.35
+   ],
+   [
+    "thinking",
+    1.31
+   ],
+   [
+    "creating",
+    15.11
+   ],
+   [
+    "thinking",
+    2.2
+   ],
+   [
+    "executing",
+    3.11
+   ],
+   [
+    "thinking",
+    2.38
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    4.85
+   ],
+   [
+    "executing",
+    0.34
+   ],
+   [
+    "thinking",
+    6.62
+   ],
+   [
+    "creating",
+    4.11
+   ],
+   [
+    "thinking",
+    1.53
+   ],
+   [
+    "creating",
+    3.99
+   ],
+   [
+    "thinking",
+    2.38
+   ],
+   [
+    "executing",
+    2.99
+   ],
+   [
+    "thinking",
+    1.52
+   ],
+   [
+    "creating",
+    2.29
+   ],
+   [
+    "thinking",
+    2.42
+   ],
+   [
+    "executing",
+    2.91
+   ],
+   [
+    "thinking",
+    2.61
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.13
+   ],
+   [
+    "linting",
+    0.62
+   ],
+   [
+    "thinking",
+    8.99
+   ],
+   [
+    "linting",
+    3.65
+   ],
+   [
+    "queued",
+    20
+   ],
+   [
+    "test suite",
+    22.91
+   ],
+   [
+    "thinking",
+    1.43
+   ],
+   [
+    "fixing",
+    1.24
+   ],
+   [
+    "thinking",
+    5.81
+   ],
+   [
+    "fixing",
+    0.46
+   ],
+   [
+    "other",
+    0.01
+   ]
+  ],
+  "totals": {
+   "thinking": 90.0,
+   "looking up": 10.6,
+   "creating": 33.2,
+   "executing": 12.1,
+   "linting": 4.3,
+   "queued": 20,
+   "test suite": 22.9,
+   "fixing": 1.7,
+   "other": 0.0
+  },
+  "span_s": 194.7
+ },
+ "cli7": {
+  "segments": [
+   [
+    "thinking",
+    2.54
+   ],
+   [
+    "looking up",
+    0.49
+   ],
+   [
+    "thinking",
+    1.87
+   ],
+   [
+    "looking up",
+    0.73
+   ],
+   [
+    "thinking",
+    2.78
+   ],
+   [
+    "looking up",
+    0.32
+   ],
+   [
+    "thinking",
+    2.85
+   ],
+   [
+    "looking up",
+    5.23
+   ],
+   [
+    "thinking",
+    2.78
+   ],
+   [
+    "looking up",
+    0.6
+   ],
+   [
+    "thinking",
+    3.66
+   ],
+   [
+    "looking up",
+    0.44
+   ],
+   [
+    "thinking",
+    2.7
+   ],
+   [
+    "creating",
+    15.85
+   ],
+   [
+    "thinking",
+    2.73
+   ],
+   [
+    "creating",
+    14.05
+   ],
+   [
+    "thinking",
+    1.21
+   ],
+   [
+    "creating",
+    0.34
+   ],
+   [
+    "executing",
+    2.64
+   ],
+   [
+    "thinking",
+    1.8
+   ],
+   [
+    "creating",
+    4.12
+   ],
+   [
+    "thinking",
+    1.18
+   ],
+   [
+    "creating",
+    0.56
+   ],
+   [
+    "executing",
+    2.58
+   ],
+   [
+    "thinking",
+    1.87
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    0.97
+   ],
+   [
+    "linting",
+    0.63
+   ],
+   [
+    "thinking",
+    3.12
+   ],
+   [
+    "looking up",
+    0.36
+   ],
+   [
+    "thinking",
+    16.68
+   ],
+   [
+    "executing",
+    2.97
+   ],
+   [
+    "thinking",
+    1.95
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.37
+   ],
+   [
+    "test suite",
+    24.93
+   ],
+   [
+    "thinking",
+    6.94
+   ],
+   [
+    "looking up",
+    0.33
+   ],
+   [
+    "other",
+    0.0
+   ]
+  ],
+  "totals": {
+   "thinking": 59.0,
+   "looking up": 8.5,
+   "creating": 34.9,
+   "executing": 8.2,
+   "linting": 0.6,
+   "test suite": 24.9,
+   "other": 0.0
+  },
+  "span_s": 136.2
+ },
+ "cli8": {
+  "segments": [
+   [
+    "thinking",
+    2.39
+   ],
+   [
+    "other",
+    0.54
+   ],
+   [
+    "thinking",
+    2.96
+   ],
+   [
+    "other",
+    0.44
+   ],
+   [
+    "thinking",
+    1.92
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    1.03
+   ],
+   [
+    "looking up",
+    0.34
+   ],
+   [
+    "thinking",
+    2.84
+   ],
+   [
+    "looking up",
+    5.08
+   ],
+   [
+    "thinking",
+    4.87
+   ],
+   [
+    "creating",
+    2.15
+   ],
+   [
+    "thinking",
+    1.38
+   ],
+   [
+    "creating",
+    3.6
+   ],
+   [
+    "thinking",
+    1.45
+   ],
+   [
+    "creating",
+    3.04
+   ],
+   [
+    "thinking",
+    3.07
+   ],
+   [
+    "executing",
+    2.54
+   ],
+   [
+    "thinking",
+    3.21
+   ],
+   [
+    "other",
+    0.36
+   ],
+   [
+    "looking up",
+    0.13
+   ],
+   [
+    "thinking",
+    2.36
+   ],
+   [
+    "looking up",
+    0.37
+   ],
+   [
+    "thinking",
+    11.8
+   ],
+   [
+    "creating",
+    15.62
+   ],
+   [
+    "thinking",
+    2.55
+   ],
+   [
+    "creating",
+    0.4
+   ],
+   [
+    "executing",
+    2.58
+   ],
+   [
+    "thinking",
+    2.51
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    1.28
+   ],
+   [
+    "linting",
+    0.57
+   ],
+   [
+    "thinking",
+    13.09
+   ],
+   [
+    "executing",
+    0.44
+   ],
+   [
+    "thinking",
+    6.08
+   ],
+   [
+    "linting",
+    2.84
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    4.55
+   ],
+   [
+    "queued",
+    21
+   ],
+   [
+    "test suite",
+    20.51
+   ],
+   [
+    "thinking",
+    2.24
+   ],
+   [
+    "looking up",
+    0.35
+   ],
+   [
+    "thinking",
+    7.23
+   ],
+   [
+    "other",
+    0.36
+   ]
+  ],
+  "totals": {
+   "thinking": 78.8,
+   "other": 1.7,
+   "looking up": 6.3,
+   "creating": 24.8,
+   "executing": 5.6,
+   "linting": 3.4,
+   "queued": 21,
+   "test suite": 20.5
+  },
+  "span_s": 162.1
+ },
+ "cli9": {
+  "segments": [
+   [
+    "thinking",
+    2.42
+   ],
+   [
+    "other",
+    0.36
+   ],
+   [
+    "thinking",
+    2.41
+   ],
+   [
+    "other",
+    0.34
+   ],
+   [
+    "thinking",
+    1.65
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    0.63
+   ],
+   [
+    "looking up",
+    0.38
+   ],
+   [
+    "thinking",
+    2.38
+   ],
+   [
+    "looking up",
+    6.7
+   ],
+   [
+    "thinking",
+    3.44
+   ],
+   [
+    "looking up",
+    2.42
+   ],
+   [
+    "thinking",
+    6.86
+   ],
+   [
+    "creating",
+    17.06
+   ],
+   [
+    "thinking",
+    1.36
+   ],
+   [
+    "creating",
+    14.83
+   ],
+   [
+    "thinking",
+    4.39
+   ],
+   [
+    "executing",
+    3.06
+   ],
+   [
+    "thinking",
+    3.37
+   ],
+   [
+    "linting",
+    0.25
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    4.39
+   ],
+   [
+    "test suite",
+    22.39
+   ],
+   [
+    "thinking",
+    2.47
+   ],
+   [
+    "looking up",
+    0.34
+   ],
+   [
+    "thinking",
+    6.1
+   ],
+   [
+    "other",
+    0.4
+   ]
+  ],
+  "totals": {
+   "thinking": 41.9,
+   "other": 1.1,
+   "looking up": 9.9,
+   "creating": 31.9,
+   "executing": 3.1,
+   "linting": 0.3,
+   "test suite": 22.4
+  },
+  "span_s": 110.5
+ },
+ "cli10": {
+  "segments": [
+   [
+    "thinking",
+    2.04
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    0.76
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    0.94
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    2.08
+   ],
+   [
+    "looking up",
+    0.39
+   ],
+   [
+    "thinking",
+    5.14
+   ],
+   [
+    "looking up",
+    0.03
+   ],
+   [
+    "thinking",
+    4.28
+   ],
+   [
+    "looking up",
+    4.31
+   ],
+   [
+    "thinking",
+    3.45
+   ],
+   [
+    "looking up",
+    4.19
+   ],
+   [
+    "thinking",
+    5.4
+   ],
+   [
+    "creating",
+    12.65
+   ],
+   [
+    "thinking",
+    2.09
+   ],
+   [
+    "creating",
+    14.04
+   ],
+   [
+    "thinking",
+    0.85
+   ],
+   [
+    "creating",
+    0.31
+   ],
+   [
+    "other",
+    0.08
+   ],
+   [
+    "thinking",
+    6.21
+   ],
+   [
+    "executing",
+    3.0
+   ],
+   [
+    "thinking",
+    3.2
+   ],
+   [
+    "looking up",
+    0.03
+   ],
+   [
+    "thinking",
+    15.07
+   ],
+   [
+    "creating",
+    7.74
+   ],
+   [
+    "thinking",
+    3.52
+   ],
+   [
+    "creating",
+    1.36
+   ],
+   [
+    "thinking",
+    1.35
+   ],
+   [
+    "creating",
+    0.35
+   ],
+   [
+    "executing",
+    2.99
+   ],
+   [
+    "thinking",
+    2.03
+   ],
+   [
+    "looking up",
+    0.02
+   ],
+   [
+    "thinking",
+    1.15
+   ],
+   [
+    "linting",
+    0.51
+   ],
+   [
+    "thinking",
+    6.64
+   ],
+   [
+    "looking up",
+    0.4
+   ],
+   [
+    "thinking",
+    3.77
+   ],
+   [
+    "fixing",
+    4.63
+   ],
+   [
+    "thinking",
+    6.17
+   ],
+   [
+    "executing",
+    0.39
+   ],
+   [
+    "thinking",
+    2.23
+   ],
+   [
+    "fixing",
+    4.5
+   ],
+   [
+    "thinking",
+    1.5
+   ],
+   [
+    "fixing",
+    2.18
+   ],
+   [
+    "thinking",
+    1.7
+   ],
+   [
+    "fixing",
+    0.6
+   ],
+   [
+    "linting",
+    2.77
+   ],
+   [
+    "thinking",
+    2.03
+   ],
+   [
+    "looking up",
+    0.01
+   ],
+   [
+    "thinking",
+    1.54
+   ],
+   [
+    "test suite",
+    21.14
+   ],
+   [
+    "thinking",
+    4.17
+   ],
+   [
+    "looking up",
+    0.35
+   ],
+   [
+    "thinking",
+    9.69
+   ],
+   [
+    "other",
+    0.59
+   ]
+  ],
+  "totals": {
+   "thinking": 99.0,
+   "looking up": 9.8,
+   "creating": 36.5,
+   "other": 0.7,
+   "executing": 6.4,
+   "linting": 3.3,
+   "fixing": 11.9,
+   "test suite": 21.1
+  },
+  "span_s": 188.6
+ }
+}
