@@ -137,9 +137,9 @@ td[title] { cursor: help; }
   <h2>Takeaways</h2>
   <p class="prose">The extended CLI, run with the runner's auto layout, measured against two baselines. <strong>/camunda-bpmn</strong> is the status quo: the agent writes the BPMN XML by hand with the skill, including every diagram coordinate, following its layout rules. <strong>A Python generator</strong> is in the comparison because it is what an agent tends to reach for by default when asked to produce a file from code.</p>
   <div class="verdict">
-    <div class="v"><span class="k">Against /camunda-bpmn</span><span class="big">16% faster</span><p>78% fewer lines written and closeness +0.6%. Without cli12's one rework the time gain is 31%.</p></div>
-    <div class="v"><span class="k">Against Python</span><span class="big">18% faster</span><p>60% fewer lines written and closeness +2.9%. Without the rework the time gain is 33%.</p></div>
-    <div class="v"><span class="k">Auto layout</span><span class="big">9.5 of 15</span><p>Layout score equal to the status quo (/camunda-bpmn) and 17% above Python, with no layout code in the script. The runner tidies bpmn-auto-layout's output.</p></div>
+    <div class="v"><span class="k">Time against /camunda-bpmn</span><span class="big">16% faster</span><p>138 s against 164 s, and 12% fewer tokens. Without cli12's one rework the time gain is 31%.</p></div>
+    <div class="v"><span class="k">Lines written against /camunda-bpmn</span><span class="big">78% fewer</span><p>63 lines of commands against 282 lines of XML, and no layout code in the script.</p></div>
+    <div class="v"><span class="k">Accuracy against /camunda-bpmn</span><span class="big">+0.6% closeness</span><p>89.5 against 89.0 of 100 on closeness to the canonical file, with the same layout score (9.5 of 15).</p></div>
   </div>
   <div class="tablewrap">
     <table>
