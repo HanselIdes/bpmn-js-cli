@@ -144,6 +144,7 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
   </div>
   <div class="charts">{{CHARTS}}</div>
   <p class="note">Each dot is one trial; the label is the method mean. Active time excludes time queued for the shared test slot.</p>
+  <p class="note">cli12 passed the gate once, then reordered its tool calls to fix the tool grid (a cosmetic change) and ran the gate again, because the brief requires a pass on the final file. That rework and second test run took about 50 seconds. Without them its active time would be about 125 seconds and the auto-layout mean about 113 seconds. The charts and tables show the measured values.</p>
   <details class="tv"><summary>Table view: every trial</summary>
     <div class="tablewrap"><table>
       <thead><tr><th>Run</th><th>Method</th><th class="num">Lint errors</th><th class="num">CPT</th><th class="num">Gate tries</th><th class="num">Closeness</th><th class="num">Structure /25</th><th class="num">Config /50</th><th class="num">Annot. /10</th><th class="num">Layout /15</th><th class="num">Tokens</th><th class="num">Active s</th><th class="num">Queue s</th><th class="num">Tool uses</th></tr></thead>
