@@ -154,10 +154,10 @@ dl.gloss dd { margin: 0; color: var(--muted); }
   <h2>Takeaways</h2>
   <h3>CLI against /camunda-bpmn</h3>
   <div class="verdict">
-    <div class="v"><span class="k">Faster</span><span class="big">31% less time</span><p>113 s against 164 s to the first passing gate. Both CLI runs beat both /camunda-bpmn runs.</p></div>
+    <div class="v"><span class="k">Faster</span><span class="big">16% to 31% less time</span><p>138 s to the final passing gate, as briefed, and 113 s to the first, against 164 s. I switched to the first-gate measure after seeing cli12 run the gate twice. As briefed, cli12 finished after both /camunda-bpmn runs.</p></div>
     <div class="v"><span class="k">Cheaper</span><span class="big">22% lower cost</span><p>$0.47 against $0.61 per run at Sonnet 5.5 API rates, and 15% below Python.</p></div>
-    <div class="v"><span class="k">Easier to modify</span><span class="big">78% fewer lines</span><p>63 lines of commands against 282 lines of XML, and the layout regenerates. Editing itself was not tested.</p></div>
-    <div class="v"><span class="k">Consistent layout</span><span class="big">Same layout twice</span><p>Layout score 9.5 and 9.5 for the CLI, 8.6 and 10.4 for /camunda-bpmn. Time, cost and closeness varied more between the two CLI runs than between the two /camunda-bpmn runs.</p></div>
+    <div class="v"><span class="k">Modification (size only)</span><span class="big">78% fewer lines</span><p>63 lines of commands against 282 lines of XML, with no coordinates to work out. Editing effort itself was not measured.</p></div>
+    <div class="v"><span class="k">Consistency</span><span class="big">Layout only</span><p>Layout score 9.5 and 9.5 for the CLI, 8.6 and 10.4 for /camunda-bpmn. Consistency is not shown elsewhere: time, cost and closeness were tighter across the two /camunda-bpmn runs.</p></div>
   </div>
   <div class="tablewrap">
     <table>
@@ -165,6 +165,7 @@ dl.gloss dd { margin: 0; color: var(--muted); }
         <tr><th>Metric</th><th class="num">/camunda-bpmn</th><th class="num">Python</th><th class="num">CLI vs /camunda-bpmn</th><th class="num">CLI vs Python</th></tr>
       </thead>
       <tbody><tr><td class="strong">Time to first passing gate</td><td class="num" title="skill1 159 s | skill2 168 s">164 s</td><td class="num" title="py1 155 s | py2 182 s">169 s</td><td class="num pct good" title="CLI: cli11 101 s | cli12 125 s">31.0% less</td><td class="num pct good" title="CLI: cli11 101 s | cli12 125 s">33.0% less</td></tr>
+<tr><td class="strong">Time to final passing gate (as briefed)</td><td class="num" title="skill1 159 s | skill2 168 s">164 s</td><td class="num" title="py1 155 s | py2 182 s">169 s</td><td class="num pct good" title="CLI: cli11 101 s | cli12 175 s">15.6% less</td><td class="num pct good" title="CLI: cli11 101 s | cli12 175 s">18.1% less</td></tr>
 <tr><td class="strong">Estimated cost</td><td class="num" title="skill1 $0.60 | skill2 $0.61">$0.61</td><td class="num" title="py1 $0.51 | py2 $0.60">$0.56</td><td class="num pct good" title="CLI: cli11 $0.42 | cli12 $0.53">21.6% lower</td><td class="num pct good" title="CLI: cli11 $0.42 | cli12 $0.53">14.6% lower</td></tr>
 <tr><td class="strong">Tool calls</td><td class="num" title="skill1 23 | skill2 21">22</td><td class="num" title="py1 16 | py2 24">20</td><td class="num pct good" title="CLI: cli11 13 | cli12 25">13.6% fewer</td><td class="num pct good" title="CLI: cli11 13 | cli12 25">5.0% fewer</td></tr>
 <tr><td class="strong">Lines in the agent's output file</td><td class="num" title="skill1 286 | skill2 278">282</td><td class="num" title="py1 151 | py2 165">158</td><td class="num pct good" title="CLI: cli11 65 | cli12 61">77.7% fewer</td><td class="num pct good" title="CLI: cli11 65 | cli12 61">60.1% fewer</td></tr>
@@ -172,7 +173,7 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <tr><td class="strong">Layout score (of 15)</td><td class="num" title="skill1 8.6 | skill2 10.4">9.5</td><td class="num" title="py1 8.2 | py2 8.1">8.2</td><td class="num pct flat" title="CLI: cli11 9.5 | cli12 9.5">+0.0%</td><td class="num pct good" title="CLI: cli11 9.5 | cli12 9.5">+16.6%</td></tr></tbody>
     </table>
   </div>
-  <p class="note">Means of two runs, so differences are indicative. Hover a value for per-run numbers. The CLI figures are from its sixth iteration<sup><a href="#fn1">1</a></sup>, and cli12's second gate run is not counted in time.</p>
+  <p class="note">Means of two runs, so differences are indicative. Hover a value for per-run numbers. The CLI figures are from its sixth iteration<sup><a href="#fn1">1</a></sup>, and the first-gate time measure was adopted after the results, when cli12 ran the gate a second time.</p>
   <details class="tv"><summary>Terms</summary>
     <dl class="gloss">
       <dt><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></dt><dd>The status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>.</dd>
