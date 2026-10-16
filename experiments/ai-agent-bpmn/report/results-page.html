@@ -5,6 +5,7 @@
 <style>
 /* Layout: a lab report. Verdict first, then the evidence in the order a reviewer checks it: setup, numbers, where points went, renders, tooling findings, caveats. */
 :root {
+  --good: #17794a; --bad: #b8372a;
   --bg: #f5f6f8;
   --surface: #ffffff;
   --fg: #151922;
@@ -22,6 +23,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --good: #4cc790; --bad: #f08577;
     --bg: #11141a; --surface: #191d25; --fg: #e7eaf0; --muted: #9aa2b3; --rule: #2b313d; --accent: #8aa8ff;
     --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
     --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300;
@@ -29,6 +31,7 @@
   }
 }
 :root[data-theme="dark"] {
+  --good: #4cc790; --bad: #f08577;
   --bg: #11141a; --surface: #191d25; --fg: #e7eaf0; --muted: #9aa2b3; --rule: #2b313d; --accent: #8aa8ff;
   --s1: #3987e5; --s2: #d95926; --s3: #199e70; color-scheme: dark;
   --c1: #3987e5; --c2: #d95926; --c3: #199e70; --c4: #c98500; --c5: #d55181; --c6: #008300;
@@ -69,6 +72,11 @@ th { font-weight: 600; color: var(--muted); font-size: 12px; letter-spacing: 0.0
 tbody tr:last-child td { border-bottom: 0; }
 td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); font-size: 13px; }
 td.strong { font-weight: 500; color: var(--fg); }
+td.pct { font-weight: 500; }
+td.pct.good { color: var(--good); }
+td.pct.bad { color: var(--bad); }
+td.pct.flat { color: var(--muted); }
+th.grp { text-align: center; border-bottom: 1px solid var(--rule); }
 td.txt { white-space: normal; min-width: 240px; vertical-align: top; }
 .points-table td:first-child { width: 42%; }
 .points-table td { vertical-align: top; }
@@ -126,13 +134,25 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
 
 <section>
   <h2>Takeaways</h2>
+  <p class="prose">The extended CLI (with the runner's auto layout) measured against the two baselines: hand-written XML with the camunda-bpmn skill, and a Python generator.</p>
   <div class="verdict">
-    <div class="v"><span class="k">Speed and cost</span><span class="big">138 s &middot; 118k tokens</span><p>The extended CLI with auto layout, against 164 s and 133k for hand-written XML and 168 s and 124k for Python.</p></div>
-    <div class="v"><span class="k">Scripts</span><span class="big">61 to 93 lines</span><p>A CLI script is a short list of commands, and re-running it rebuilds the diagram from code.</p></div>
-    <div class="v"><span class="k">Layout placed by hand</span><span class="big">5.9 of 15</span><p>Poor, against 8.1 for Python and 9.5 for hand-written XML. It made the CLI the least close to the canonical file.</p></div>
-    <div class="v"><span class="k">With auto layout</span><span class="big">9.5 of 15</span><p>Fixed once the runner tidied bpmn-auto-layout's output: no overlaps, no layout code in the script, and 89.5 of 100 on closeness.</p></div>
+    <div class="v"><span class="k">Time against hand-written XML</span><span class="big">16% faster</span><p>12% fewer tokens, and closeness +0.6%. Without cli12's one rework the time gain is 31%.</p></div>
+    <div class="v"><span class="k">Time against Python</span><span class="big">18% faster</span><p>5% fewer tokens, closeness +2.9%, and layout +17%. Without the rework the time gain is 33%.</p></div>
+    <div class="v"><span class="k">Layout placed by hand</span><span class="big">&minus;38% against hand-written</span><p>Hand-placed CLI layout scored 38% below hand-written XML and 28% below Python. Auto layout closes the gap to 0% against hand-written XML.</p></div>
   </div>
-  <p class="note">Two trials per method, so read gaps as suggestive. The CLI was tuned over several rounds that the others did not get, and building it is not in its numbers.</p>
+  <div class="tablewrap">
+    <table>
+      <thead>
+        <tr><th rowspan="2">Metric</th><th class="num" rowspan="2">Hand-written XML</th><th class="num" rowspan="2">Python</th><th class="grp" colspan="2">Change against hand-written XML</th><th class="grp" colspan="2">Change against Python</th></tr>
+        <tr><th class="num">CLI, hand-placed</th><th class="num">CLI + auto layout</th><th class="num">CLI, hand-placed</th><th class="num">CLI + auto layout</th></tr>
+      </thead>
+      <tbody><tr><td class="strong">Tokens</td><td class="num">133,216</td><td class="num">124,234</td><td class="num pct good">+9.3%</td><td class="num pct good">+11.7%</td><td class="num pct good">+2.7%</td><td class="num pct good">+5.3%</td></tr>
+<tr><td class="strong">Active time</td><td class="num">164 s</td><td class="num">168 s</td><td class="num pct good">+15.3%</td><td class="num pct good">+15.6%</td><td class="num pct good">+17.8%</td><td class="num pct good">+18.1%</td></tr>
+<tr><td class="strong">Closeness (of 100)</td><td class="num">89.0</td><td class="num">87.0</td><td class="num pct bad">-3.7%</td><td class="num pct good">+0.6%</td><td class="num pct bad">-1.6%</td><td class="num pct good">+2.9%</td></tr>
+<tr><td class="strong">Layout (of 15)</td><td class="num">9.5</td><td class="num">8.1</td><td class="num pct bad">-37.9%</td><td class="num pct flat">+0.0%</td><td class="num pct bad">-27.6%</td><td class="num pct good">+16.6%</td></tr></tbody>
+    </table>
+  </div>
+  <p class="note">Positive is better: fewer tokens, less time, higher closeness and layout. Means of two trials per method, so read the percentages as indicative. The CLI was tuned over several rounds that the others did not get, and building it is not in its numbers.</p>
 </section>
 
 <section class="gallery">
