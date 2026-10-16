@@ -142,17 +142,19 @@ const code_ = await withPage(async (page, errors) => {
   }
 
   if (autolayout) {
+    const annotations = await page.evaluate(() => window.captureAnnotations());
     const { xml: unplaced } = await page.evaluate(() => window.modeler.saveXML({ format: true }));
     const laidOut = await layoutProcess(unplaced);
-    const after = await page.evaluate(async laidOut => {
+    const after = await page.evaluate(async (laidOut, annotations) => {
       try {
         await window.modeler.importXML(laidOut);
+        window.tidyLayout(annotations);
         window.__afterLayout.forEach(fn => fn());
         return { ok: true };
       } catch (e) {
         return { ok: false, message: String(e && e.message || e).split('\n').slice(0, 2).join(' ') };
       }
-    }, laidOut);
+    }, laidOut, annotations);
 
     if (!after.ok) {
       console.error('COMMAND ERROR (afterLayout) ' + after.message);

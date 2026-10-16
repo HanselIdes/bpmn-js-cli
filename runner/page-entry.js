@@ -3,6 +3,7 @@ import zeebeModdle from 'zeebe-bpmn-moddle/resources/zeebe.json';
 import ZeebeBehaviorsModule from 'camunda-bpmn-js-behaviors/lib/camunda-cloud';
 import { CloudElementTemplatesCoreModule } from 'bpmn-js-element-templates/core';
 
+import { captureAnnotations, tidy } from './tidy';
 import CliModule from '../index';
 import CamundaCliModule from '../lib/camunda';
 
@@ -42,4 +43,12 @@ window.bootCli = async function(options) {
   const { warnings } = await modeler.importXML(options.xml || emptyDiagram(options.engine));
 
   return warnings.map(w => w.message);
+};
+
+window.captureAnnotations = function() {
+  return captureAnnotations(window.modeler);
+};
+
+window.tidyLayout = function(annotations) {
+  tidy(window.modeler, annotations);
 };

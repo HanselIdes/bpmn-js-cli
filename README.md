@@ -76,12 +76,19 @@ may contain spaces. Upstream commands keep splitting string arguments on whitesp
 
 ### Auto layout
 
-`run ... --autolayout` lays out the flow nodes with [bpmn-auto-layout](https://github.com/bpmn-io/bpmn-auto-layout)
-after the script ran, so the script needs no coordinates for the main flow. The layout drops text
-annotations and cannot arrange free tasks inside a sub-process (they stack in one column). Create
-annotations, and any grid or loop fix-ups, in `cli.afterLayout(function() { ... })`: the callbacks run
-after the layout with every element placed, so they can read `cli.element(id)` positions instead of
-hard-coding them. Without `--autolayout` the runner behaves as before.
+`run ... --autolayout` lays out the diagram with [bpmn-auto-layout](https://github.com/bpmn-io/bpmn-auto-layout)
+after the script ran, so a script needs no coordinates, `move`, `resize`, `waypoints` or annotation offsets.
+The library alone drops text annotations, stacks the unconnected children of a sub-process in one column and
+leaves loop-backs crossing the diagram, so the runner adds general post-processing steps:
+
+- Unconnected children of an expanded sub-process go into a grid, the sub-process is fitted around them, the
+  nodes after it shift right, and the sub-process is centered on the row that feeds it.
+- Flows that run backwards are routed below the whole diagram.
+- Text annotations are taken out before the layout and put back in free space near their element, clear of
+  shapes and flows. `annotate` options for position (`dx`, `dy`) are ignored in this mode; `width` and `height` are kept.
+
+`cli.afterLayout(function() { ... })` registers a callback that runs after all of this, for anything else.
+Without `--autolayout` the runner behaves as before.
 
 ### Options
 
