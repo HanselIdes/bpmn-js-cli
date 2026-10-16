@@ -147,23 +147,17 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <header>
   <span class="eyebrow">Experiment &middot; 15 to 16 October 2026 &middot; Sonnet 5.5 trials</span>
   <h1>AI Agent BPMN Bake-off</h1>
-  <p class="lede">Can an agent rebuild Camunda's "AI Agent Chat With Tools" process from a plain-language spec faster with a dedicated CLI than with a Python generator or the /camunda-bpmn skill? Python and /camunda-bpmn ran twice each. The CLI ran twice in each of six iterations, and the last iteration is shown. Every run passed lint and the tutorial's tests.</p>
-  <dl class="gloss">
-    <dt>Blueprint</dt><dd>The tutorial's own diagram for this process. Every run is scored against it.</dd>
-    <dt>Closeness</dt><dd>A 0 to 100 match to the blueprint's structure, configuration, annotations and layout. It measures similarity to the blueprint, not whether the diagram works or reads well.</dd>
-    <dt>Gate</dt><dd>Lint with 0 errors plus the tutorial's 6 tests. Time to first passing gate is the clock from start to the first pass, without time queued behind other trials' test runs.</dd>
-    <dt>Auto layout</dt><dd>The CLI runner places the shapes itself, so a script works out no diagram coordinates.</dd>
-  </dl>
+  <p class="lede">A CLI with auto layout against the /camunda-bpmn skill and a Python generator, each rebuilding Camunda's "AI Agent Chat With Tools" process from a spec. Two runs per method, every run passing lint and the tutorial's tests.</p>
 </header>
 
 <section>
   <h2>Takeaways</h2>
-  <p class="prose"><strong><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></strong> is the status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>, and uses c8ctl to apply connector templates. <strong>A Python generator</strong> is the common fallback when no dedicated tool exists. Both are compared with the CLI, an extended bpmn-js-cli run with auto layout.</p>
   <h3>CLI against /camunda-bpmn</h3>
   <div class="verdict">
-    <div class="v"><span class="k">Time to first passing gate</span><span class="big">31% faster</span><p>113 s against 164 s. Both CLI runs finished before either /camunda-bpmn run. Cost is in the third card.</p></div>
-    <div class="v"><span class="k">Lines in the output file</span><span class="big">78% fewer</span><p>63 lines of commands against 282 lines of XML, with no diagram coordinates to work out.</p></div>
-    <div class="v"><span class="k">Estimated cost</span><span class="big">22% lower</span><p>$0.47 per run against $0.61, at Sonnet 5.5 API rates, counted in full. It is 15% lower than Python.</p></div>
+    <div class="v"><span class="k">Faster</span><span class="big">31% less time</span><p>113 s against 164 s to the first passing gate. Both CLI runs beat both /camunda-bpmn runs.</p></div>
+    <div class="v"><span class="k">Cheaper</span><span class="big">22% lower cost</span><p>$0.47 against $0.61 per run at Sonnet 5.5 API rates, and 15% below Python.</p></div>
+    <div class="v"><span class="k">Easier to modify</span><span class="big">78% fewer lines</span><p>63 lines of commands against 282 lines of XML, and the layout regenerates. Editing itself was not tested.</p></div>
+    <div class="v"><span class="k">Consistent layout</span><span class="big">Same layout twice</span><p>Layout score 9.5 and 9.5 for the CLI, 8.6 and 10.4 for /camunda-bpmn. Time, cost and closeness varied more between the two CLI runs than between the two /camunda-bpmn runs.</p></div>
   </div>
   <div class="tablewrap">
     <table>
@@ -178,7 +172,16 @@ dl.gloss dd { margin: 0; color: var(--muted); }
 <tr><td class="strong">Layout score (of 15)</td><td class="num" title="skill1 8.6 | skill2 10.4">9.5</td><td class="num" title="py1 8.2 | py2 8.1">8.2</td><td class="num pct flat" title="CLI: cli11 9.5 | cli12 9.5">+0.0%</td><td class="num pct good" title="CLI: cli11 9.5 | cli12 9.5">+16.6%</td></tr></tbody>
     </table>
   </div>
-  <p class="note">Means of two runs per method, so treat the differences as indicative. Percentages use unrounded means. Hover a value for the per-run numbers. The clock stops at each run's first passing gate: the second CLI run (cli12) ran the gate again after a layout fix, about 50 seconds that are not counted. Costs include that run. The CLI numbers carry a caveat: see footnote 1 and the appendix.<sup><a href="#fn1">1</a></sup></p>
+  <p class="note">Means of two runs, so differences are indicative. Hover a value for per-run numbers. The CLI figures are from its sixth iteration<sup><a href="#fn1">1</a></sup>, and cli12's second gate run is not counted in time.</p>
+  <details class="tv"><summary>Terms</summary>
+    <dl class="gloss">
+      <dt><a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/SKILL.md">/camunda-bpmn</a></dt><dd>The status quo: the agent writes the BPMN XML, including every diagram coordinate, following the skill's <a href="https://github.com/camunda/skills/blob/0949856f69bd4532c08f32fd55f52d14704f6524/skills/camunda-bpmn/references/layout-rules.md">layout rules</a>.</dd>
+      <dt>Python</dt><dd>A generator script, the common fallback when no dedicated tool exists.</dd>
+      <dt>CLI</dt><dd>An extended bpmn-js-cli run with auto layout: the runner places the shapes, so a script works out no diagram coordinates.</dd>
+      <dt>Blueprint</dt><dd>The tutorial's own diagram for this process. Closeness (0 to 100) is a match to its structure, configuration, annotations and layout, not a check that the diagram works.</dd>
+      <dt>Gate</dt><dd>Lint with 0 errors plus the tutorial's 6 tests. Time is measured to the first pass, without time queued behind other runs' tests.</dd>
+    </dl>
+  </details>
 </section>
 
 <section class="gallery">
