@@ -138,12 +138,12 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
   <div class="verdict">
     <div class="v"><span class="k">Time against hand-written XML</span><span class="big">16% faster</span><p>12% fewer tokens, and closeness +0.6%. Without cli12's one rework the time gain is 31%.</p></div>
     <div class="v"><span class="k">Time against Python</span><span class="big">18% faster</span><p>5% fewer tokens, closeness +2.9%, and layout +17%. Without the rework the time gain is 33%.</p></div>
-    <div class="v"><span class="k">Auto layout</span><span class="big">9.5 of 15</span><p>Layout score equal to hand-written XML and 17% above Python, with no layout code in the script. The runner tidies bpmn-auto-layout's output.</p></div>
+    <div class="v"><span class="k">Auto layout</span><span class="big">9.5 of 15</span><p>Layout score equal to the status quo (hand-written XML with the camunda-bpmn skill) and 17% above Python, with no layout code in the script. The runner tidies bpmn-auto-layout's output.</p></div>
   </div>
   <div class="tablewrap">
     <table>
       <thead>
-        <tr><th rowspan="2">Metric</th><th class="num" rowspan="2">Hand-written XML</th><th class="num" rowspan="2">Python</th><th class="grp" colspan="2">Change against hand-written XML</th><th class="grp" colspan="2">Change against Python</th></tr>
+        <tr><th rowspan="2">Metric</th><th class="num" rowspan="2">Hand-written XML</th><th class="num" rowspan="2">Python</th><th class="grp" colspan="2">Change against hand-written XML (status quo)</th><th class="grp" colspan="2">Change against Python</th></tr>
         <tr><th class="num">CLI, hand-placed</th><th class="num">CLI + auto layout</th><th class="num">CLI, hand-placed</th><th class="num">CLI + auto layout</th></tr>
       </thead>
       <tbody><tr><td class="strong">Tokens</td><td class="num">133,216</td><td class="num">124,234</td><td class="num pct good">+9.3%</td><td class="num pct good">+11.7%</td><td class="num pct good">+2.7%</td><td class="num pct good">+5.3%</td></tr>
