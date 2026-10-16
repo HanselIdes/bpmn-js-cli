@@ -278,6 +278,12 @@ def gain(base, g, k, part, lower):
 def cell(x):
     cls = 'good' if x > 0.5 else 'bad' if x < -0.5 else 'flat'
     return f'<td class="num pct {cls}">{x:+.1f}%</td>'
+def lines_written(run):
+    d = os.path.join(os.path.dirname(P), 'exp2', 'runs', run)
+    f = next((n for n in ('build.py', 'model.js') if os.path.exists(os.path.join(d, n))), 'ai-agent-chat-with-tools.bpmn')
+    return sum(1 for l in open(os.path.join(d, f)) if l.strip())
+LINES = {g: statistics.mean(lines_written(r) for r in G[g]) for g in G}
+print('lines', LINES)
 vs_rows = []
 for label, k, part, lower, fmt in METRICS:
     vs_rows.append(f'<tr><td class="strong">{label}</td><td class="num">{fmt(gm("hand", k, part))}</td><td class="num">{fmt(gm("py", k, part))}</td>'
@@ -287,6 +293,9 @@ C = {m_: {b: gain(b, 'cli', k, part, lower) for b in ('hand', 'py')} for m_, k, 
 adj = (by['cli11']['active_s'] + by['cli12']['active_s'] - 50.3) / 2
 adj_h = 100 * (gm('hand', 'active_s') - adj) / gm('hand', 'active_s')
 adj_p = 100 * (gm('py', 'active_s') - adj) / gm('py', 'active_s')
+lines_gain = lambda base, g: 100 * (LINES[base] - LINES[g]) / LINES[base]
+vs_rows.append(f'<tr><td class="strong">Lines the agent writes</td><td class="num">{LINES["hand"]:.0f} (XML)</td><td class="num">{LINES["py"]:.0f} (Python)</td>'
+               + ''.join(cell(lines_gain(b, g)) for b in ('hand', 'py') for g in ('cli', 'auto')) + '</tr>')
 repl = {'{{VS_ROWS}}': '\n'.join(vs_rows),
         '{{A_TIME_H}}': f'{A["time"]["hand"]:.0f}', '{{A_TIME_P}}': f'{A["time"]["py"]:.0f}',
         '{{A_TOK_H}}': f'{A["tok"]["hand"]:.0f}', '{{A_TOK_P}}': f'{A["tok"]["py"]:.0f}',

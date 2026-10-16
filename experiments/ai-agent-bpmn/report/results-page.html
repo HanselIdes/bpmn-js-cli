@@ -149,10 +149,11 @@ footer { color: var(--muted); font-size: 13px; border-top: 1px solid var(--rule)
       <tbody><tr><td class="strong">Tokens</td><td class="num">133,216</td><td class="num">124,234</td><td class="num pct good">+9.3%</td><td class="num pct good">+11.7%</td><td class="num pct good">+2.7%</td><td class="num pct good">+5.3%</td></tr>
 <tr><td class="strong">Active time</td><td class="num">164 s</td><td class="num">168 s</td><td class="num pct good">+15.3%</td><td class="num pct good">+15.6%</td><td class="num pct good">+17.8%</td><td class="num pct good">+18.1%</td></tr>
 <tr><td class="strong">Closeness (of 100)</td><td class="num">89.0</td><td class="num">87.0</td><td class="num pct bad">-3.7%</td><td class="num pct good">+0.6%</td><td class="num pct bad">-1.6%</td><td class="num pct good">+2.9%</td></tr>
-<tr><td class="strong">Layout (of 15)</td><td class="num">9.5</td><td class="num">8.1</td><td class="num pct bad">-37.9%</td><td class="num pct flat">+0.0%</td><td class="num pct bad">-27.6%</td><td class="num pct good">+16.6%</td></tr></tbody>
+<tr><td class="strong">Layout (of 15)</td><td class="num">9.5</td><td class="num">8.1</td><td class="num pct bad">-37.9%</td><td class="num pct flat">+0.0%</td><td class="num pct bad">-27.6%</td><td class="num pct good">+16.6%</td></tr>
+<tr><td class="strong">Lines the agent writes</td><td class="num">282 (XML)</td><td class="num">158 (Python)</td><td class="num pct good">+70.7%</td><td class="num pct good">+77.7%</td><td class="num pct good">+47.8%</td><td class="num pct good">+60.1%</td></tr></tbody>
     </table>
   </div>
-  <p class="note">Positive is better: fewer tokens, less time, higher closeness and layout. Means of two trials per method, so read the percentages as indicative. The CLI was tuned over several rounds that the others did not get, and building it is not in its numbers.</p>
+  <p class="note">Positive is better: fewer tokens, less time, fewer lines, higher closeness and layout. Lines are non-blank lines of the file the agent wrote: the BPMN XML for hand-written, <code>build.py</code> for Python, <code>model.js</code> for the CLI. Means of two trials per method, so read the percentages as indicative. The CLI was tuned over several rounds that the others did not get, and building it is not in its numbers.</p>
 </section>
 
 <section class="gallery">
